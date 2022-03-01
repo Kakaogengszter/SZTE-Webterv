@@ -6,6 +6,10 @@
     --text-secondary: #ebebeb;
 }
 
+body {
+    padding-top: 60px;
+  }
+
 /* basic reset, fonts */
 * {
     margin: 0;
@@ -125,6 +129,7 @@ footer ul li a:hover {
 @media screen and (max-width: 1024px) {
     body {
         overflow-x: hidden;
+        padding-top: 0px;
     }
 
     .burger {
