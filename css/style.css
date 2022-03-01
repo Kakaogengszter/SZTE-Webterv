@@ -216,3 +216,41 @@ input, select {
     background-color: #1d5737;
   }
 
+  #receptekcontainer{
+    margin: 7% 0 0 35%;
+
+  }
+
+  #receptektabla th{
+
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    color: black;
+  }
+
+  #receptektabla {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+  }
+
+  #receptektabla caption{
+      font-family:'Times New Roman', Times, serif;
+      font-size: xx-large;
+
+  }
+  
+  #receptektabla td, #receptektabla th, #receptektabla a {
+    border: 1px solid #ddd;
+    padding: 8px;
+    color:black;
+
+  }
+
+  #receptektabla a:hover{
+
+    background-color: gray;
+
+  }
+
