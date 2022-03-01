@@ -6,9 +6,7 @@
     --text-secondary: #ebebeb;
 }
 
-body {
-    padding-top: 60px;
-  }
+
 
 /* basic reset, fonts */
 * {
@@ -36,9 +34,6 @@ a {
     align-items: center;
     justify-content: space-around;
     padding: 0 10%;
-    position: fixed;
-    top: 0;
-    width: 100%;
 }
 
 .brand {
