@@ -207,7 +207,7 @@ input, select {
     cursor: pointer;
   }
 
- #regform{
+ .form{
 
     margin: 6% 0 0 35%;
  }
