@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Főoldal</title>
+        <title>#TODO Profilja</title>
         <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
         <link rel="stylesheet" href="./css/style.css">
         <script src="./js/app.js" defer></script>
@@ -15,12 +15,12 @@
            <a class="brand" href="/"><!-- #TODO -->Receptoldal</a>
 
             <ul class="nav-menu">
-                <li class="nav-item"><a class="nav-link active" href="/">Főoldal</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">Főoldal</a></li>
                 <li class="nav-item"><a class="nav-link" href="./recipes.html">Receptek</a></li>
                 <li class="nav-item"><a class="nav-link" href="./login.html">Bejelentkezés</a></li>
                 <li class="nav-item"><a class="nav-link" href="./register.html">Regisztráció</a></li>
 
-                <li class="nav-item"><a class="nav-link" href="./profile.html">Profil</a></li>
+                <li class="nav-item"><a class="nav-link active" href="./profile.html">Profil</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Kijelentkezés</a></li>
             </ul>
 
@@ -32,7 +32,34 @@
         </nav>
 
         <main>
-            <h1>CONTENT HERE</h1>
+            <div class="profile-container">
+                <div class="profile-information-container">
+                    <form class="profile-form" action="profileUpdateValidator.php" method="POST" autocomplete="off" enctype="multipart/form-data">
+                        <div class="profile-picture-container">
+                            <img src="https://via.placeholder.com/200x200" alt="profile picture"><!-- #TODO -->
+                            <label for="profile-picture">Edit</label>
+                            <input type="file" name="profile-picture" id="profile-picture" value="Edit">
+                        </div>
+
+                        <label for="username">Felhasználónév:</label>
+                        <input type="text" name="username" id="username" maxlength="80" value="#TODO">
+
+                        <label for="email">E-mail cím:</label>
+                        <input type="email" name="email" id="email" value="email@email.com">
+
+                        <label for="password">Jelszó:</label>
+                        <input type="password" name="password" id="password" placeholder="Jelszó">
+
+                        <label for="birthday">Születési dátum:</label>
+                        <input type="date" id="birthday" name="birthday" min="1900-01-01">
+
+                        <input type="submit" name="btn-update" value="Mentés">
+                    </form>
+                </div>
+
+                <hr>
+
+            </div>
         </main>
 
         <footer>

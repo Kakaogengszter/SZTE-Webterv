@@ -3,23 +3,18 @@
 ### Receptek
 
 ## Programozási nyelvek:
- - PHP
  - HTML
  - CSS
  - JS
+ - PHP
 
  ## Oldalak
   - Főoldal
   - Regisztráció
+  - Belépés
   - Saját profil
-  - Receptes oldal
-  - Recept feltöltő oldal
-
-  ## Navbar
-  - Oldalak neve
-
-  ## Animáció
-   - 
+  - Receptek
+  - 1 Recept
 
   ## Táblázatok
   - Ki hány receptet töltött fel
@@ -28,7 +23,8 @@
   - Recepthez kép/videó
 
   ## Regisztráció adatok
-   - Felhasznnév
+   - Felhasználónév
    - Email
    - Jelszó / megerősítés
-   
+   - Szüldátum
+   - Profilkép

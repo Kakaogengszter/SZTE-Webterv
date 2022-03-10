@@ -1,12 +1,10 @@
 /* #TODO color scheme */
 :root {
     --bg: #262626;
-    --bg-secondary: #151519;
+    --bg-secondary: #202022;
     --text: #c5c5c5;
     --text-secondary: #ebebeb;
 }
-
-
 
 /* basic reset, fonts */
 * {
@@ -34,6 +32,9 @@ a {
     align-items: center;
     justify-content: space-around;
     padding: 0 10%;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .brand {
@@ -58,7 +59,7 @@ a {
 }
 
 .nav-link:hover, .brand:hover {
-    background: #eee;
+    background-color: #eee;
     color: var(--bg);
 }
 
@@ -74,15 +75,126 @@ a {
     margin: 5px auto;
     -webkit-transition: all .2s;
     transition: all .2s;
-    background: #fff;
+    background-color: #fff;
 }
 
-/* Main */
+.nav-link.active {
+    background-color: var(--bg-secondary);
+}
+
+/* Main, main content */
 
 main {
-    min-height: 100vh;
+    min-height: 80vh;
     margin: 40px 10%;
 }
+
+/* Form */
+
+.form-container {
+    width: 50%;
+    padding: 30px;
+    border: 2px solid #ccc;
+    margin: 0 auto;
+}
+
+.default-form > input:not([type="file"]) {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 100%;
+}
+
+.default-form .form-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.default-form > .form-btn-container > input[type="reset"],
+.default-form > .form-btn-container > input[type="submit"],
+.profile-form > input[type="submit"] {
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 95%;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin: 15px 0;
+    padding: 8px;
+}
+
+.default-form > .form-btn-container > input[type="reset"] {
+    width: 25%;
+    background-color: #E52424;
+    color: #fff;
+}
+
+.default-form > .form-btn-container > input[type="submit"],
+.profile-form > input[type="submit"] {
+    width: 60%;
+    background-color: #238636;
+}
+
+.login-form .form-btn-container {
+    justify-content: center;
+}
+
+.required-label::after {
+    content: "*";
+    color: red;
+}
+
+/* Főoldal */
+
+/* Recept oldal */
+
+/* Profil page */
+
+.profile-container {
+    margin: 0 15%;
+}
+
+.profile-form > input:not([type="file"]) {
+    display: block;
+    margin: 5px 0;
+    padding: 10px;
+    width: 50%;
+}
+
+.profile-picture-container {
+    float: right;
+    display: block;
+    width: 200px;
+    height: 200px;
+    position: relative;
+}
+
+.profile-picture-container > img {
+    border-radius: 50%;
+}
+
+.profile-picture-container > input[type="file"] {
+    display: none;
+}
+
+.profile-picture-container > label[for="profile-picture"] {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 5px;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #fff;
+}
+
+.profile-container hr {
+    margin: 30px auto;
+    width: 70%;
+}
+
 
 /* Footer */
 
@@ -110,7 +222,7 @@ footer ul li a {
 }
 
 footer ul li a:hover {
-    background: #eee;
+    background-color: #eee;
     color: var(--bg);
 }
 
@@ -121,11 +233,12 @@ footer ul li a:hover {
 }
 
 
-@media screen and (max-width: 1024px) {
+@media only screen and (max-width: 1124px) {
     body {
         overflow-x: hidden;
-        padding-top: 0px;
     }
+
+    /* Nav */
 
     .burger {
         display: block;
@@ -161,9 +274,8 @@ footer ul li a:hover {
     }
 
     .nav-item {
-        margin: 8px 0;
+        margin: 6px 0;
         width: 100%;
-
     }
 
     .nav-link {
@@ -174,7 +286,16 @@ footer ul li a:hover {
 
     .nav-menu.active {
         right: 0;
+        padding-bottom: 20px;
     }
+
+    /* Main, main content */
+
+    main {
+        margin: 40px 0;
+    }
+
+    /* Footer */
 
     footer ul {
         flex-direction: column;
@@ -182,70 +303,24 @@ footer ul li a:hover {
     }
 }
 
-input, select {
-    width: 40%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
+/* Mobil */
+@media only screen and (max-width:787px) {
+    .form-container {
+        border: none;
+        width: 100%;
+    }
 
-  input[type=submit] {
-    width: 40%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+    .profile-picture-container {
+        float: none;
+        margin-bottom: 40px ;
+    }
 
- .form{
+    .profile-picture-container {
+        margin: 30px auto;
 
-    margin: 6% 0 0 35%;
- }
+    }
 
- input[type=submit]:hover {
-    background-color: #1d5737;
-  }
-
-  #receptekcontainer{
-    margin: 7% 0 0 35%;
-
-  }
-
-  #receptektabla th{
-
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-    color: black;
-  }
-
-  #receptektabla {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 50%;
-  }
-
-  #receptektabla caption{
-      font-family:'Times New Roman', Times, serif;
-      font-size: xx-large;
-
-  }
-  
-  #receptektabla td, #receptektabla th, #receptektabla a {
-    border: 1px solid #ddd;
-    padding: 8px;
-    color:black;
-
-  }
-
-  #receptektabla a:hover{
-
-    background-color: gray;
-
-  }
-
+    .profile-form > input:not([type="file"]) {
+        width: 100%;
+    }
+}
