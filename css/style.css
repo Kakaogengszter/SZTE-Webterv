@@ -22,6 +22,9 @@ a {
     color: #fff;
 }
 
+.text-center {
+    text-align: center;
+}
 
 /* Nav */
 
@@ -148,7 +151,121 @@ main {
 
 /* Főoldal */
 
-/* Recept oldal */
+/* Receptek oldal */
+
+.recipes-container {
+    border: 2px solid #ccc;
+    max-width: 1200px;
+    display: grid;
+    grid-gap: 1rem;
+    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card-container {
+    margin: 8px auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    height: 400px;
+}
+
+.card-container a {
+    color: #000;
+}
+
+.card-container .recipe-details {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-container .recipe-uploader a {
+    display: flex;
+    align-items: center;
+}
+
+/* Egy recept oldal */
+.receptneve {
+    grid-area: header;
+    text-decoration: underline;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.feltolto{
+    grid-area: feltolto;
+}
+
+.feltolto a {
+    color: #000;
+}
+
+/* Elkészítési idő/adag */
+.adatok{
+    grid-area: adatok;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.hozzavalok {
+    grid-area: menu;
+}
+
+.hozzavalok h1,
+.elkeszites h1 {
+    font-size: 35px;
+    margin-bottom: 5px;
+}
+
+.hozzavalok p{
+    font-size: 28px;
+    text-decoration: underline;
+}
+
+.hozzavalok ul{
+    font-size: 23px;
+}
+
+.elkeszites {
+    grid-area: main;
+    font-size: 25px;
+}
+
+.elkeszites p {
+    padding: 8px;
+    text-align: justify;
+}
+
+.media {
+    grid-area: right;
+}
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+                        'header header header adatok feltolto '
+                        'menu main main right right'
+                        'menu main main right right';
+    grid-gap: 0.3rem;
+    background-color: #fff;
+    padding: 5px;
+    border: 2px solid #ccc;
+}
+
+.grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 0;
+}
+
+.media > iframe,
+.media > img {
+    aspect-ratio: 16 / 9;
+    width: 80%;
+}
 
 /* Profil page */
 
@@ -265,7 +382,6 @@ footer ul li a:hover {
         right: 100%;
         top: 70px;
         width: 100%;
-        height: 30vh;
         flex-direction: column;
         justify-content: center;
         background-color: var(--bg);
@@ -295,92 +411,16 @@ footer ul li a:hover {
         margin: 40px 0;
     }
 
+    /* Recipes */
+    .recipes-container {
+        border: none;
+    }
     /* Footer */
 
     footer ul {
         flex-direction: column;
         gap: 20px;
     }
-}
-
-.receptneve {
-    grid-area: header;
-    text-decoration: underline;
-    font-size: 50px;
-    font-weight: bold;
-}
-
-.feltolto{
-    grid-area: feltolto;
-
-}
-
-/* Elkészítési idő/adag */
-.adatok{
-    grid-area: adatok;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-
-
-.hozzavalok {
-    grid-area: menu;
-
-}
-
-.hozzavalok h1{
-    font-size: 45px;
-}
-
-.hozzavalok p{
-    font-size: 40px;
-    text-align: left;
-    text-decoration: underline;
-}
-
-.hozzavalok h1{
-    text-decoration: underline dashed;
-}
-
-.hozzavalok ul{
-    font-size: 23px;
-    text-align: left;
-
-}
-
-
-.elkeszites {
-    grid-area: main;
-    font-size: 30px;
-}
-
-.video {
-    grid-area: right;
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-areas:
-                        'header header header adatok feltolto '
-                        'menu main main right right'
-                        'menu main main right right';
-    grid-gap: 0.3rem;
-    background-color: #000000;
-    padding: 10px;
-}
-
-.grid-container > div {
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    padding: 10px 0;
-}
-
-
-iframe{
-    width: 100%;
-    height: 400px;
 }
 
 
@@ -429,8 +469,8 @@ iframe{
         text-align: center;
     }
 
-    iframe{
-        width: 70%;
+    .media > iframe,
+    .media > img {
+        width: 90%;
     }
-
 }
