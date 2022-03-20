@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Regisztráció</title>
+        <title>Recept hozzáadása</title>
         <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
         <link rel="stylesheet" href="./css/style.css">
         <script src="./js/app.js" defer></script>
@@ -18,7 +18,7 @@
                 <li class="nav-item"><a class="nav-link" href="./">Főoldal</a></li>
                 <li class="nav-item"><a class="nav-link" href="./recipes.html">Receptek</a></li>
                 <li class="nav-item"><a class="nav-link" href="./login.html">Bejelentkezés</a></li>
-                <li class="nav-item"><a class="nav-link active" href="./register.html">Regisztráció</a></li>
+                <li class="nav-item"><a class="nav-link" href="./register.html">Regisztráció</a></li>
 
                 <li class="nav-item"><a class="nav-link" href="./profile.html">Profil</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Kijelentkezés</a></li>
@@ -33,30 +33,34 @@
 
         <main>
             <div class="form-container">
-                <h1>Regisztráció</h1>
-                <form class="default-form register-form" action="registerValidator.php" method="POST" autocomplete="off" enctype="multipart/form-data">
-                    <label class="required-label" for="username">Felhasználónév:</label>
-                    <input type="text" name="username" id="username" maxlength="80" placeholder="Felhasználónév" required>
+                <h1>Új recept hozzáadása</h1>
+                <form class="default-form create-recipe-form" action="createRecipeValidator.php" method="POST" enctype="multipart/form-data">
+                    <label class="required-label" for="recipe-name">Recept neve:</label>
+                    <input type="text" name="recipe-name" id="recipe-name" maxlength="80" placeholder="Recept neve" required>
 
-                    <label class="required-label" for="email">E-mail cím:</label>
-                    <input type="email" name="email" id="email" placeholder="email@email.com" required>
+                    <label class="required-label" for="portion">Adag:</label>
+                    <input type="number" name="portion" id="portion" value="4" min="0" required>
 
-                    <label class="required-label" for="password">Jelszó:</label>
-                    <input type="password" name="password" id="password" placeholder="Jelszó" required>
+                    <label class="required-label" for="time">Idő (perc):</label>
+                    <input type="number" name="time" id="time" value="120" min="0" required>
 
-                    <label class="required-label" for="password-check">Jelszó megerősítése:</label>
-                    <input type="password" name="password-check" id="password-check" placeholder="Jelszó megerősítése" required>
+                    <label class="required-label" for="recipe-ingredients">Recept hozzávalók:</label>
+                    <textarea id="recipe-ingredients" name="recipe-ingredients" rows="6"
+placeholder="1 kg liszt
+500 g burgonya">
+</textarea>
 
-                    <label for="birthday">Születési dátum:</label>
-                    <input type="date" id="birthday" name="birthday" min="1900-01-01">
+                    <label class="required-label" for="recipe-instructions">Elkészítés:</label>
+                    <textarea id="recipe-instructions" name="recipe-instructions" rows="6"></textarea>
 
+                    <label for="recipe-video-link">Recept videó link:</label>
+                    <input type="text" name="recipe-video-link" id="recipe-video-link" maxlength="80" placeholder="https://youtu.be/dQw4w9WgXcQ">
 
-                    <label for="profile-picture">Profilkép:</label>
-                    <input type="file" name="profile-picture" id="profile-picture">
+                    <label class="required-label" for="recipe-picture">Kép:</label>
+                    <input type="file" name="recipe-picture" id="recipe-picture" required>
 
-                    <div class="form-btn-container">
-                        <input type="submit" name="btn-register" value="Regisztráció">
-                        <input type="reset" name="btn-reset" value="Reset">
+                    <div class="form-btn-container center">
+                        <input type="submit" name="btn-create-recipe" value="Recept hozzáadása">
                     </div>
                     <p class="required-footnote"><small> kötelező</small></p>
                 </form>

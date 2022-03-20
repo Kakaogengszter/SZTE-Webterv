@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>#TODO Profilja</title>
+        <title>firstuser</title>
         <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
         <link rel="stylesheet" href="./css/style.css">
         <script src="./js/app.js" defer></script>
@@ -12,10 +12,10 @@
 
     <body>
         <nav class="navbar">
-           <a class="brand" href="/"><!-- #TODO -->Receptoldal</a>
+           <a class="brand" href="./">Receptoldal</a>
 
             <ul class="nav-menu">
-                <li class="nav-item"><a class="nav-link" href="/">Főoldal</a></li>
+                <li class="nav-item"><a class="nav-link" href="./">Főoldal</a></li>
                 <li class="nav-item"><a class="nav-link" href="./recipes.html">Receptek</a></li>
                 <li class="nav-item"><a class="nav-link" href="./login.html">Bejelentkezés</a></li>
                 <li class="nav-item"><a class="nav-link" href="./register.html">Regisztráció</a></li>
@@ -33,16 +33,17 @@
 
         <main>
             <div class="profile-container">
-                <div class="profile-information-container">
+                <h1>Firstuser profilja</h1>
+                <div class="profile-informations">
                     <form class="profile-form" action="profileUpdateValidator.php" method="POST" autocomplete="off" enctype="multipart/form-data">
                         <div class="profile-picture-container">
-                            <img src="https://via.placeholder.com/200x200" alt="profile picture"><!-- #TODO -->
-                            <label for="profile-picture">Edit</label>
-                            <input type="file" name="profile-picture" id="profile-picture" value="Edit">
+                            <img class="img-rounded" height="200" src="./img/firstuser.jpg" alt="profile picture">
+                            <label for="profile-picture">Feltöltés</label>
+                            <input type="file" name="profile-picture" id="profile-picture">
                         </div>
 
                         <label for="username">Felhasználónév:</label>
-                        <input type="text" name="username" id="username" maxlength="80" value="#TODO">
+                        <input type="text" name="username" id="username" maxlength="80" value="firstuser">
 
                         <label for="email">E-mail cím:</label>
                         <input type="email" name="email" id="email" value="email@email.com">
@@ -59,12 +60,56 @@
 
                 <hr>
 
+                <h2>Kedvenc receptek:</h2>
+                <div class="recipe-list-container">
+                    <div class="card-container">
+                        <a href="./recipes/bolognai-raguval-toltott-langos.html">
+                            <img src="./img/bolognai-raguval-toltott-langos.jpg" alt="bolognai-raguval-toltott-langos">
+                            <h3 class="recipe-name text-center">Bolognai raguval töltött lángos</h3>
+                        </a>
+                    </div>
+
+                    <div class="card-container">
+                        <a href="./recipes/az-eredeti-carbonara.html">
+                            <img src="./img/az-eredeti-carbonara.jpg" alt="carbonara">
+                            <h3 class="recipe-name text-center">Az eredeti carbonara</h3>
+                        </a>
+                    </div>
+
+                    <div class="card-container">
+                        <a href="./recipes/tiramisu.html">
+                            <img src="./img/tiramisu.jpg" alt="tiramisu.jpg">
+                            <h3 class="recipe-name text-center">Tiramisu</h3>
+                        </a>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="own-create-container">
+                    <h2 class="own-recipes">Saját receptek:</h2>
+                    <h4 class="create-recipe-link"><a href="./create-recipe.html">Új recept hozzáadása</a></h4>
+                </div>
+                <div class="recipe-list-container">
+                    <div class="card-container">
+                        <a href="./recipes/homemade-duplasajtos-hamburger.html">
+                            <img src="./img/homemade-duplasajtos-hamburger.jpg" alt="homemade duplasajtos hamburger">
+                            <h3 class="recipe-name text-center">Homemade duplasajtos hamburger</h3>
+                        </a>
+                    </div>
+                    <div class="card-container">
+                        <a href="./recipes/grillezett-kenyerlangos.html">
+                            <img src="./img/grillezett-kenyerlangos.jpg" alt="grillezett kenyerlangos">
+                            <h3 class="recipe-name text-center">Grillezett kenyérlángos</h3>
+                        </a>
+                    </div>
+                </div>
             </div>
         </main>
 
         <footer>
             <ul>
-                <li><a href="/">Főoldal</a></li>
+                <li><a href="./">Főoldal</a></li>
                 <li><a href="./recipes.html">Receptek</a></li>
                 <li><a href="./login.html">Bejelentkezés</a></li>
                 <li><a href="./register.html">Regisztráció</a></li>
@@ -73,7 +118,7 @@
                 <li><a href="#">Kijelentkezés</a></li>
             </ul>
             <p class="copyright">
-                Copyright &copy; 2022 <!-- #TODO --> Receptoldal
+                Copyright &copy; 2022 Receptoldal
             </p>
         </footer>
 
