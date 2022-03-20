@@ -12,7 +12,7 @@
 
     <body>
         <nav class="navbar">
-           <a class="brand" href="/"><!-- #TODO -->Receptoldal</a>
+           <a class="brand" href="/">Receptoldal</a>
 
             <ul class="nav-menu">
                 <li class="nav-item"><a class="nav-link active" href="/">Főoldal</a></li>
@@ -32,7 +32,77 @@
         </nav>
 
         <main>
-            <h1>CONTENT HERE</h1>
+            <div class="main-page-container">
+                <div class="introduction">
+                    <h1>Nálunk vannak a legjobb receptek</h1>
+                    <div class="introduction-steps">
+                        <div class="card-container">
+                            <h1>Regisztrálj</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Legnépszerűbb receptek</h2>
+                <div class="top-recipe-container recipe-list-container">
+
+                    <div class="card-container">
+                        <a href="./recipes/homemade-duplasajtos-hamburger.html">
+                            <img src="./img/homemade-duplasajtos-hamburger.jpg" alt="homemade duplasajtos hamburger">
+                            <h3 class="recipe-name text-center">Homemade duplasajtos hamburger</h3>
+                        </a>
+                    </div>
+
+                    <div class="card-container">
+                        <a href="./recipes/tiramisu.html">
+                            <img src="./img/tiramisu.jpg" alt="tiramisu.jpg">
+                            <h3 class="recipe-name text-center">Tiramisu</h3>
+                        </a>
+                    </div>
+
+                    <div class="card-container">
+                        <a href="./recipes/grillezett-kenyerlangos.html">
+                            <img src="./img/grillezett-kenyerlangos.jpg" alt="grillezett kenyerlangos">
+                            <h3 class="recipe-name text-center">Grillezett kenyérlángos</h3>
+                        </a>
+                    </div>
+                </div>
+
+                <hr>
+
+                <table class="top-uploader-table">
+                    <tr>
+                        <th id="uploader">Feltöltő</th>
+                        <th id="uploaded">Darab</th>
+                    </tr>
+                    <tr>
+                        <td headers="uploader"><a href="./users/user12.html">user12</a></td>
+                        <td headers="uploaded">4</td>
+                    </tr>
+                    <tr>
+                        <td headers="uploader"><a href="./profile.html">firstuser</a></td>
+                        <td headers="uploaded">2</td>
+                    </tr>
+                </table>
+
+                <hr>
+
+                <h2>Korábban megtekintett receptek</h2>
+                <div id="recipe-history" class="recipe-list-container">
+                    <div class="card-container">
+                        <a href="./recipes/tiramisu.html">
+                            <img src="./img/tiramisu.jpg" alt="tiramisu.jpg">
+                            <h3 class="recipe-name text-center">Tiramisu</h3>
+                        </a>
+                    </div>
+
+                    <div class="card-container">
+                        <a href="./recipes/grillezett-kenyerlangos.html">
+                            <img src="./img/grillezett-kenyerlangos.jpg" alt="grillezett kenyerlangos">
+                            <h3 class="recipe-name text-center">Grillezett kenyérlángos</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </main>
 
         <footer>
@@ -46,7 +116,7 @@
                 <li><a href="#">Kijelentkezés</a></li>
             </ul>
             <p class="copyright">
-                Copyright &copy; 2022 <!-- #TODO --> Receptoldal
+                Copyright &copy; 2022 Receptoldal
             </p>
         </footer>
 

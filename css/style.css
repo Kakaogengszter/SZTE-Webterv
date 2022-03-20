@@ -1,9 +1,13 @@
-/* #TODO color scheme */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+
 :root {
-    --bg: #262626;
-    --bg-secondary: #202022;
+    --bg: #100570;
+    --text-shadow: 1px 1px 1px #eee, 1px 1px 1px var(--bg);
+    --bg-secondary: #291ba5;
+    --bg-footer: #060324;
+    --button-bg: #3b2eac;
     --text: #c5c5c5;
-    --text-secondary: #ebebeb;
 }
 
 /* basic reset, fonts */
@@ -11,19 +15,41 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-shadow: var(--text-shadow);
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 li {
     list-style: none;
 }
 
-a {
-    text-decoration: none;
+.navbar a,
+footer a {
     color: #fff;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:hover {
+    opacity: 0.9;
 }
 
 .text-center {
     text-align: center;
+}
+
+.img-rounded {
+    border-radius: 50%;
 }
 
 /* Nav */
@@ -92,6 +118,37 @@ main {
     margin: 40px 10%;
 }
 
+/* Index */
+
+.introduction {
+
+}
+
+.top-uploader-table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 2px solid #ccc;
+}
+
+.top-uploader-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.top-uploader-table th,
+.top-uploader-table td {
+    text-align: left;
+    padding: 8px;
+  }
+
+.top-uploader-table th {
+    background-color: var(--bg);
+    color: #fff;
+}
+
+.recipe-history {
+
+}
+
 /* Form */
 
 .form-container {
@@ -101,11 +158,17 @@ main {
     margin: 0 auto;
 }
 
-.default-form > input:not([type="file"]) {
+.form-container h1 {
+    margin-bottom: 20px;
+}
+
+.default-form > input:not([type="file"]),
+.default-form textarea {
     display: block;
     margin: 10px auto;
     padding: 10px;
     width: 100%;
+    border: 2px solid #ccc;
 }
 
 .default-form .form-btn-container {
@@ -116,7 +179,8 @@ main {
 
 .default-form > .form-btn-container > input[type="reset"],
 .default-form > .form-btn-container > input[type="submit"],
-.profile-form > input[type="submit"] {
+.profile-form > input[type="submit"],
+.recipe-add-comment {
     border: none;
     border-radius: 3px;
     cursor: pointer;
@@ -135,23 +199,34 @@ main {
 }
 
 .default-form > .form-btn-container > input[type="submit"],
-.profile-form > input[type="submit"] {
+.profile-form > input[type="submit"],
+.recipe-add-comment {
     width: 60%;
-    background-color: #238636;
+    background-color: var(--button-bg);
 }
 
 .login-form .form-btn-container {
     justify-content: center;
 }
 
-.required-label::after {
+.required-label::after,
+.required-footnote::before {
     content: "*";
     color: red;
+}
+
+/* Create Recipe form */
+.create-recipe-form textarea {
+    resize: none;
 }
 
 /* Főoldal */
 
 /* Receptek oldal */
+
+#page-title {
+    margin: 40px;
+}
 
 .recipes-container {
     border: 2px solid #ccc;
@@ -160,30 +235,96 @@ main {
     grid-gap: 1rem;
     margin: 0 auto;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 15px;
 }
 
 .card-container {
+    position: relative;
+    max-width: 300px;
     margin: 8px auto;
     display: flex;
     flex-direction: column;
-    max-width: 300px;
-    height: 400px;
+    background-color: #f0f0f0;
+    border: 2px solid #000;
+    padding-bottom: 5px;
 }
 
-.card-container a {
-    color: #000;
+.card-container .recipe-name {
+    height: 50px;
+    margin-top: 13px;
+    line-height: 19px;
 }
 
 .card-container .recipe-details {
-    margin-top: 20px;
+    margin: 5px auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+.card-container .recipe-uploader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    bottom: 0;
+}
+
+.card-container .recipe-uploader::before,
+.card-container .recipe-uploader::after {
+    content: "";
+    display: block;
+    border-top: 1px solid #000;
+    width: 25%;
+    margin: 0 auto;
+}
+
+.card-container .recipe-uploader h3 {
+    display: inline-block;
+}
+
 .card-container .recipe-uploader a {
     display: flex;
     align-items: center;
+}
+
+.recipe-uploader img {
+    max-width: 100%;
+}
+
+.card-container .recipe-uploader img,
+.feltolto img {
+    margin: 4px;
+}
+
+.comment-container {
+    margin: 150px 0;
+}
+
+.comment-container h2 {
+    margin: 10px 0;
+}
+
+.comment-container .comment {
+    border-left: 2px solid #ccc;
+    padding-left: 5px;
+    margin-bottom: 18px;
+}
+
+.recipe-new-comment label,
+.recipe-new-comment input {
+    display: block;
+}
+
+.recipe-new-comment #recipe-comment {
+    resize: none;
+    width: 70%;
+    height: 80px;
+}
+
+.recipe-add-comment {
+    width: 200px;
+    height: 40px;
 }
 
 /* Egy recept oldal */
@@ -198,8 +339,40 @@ main {
     grid-area: feltolto;
 }
 
-.feltolto a {
-    color: #000;
+/* Rating */
+.rating {
+    padding: 10px;
+    background: #fff;
+    position: relative;
+    direction: rtl;
+    margin: 0 auto;
+}
+
+.rating input {
+    position: absolute;
+    width: 35px;
+    height: 30px;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 9;
+}
+
+.rating .star {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-size: 22px;
+    margin: 3px;
+    color: #FBB202;
+    cursor: pointer;
+}
+
+.rating .star:after {
+    content: '\f006';
+}
+
+.rating input:checked ~ .star:after,
+.rating input:hover ~ .star:after {
+    content: '\f005';
 }
 
 /* Elkészítési idő/adag */
@@ -215,22 +388,20 @@ main {
 
 .hozzavalok h1,
 .elkeszites h1 {
-    font-size: 35px;
     margin-bottom: 5px;
 }
 
 .hozzavalok p{
-    font-size: 28px;
+    font-size: 20px;
     text-decoration: underline;
 }
 
 .hozzavalok ul{
-    font-size: 23px;
+    font-size: 18px;
 }
 
 .elkeszites {
     grid-area: main;
-    font-size: 25px;
 }
 
 .elkeszites p {
@@ -252,7 +423,7 @@ main {
                         'menu main main right right';
     grid-gap: 0.3rem;
     background-color: #fff;
-    padding: 5px;
+    padding: 15px;
     border: 2px solid #ccc;
 }
 
@@ -269,8 +440,17 @@ main {
 
 /* Profil page */
 
-.profile-container {
+.profile-container,
+.main-page-container,
+.recipes-container {
     margin: 0 15%;
+    padding: 15px !important;
+}
+
+.profile-information-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .profile-form > input:not([type="file"]) {
@@ -288,10 +468,6 @@ main {
     position: relative;
 }
 
-.profile-picture-container > img {
-    border-radius: 50%;
-}
-
 .profile-picture-container > input[type="file"] {
     display: none;
 }
@@ -302,22 +478,42 @@ main {
     bottom: 0;
     padding: 5px;
     background-color: #0d1117;
-    border: 1px solid #30363d;
+    border: 2px solid #30363d;
     border-radius: 6px;
     color: #fff;
 }
 
-.profile-container hr {
-    margin: 30px auto;
-    width: 70%;
+.profile-container hr,
+.main-page-container hr {
+    margin: 50px auto;
+    width: 80%;
 }
 
+.recipe-list-container {
+    display: grid;
+    margin: 0 auto;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.recipe-list-container .card-container {
+    width: 260px;
+}
+
+.recipe-list-container .card-container img{
+    max-width: 100%;
+}
+
+.own-create-container {
+    display: flex;
+    justify-content: space-between;
+}
 
 /* Footer */
 
 footer {
     padding: 40px 0;
-    background-color: var(--bg);
+    background-color: var(--bg-footer);
 }
 
 footer ul {
@@ -350,7 +546,7 @@ footer ul li a:hover {
 }
 
 
-@media only screen and (max-width: 1124px) {
+@media only screen and (max-width: 1250px) {
     body {
         overflow-x: hidden;
     }
@@ -414,6 +610,19 @@ footer ul li a:hover {
     /* Recipes */
     .recipes-container {
         border: none;
+        margin: 0 auto;
+    }
+
+    .recipe-new-comment #recipe-comment {
+        width: 100%;
+    }
+
+    .rating {
+        margin: 0 auto;
+    }
+
+    .grid-container {
+        border: none;
     }
     /* Footer */
 
@@ -433,6 +642,7 @@ footer ul li a:hover {
 
     .profile-picture-container {
         float: none;
+        clear: left;
         margin-bottom: 40px ;
     }
 
@@ -469,8 +679,45 @@ footer ul li a:hover {
         text-align: center;
     }
 
+    .comment-container,
+    .elkeszites {
+        width: 80%;
+        margin: 150px auto;
+        padding: 5px;
+    }
+
     .media > iframe,
     .media > img {
         width: 90%;
     }
 }
+
+/* Egy recept nyomtatási */
+@media print {
+    p { font-size: 12pt; }
+    .navbar, footer, iframe, img, .feltolto, .comment-container { display: none; }
+    h1, h2, h3 { page-break-after: avoid; }
+    main { margin: 0; }
+    .grid-container {
+        border: none;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+                            'header header header header adatok '
+                            'main main main menu menu'
+                            'main main main menu menu';
+    }
+
+    .receptneve,
+    .hozzavalok h2,
+    .hozzavalok p,
+    .hozzavalok ul,
+    .elkeszites h2 {
+        font-size: initial;
+        text-decoration: none;
+        text-align: initial;
+    }
+
+    .elkeszites p { text-align: justify; }
+}
+
+@page { margin: 0.5cm; }

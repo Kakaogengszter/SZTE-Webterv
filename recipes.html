@@ -12,7 +12,7 @@
 
     <body>
         <nav class="navbar">
-           <a class="brand" href="/"><!-- #TODO -->Receptoldal</a>
+           <a class="brand" href="/">Receptoldal</a>
 
             <ul class="nav-menu">
                 <li class="nav-item"><a class="nav-link" href="/">Főoldal</a></li>
@@ -20,7 +20,7 @@
                 <li class="nav-item"><a class="nav-link" href="./login.html">Bejelentkezés</a></li>
                 <li class="nav-item"><a class="nav-link" href="./register.html">Regisztráció</a></li>
 
-                <li class="nav-item"><a class="nav-link" href="./profile/">Profil</a></li>
+                <li class="nav-item"><a class="nav-link" href="./profile.html">Profil</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Kijelentkezés</a></li>
             </ul>
 
@@ -33,165 +33,107 @@
 
 
         <main>
+            <h1 id="page-title" class="text-center">Receptek</h1>
             <div class="recipes-container">
                 <div class="card-container">
-                    <img width="300" src="./img/bolognai-raguval-toltott-langos.jpg" alt="bolognai-raguval-toltott-langos">
-                    <h2 class="text-center"><a href="./bolognai-raguval-toltott-langos.html">Bolognai raguval töltött lángos</a></h2>
+                    <img src="./img/bolognai-raguval-toltott-langos.jpg" alt="bolognai-raguval-toltott-langos">
+                    <h3 class="recipe-name text-center"><a href="./recipes/bolognai-raguval-toltott-langos.html">Bolognai raguval töltött lángos</a></h3>
                     <div class="recipe-details">
                         <div>
                             <p>Adag: 8-10 lángos</p>
                             <p>Összesen: 120 perc</p>
-                        </div>
-                        <div class="recipe-uploader">
-                            <a href="./user12.html">
-                                <img height="50" width="50" src="./img/profile_1.jpg" alt="user12's profile picture">
-                                <p>Feltöltő: user12</p>
-                            </a>
                         </div>
                     </div>
-                </div>
-                <div class="card-container">
-                    <img width="300" src="./img/bolognai-raguval-toltott-langos.jpg" alt="bolognai-raguval-toltott-langos">
-                    <h2 class="text-center"><a href="./bolognai-raguval-toltott-langos.html">Bolognai raguval töltött lángos</a></h2>
-                    <div class="recipe-details">
-                        <div>
-                            <p>Adag: 8-10 lángos</p>
-                            <p>Összesen: 120 perc</p>
-                        </div>
-                        <div class="recipe-uploader">
-                            <a href="./user12.html">
-                                <img height="50" width="50" src="./img/profile_1.jpg" alt="user12's profile picture">
-                                <p>Feltöltő: user12</p>
-                            </a>
-                        </div>
+                    <div class="recipe-uploader">
+                        <a href="./users/user12.html">
+                            <img class="img-rounded" height="35" width="35" src="./img/user12.jpg" alt="user12 profil képe">
+                            <p>user12</p>
+                        </a>
                     </div>
                 </div>
+
                 <div class="card-container">
-                    <img width="300" src="./img/bolognai-raguval-toltott-langos.jpg" alt="bolognai-raguval-toltott-langos">
-                    <h2 class="text-center"><a href="./bolognai-raguval-toltott-langos.html">Bolognai raguval töltött lángos</a></h2>
+                    <img src="./img/az-eredeti-carbonara.jpg" alt="carbonara">
+                    <h3 class="recipe-name text-center"><a href="./recipes/az-eredeti-carbonara.html">Az eredeti carbonara</a></h3>
                     <div class="recipe-details">
                         <div>
-                            <p>Adag: 8-10 lángos</p>
-                            <p>Összesen: 120 perc</p>
-                        </div>
-                        <div class="recipe-uploader">
-                            <a href="./user12.html">
-                                <img height="50" width="50" src="./img/profile_1.jpg" alt="user12's profile picture">
-                                <p>Feltöltő: user12</p>
-                            </a>
+                            <p>Adag: 2 főre</p>
+                            <p>Idő: 30 perc</p>
                         </div>
                     </div>
-                </div>
-                <div class="card-container">
-                    <img width="300" src="./img/bolognai-raguval-toltott-langos.jpg" alt="bolognai-raguval-toltott-langos">
-                    <h2 class="text-center"><a href="./bolognai-raguval-toltott-langos.html">Bolognai raguval töltött lángos</a></h2>
-                    <div class="recipe-details">
-                        <div>
-                            <p>Adag: 8-10 lángos</p>
-                            <p>Összesen: 120 perc</p>
-                        </div>
-                        <div class="recipe-uploader">
-                            <a href="./user12.html">
-                                <img height="50" width="50" src="./img/profile_1.jpg" alt="user12's profile picture">
-                                <p>Feltöltő: user12</p>
-                            </a>
-                        </div>
+                    <div class="recipe-uploader">
+                        <a href="./users/user12.html">
+                            <img class="img-rounded" height="35" width="35" src="./img/user12.jpg" alt="user12 profil képe">
+                            <p>user12</p>
+                        </a>
                     </div>
                 </div>
+
                 <div class="card-container">
-                    <img width="300" src="./img/bolognai-raguval-toltott-langos.jpg" alt="bolognai-raguval-toltott-langos">
-                    <h2 class="text-center"><a href="./bolognai-raguval-toltott-langos.html">Bolognai raguval töltött lángos</a></h2>
+                    <img src="./img/grillezett-kenyerlangos.jpg" alt="grillezett-kenyerlangos">
+                    <h3 class="recipe-name text-center"><a href="./recipes/grillezett-kenyerlangos.html">Grillezett kenyérlángos</a></h3>
                     <div class="recipe-details">
                         <div>
-                            <p>Adag: 8-10 lángos</p>
-                            <p>Összesen: 120 perc</p>
-                        </div>
-                        <div class="recipe-uploader">
-                            <a href="./user12.html">
-                                <img height="50" width="50" src="./img/profile_1.jpg" alt="user12's profile picture">
-                                <p>Feltöltő: user12</p>
-                            </a>
+                            <p>Adag: 4 darab</p>
+                            <p>Idő: 240 perc</p>
                         </div>
                     </div>
-                </div>
-                <div class="card-container">
-                    <img width="300" src="./img/bolognai-raguval-toltott-langos.jpg" alt="bolognai-raguval-toltott-langos">
-                    <h2 class="text-center"><a href="./bolognai-raguval-toltott-langos.html">Bolognai raguval töltött lángos</a></h2>
-                    <div class="recipe-details">
-                        <div>
-                            <p>Adag: 8-10 lángos</p>
-                            <p>Összesen: 120 perc</p>
-                        </div>
-                        <div class="recipe-uploader">
-                            <a href="./user12.html">
-                                <img height="50" width="50" src="./img/profile_1.jpg" alt="user12's profile picture">
-                                <p>Feltöltő: user12</p>
-                            </a>
-                        </div>
+                    <div class="recipe-uploader">
+                        <a href="./profile.html">
+                            <img class="img-rounded" height="35" width="35" src="./img/firstuser.jpg" alt="firstuser profil képe">
+                            <p>firstuser</p>
+                        </a>
                     </div>
                 </div>
+
                 <div class="card-container">
-                    <img width="300" src="./img/bolognai-raguval-toltott-langos.jpg" alt="bolognai-raguval-toltott-langos">
-                    <h2 class="text-center"><a href="./bolognai-raguval-toltott-langos.html">Bolognai raguval töltött lángos</a></h2>
+                    <img src="./img/homemade-duplasajtos-hamburger.jpg" alt="homemade-duplasajtos-hamburger">
+                    <h3 class="recipe-name text-center"><a href="./recipes/homemade-duplasajtos-hamburger.html">Homemade dupla sajtos hamburger</a></h3>
                     <div class="recipe-details">
                         <div>
-                            <p>Adag: 8-10 lángos</p>
-                            <p>Összesen: 120 perc</p>
-                        </div>
-                        <div class="recipe-uploader">
-                            <a href="./user12.html">
-                                <img height="50" width="50" src="./img/profile_1.jpg" alt="user12's profile picture">
-                                <p>Feltöltő: user12</p>
-                            </a>
+                            <p>Adag: 3 főre</p>
+                            <p>Idő: 60 perc</p>
                         </div>
                     </div>
-                </div>
-                <div class="card-container">
-                    <img width="300" src="./img/bolognai-raguval-toltott-langos.jpg" alt="bolognai-raguval-toltott-langos">
-                    <h2 class="text-center"><a href="./bolognai-raguval-toltott-langos.html">Bolognai raguval töltött lángos</a></h2>
-                    <div class="recipe-details">
-                        <div>
-                            <p>Adag: 8-10 lángos</p>
-                            <p>Összesen: 120 perc</p>
-                        </div>
-                        <div class="recipe-uploader">
-                            <a href="./user12.html">
-                                <img height="50" width="50" src="./img/profile_1.jpg" alt="user12's profile picture">
-                                <p>Feltöltő: user12</p>
-                            </a>
-                        </div>
+                    <div class="recipe-uploader">
+                        <a href="./profile.html">
+                            <img class="img-rounded" height="35" width="35" src="./img/firstuser.jpg" alt="firstuser profil képe">
+                            <p>firstuser</p>
+                        </a>
                     </div>
                 </div>
+
                 <div class="card-container">
-                    <img width="300" src="./img/bolognai-raguval-toltott-langos.jpg" alt="bolognai-raguval-toltott-langos">
-                    <h2 class="text-center"><a href="./bolognai-raguval-toltott-langos.html">Bolognai raguval töltött lángos</a></h2>
+                    <img src="./img/tiramisu.jpg" alt="tiramisu">
+                    <h3 class="recipe-name text-center"><a href="./recipes/tiramisu.html">Tiramisu</a></h3>
                     <div class="recipe-details">
                         <div>
-                            <p>Adag: 8-10 lángos</p>
-                            <p>Összesen: 120 perc</p>
-                        </div>
-                        <div class="recipe-uploader">
-                            <a href="./user12.html">
-                                <img height="50" width="50" src="./img/profile_1.jpg" alt="user12's profile picture">
-                                <p>Feltöltő: user12</p>
-                            </a>
+                            <p>Adag: 1 db 30x35 cm</p>
+                            <p>Idő: 80 perc</p>
                         </div>
                     </div>
+                    <div class="recipe-uploader">
+                        <a href="./users/user12.html">
+                            <img class="img-rounded" height="35" width="35" src="./img/user12.jpg" alt="user12 profil képe">
+                            <p>user12</p>
+                        </a>
+                    </div>
                 </div>
+
                 <div class="card-container">
-                    <img width="300" src="./img/bolognai-raguval-toltott-langos.jpg" alt="bolognai-raguval-toltott-langos">
-                    <h2 class="text-center"><a href="./bolognai-raguval-toltott-langos.html">Bolognai raguval töltött lángos</a></h2>
+                    <img src="./img/pizzakremes-melegszendvics.jpg" alt="pizzakremes-melegszendvics">
+                    <h3 class="recipe-name text-center"><a href="./recipes/pizzakremes-melegszendvics.html">Pizzakrémes melegszendvics</a></h3>
                     <div class="recipe-details">
                         <div>
-                            <p>Adag: 8-10 lángos</p>
-                            <p>Összesen: 120 perc</p>
+                            <p>Adag: 4 főre</p>
+                            <p>Idő: 45 perc</p>
                         </div>
-                        <div class="recipe-uploader">
-                            <a href="./user12.html">
-                                <img height="50" width="50" src="./img/profile_1.jpg" alt="user12's profile picture">
-                                <p>Feltöltő: user12</p>
-                            </a>
-                        </div>
+                    </div>
+                    <div class="recipe-uploader">
+                        <a href="./users/user12.html">
+                            <img class="img-rounded" height="35" width="35" src="./img/user12.jpg" alt="user12 profil képe">
+                            <p>user12</p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -208,7 +150,7 @@
                 <li><a href="#">Kijelentkezés</a></li>
             </ul>
             <p class="copyright">
-                Copyright &copy; 2022 <!-- #TODO --> Receptoldal
+                Copyright &copy; 2022 Receptoldal
             </p>
         </footer>
 
