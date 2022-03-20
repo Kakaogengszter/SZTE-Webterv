@@ -153,17 +153,31 @@ main {
     margin: 7px auto;
 }
 
+.introduction-register-hr {
+    margin: 0 auto !important;
+}
+
 .introduction-icon {
     font-family: FontAwesome;
     width: 50px;
-    margin: 0 auto;
+    height: 50px;
+    margin: 5px auto 20px;
 }
 
 .introduction-icon svg {
     fill: var(--bg);
 }
 
+.register-link {
+    text-align: center;
+}
+
+.register-link a {
+    color: var(--bg);
+}
+
 .top-uploaders-table {
+    margin-top: 5px;
     border-collapse: collapse;
     width: 100%;
     border: 2px solid #ccc;
@@ -197,7 +211,7 @@ main {
     margin-bottom: 20px;
 }
 
-.default-form > input:not([type="file"]),
+.default-form input:not([type="file"]),
 .default-form textarea {
     display: block;
     margin: 10px auto;
@@ -212,9 +226,9 @@ main {
     justify-content: space-between;
 }
 
-.default-form > .form-btn-container > input[type="reset"],
-.default-form > .form-btn-container > input[type="submit"],
-.profile-form > input[type="submit"],
+.default-form .form-btn-container > input[type="reset"],
+.default-form .form-btn-container > input[type="submit"],
+.profile-form input[type="submit"],
 .recipe-add-comment {
     border: none;
     border-radius: 3px;
@@ -227,17 +241,21 @@ main {
     padding: 8px;
 }
 
-.default-form > .form-btn-container > input[type="reset"] {
+.default-form .form-btn-container input[type="reset"] {
     width: 25%;
     background-color: #E52424;
     color: #fff;
 }
 
-.default-form > .form-btn-container > input[type="submit"],
-.profile-form > input[type="submit"],
+.default-form .form-btn-container input[type="submit"],
+.profile-form input[type="submit"],
 .recipe-add-comment {
     width: 60%;
     background-color: var(--button-bg);
+}
+
+.login-form fieldset {
+    border: none;
 }
 
 .login-form .form-btn-container {
@@ -419,9 +437,13 @@ main {
     grid-area: menu;
 }
 
-.hozzavalok h1,
-.elkeszites h1 {
+.hozzavalok h2,
+.elkeszites h2 {
     margin-bottom: 5px;
+}
+
+.hozzavalok h2 {
+    text-align: left;
 }
 
 .hozzavalok p{
@@ -669,6 +691,10 @@ footer ul li a:hover {
     .introduction-card:nth-child(2) { animation: appear-from-left 2s; }
     .introduction-card:nth-child(3) { animation: appear-from-right 2s; }
 
+    .introduction-text {
+        width: 70%;
+    }
+
     .recipes-container {
         border: none;
         margin: 0 auto;
@@ -735,6 +761,10 @@ footer ul li a:hover {
     }
 
     .hozzavalok ul{
+        text-align: center;
+    }
+
+    .hozzavalok h2 {
         text-align: center;
     }
 

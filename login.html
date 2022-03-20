@@ -33,17 +33,19 @@
 
         <main>
             <div class="form-container">
-                <h1>Bejelentkezés</h1>
                 <form class="default-form login-form" action="loginValidator.php" method="POST">
-                    <label for="username">Felhasználónév:</label>
-                    <input type="text" name="username" id="username" maxlength="80" placeholder="Felhasználónév" required>
+                    <fieldset>
+                        <legend><h1>Bejelentkezés</h1></legend>
+                        <label for="username">Felhasználónév:</label>
+                        <input type="text" name="username" id="username" maxlength="80" placeholder="Felhasználónév" required>
 
-                    <label for="password">Jelszó:</label>
-                    <input type="password" name="password" id="password" placeholder="Jelszó" required>
+                        <label for="password">Jelszó:</label>
+                        <input type="password" name="password" id="password" placeholder="Jelszó" required>
 
-                    <div class="form-btn-container">
-                        <input type="submit" name="btn-login" value="Bejelentkezés">
-                    </div>
+                        <div class="form-btn-container">
+                            <input type="submit" name="btn-login" value="Bejelentkezés">
+                        </div>
+                    </fieldset>
                 </form>
             </div>
         </main>
