@@ -467,6 +467,7 @@ main {
     right: 0;
     cursor: pointer;
     z-index: 9;
+    fill: var(--bg);
 }
 
 .grid-container > div {
