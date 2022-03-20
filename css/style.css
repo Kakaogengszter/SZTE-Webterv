@@ -120,6 +120,10 @@ main {
 
 /* Főoldal */
 
+.introduction {
+    overflow: hidden;
+}
+
 .introduction-steps {
     display: flex;
     justify-content: space-between;
@@ -165,8 +169,8 @@ main {
     border: 2px solid #ccc;
 }
 
-.top-uploaders-table tr:nth-child(even) {
-    background-color: #f2f2f2;
+.top-uploaders-table tr:nth-child(odd) {
+    background-color: #ecebeb;
 }
 
 .top-uploaders-table th,
@@ -178,10 +182,6 @@ main {
 .top-uploaders-table th {
     background-color: var(--bg);
     color: #fff;
-}
-
-.recipe-history {
-
 }
 
 /* Form */
@@ -471,6 +471,7 @@ main {
     right: 0;
     cursor: pointer;
     z-index: 9;
+    fill: var(--bg);
 }
 
 .grid-container > div {
@@ -786,19 +787,19 @@ footer ul li a:hover {
 
 
 @keyframes appear-from-bottom {
-    from {top: 100vh;}
+    from {top: 50vh;}
     50% {top: 100px !important;}
     to {top: 0;}
 }
 
 @keyframes appear-from-left {
-    from {left: 100vh;}
+    from {left: 50vh;}
     50% {left: 100px !important;}
     to {left: 0;}
 }
 
 @keyframes appear-from-right {
-    from {right: 100vh;}
+    from {right: 50vh;}
     50% {right: 100px !important;}
     to {right: 0;}
 }
