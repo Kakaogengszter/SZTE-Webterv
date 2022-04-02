@@ -1,3 +1,14 @@
+<?php
+session_start();
+require_once('php/connection.php');
+
+if (isset($_SESSION['userID'])){
+
+    die();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="hu">
     <head>
@@ -12,15 +23,15 @@
 
     <body>
         <nav class="navbar">
-           <a class="brand" href="./">Receptoldal</a>
+           <a class="brand" href="./index.html">Receptoldal</a>
 
             <ul class="nav-menu">
-                <li class="nav-item"><a class="nav-link" href="./">Főoldal</a></li>
+                <li class="nav-item"><a class="nav-link" href="./index.html">Főoldal</a></li>
                 <li class="nav-item"><a class="nav-link" href="./recipes.html">Receptek</a></li>
-                <li class="nav-item"><a class="nav-link" href="./login.html">Bejelentkezés</a></li>
-                <li class="nav-item"><a class="nav-link active" href="./register.html">Regisztráció</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.php">Bejelentkezés</a></li>
+                <li class="nav-item"><a class="nav-link active" href="register.php">Regisztráció</a></li>
 
-                <li class="nav-item"><a class="nav-link" href="./profile.html">Profil</a></li>
+                <li class="nav-item"><a class="nav-link" href="profile.php">Profil</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Kijelentkezés</a></li>
             </ul>
 
@@ -34,7 +45,7 @@
         <main>
             <div class="form-container">
                 <h1>Regisztráció</h1>
-                <form class="default-form register-form" action="registerValidator.php" method="POST" autocomplete="off" enctype="multipart/form-data">
+                <form class="default-form register-form" action="php/registerValidator.php" method="POST" autocomplete="off" enctype="multipart/form-data">
                     <label class="required-label" for="username">Felhasználónév:</label>
                     <input type="text" name="username" id="username" maxlength="80" placeholder="Felhasználónév" required>
 
@@ -55,8 +66,8 @@
                     <input type="file" name="profile-picture" id="profile-picture">
 
                     <div class="form-btn-container">
-                        <input type="submit" name="btn-register" value="Regisztráció">
-                        <input type="reset" name="btn-reset" value="Reset">
+                        <input type="submit" name="register" value="Regisztráció">
+                        <input type="reset" name="reset" value="Reset">
                     </div>
                     <p class="required-footnote"><small> kötelező</small></p>
                 </form>
@@ -65,12 +76,12 @@
 
         <footer>
             <ul>
-                <li><a href="./">Főoldal</a></li>
+                <li><a href="./index.html">Főoldal</a></li>
                 <li><a href="./recipes.html">Receptek</a></li>
-                <li><a href="./login.html">Bejelentkezés</a></li>
-                <li><a href="./register.html">Regisztráció</a></li>
+                <li><a href="login.php">Bejelentkezés</a></li>
+                <li><a href="register.php">Regisztráció</a></li>
 
-                <li><a href="./profile.html">Profil</a></li>
+                <li><a href="profile.php">Profil</a></li>
                 <li><a href="#">Kijelentkezés</a></li>
             </ul>
             <p class="copyright">
