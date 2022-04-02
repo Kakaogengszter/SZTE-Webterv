@@ -11,8 +11,6 @@ class Database{
     public $mysqli;
 
 
-
-
     public function __construct(){
 
         $this->host = "localhost";
@@ -25,10 +23,10 @@ class Database{
 
     }
 
-    public function insert($username,$email,$password,$birthdate){
+    public function insertUsersToDB($username, $email, $password, $birthdate){
         $db = new Database();
 
-        $sql = "INSERT INTO users (username,email,password,birthdate) VALUES ('$username','$email','$password','$birthdate')";
+        $sql = "INSERT INTO users (username,email,password,birthdate,picture) VALUES ('$username','$email','$password','$birthdate','default.jpg')";
         var_dump($sql);
 
         $db -> mysqli -> query($sql);
@@ -41,18 +39,12 @@ class Database{
         return $db -> mysqli -> query($sql);
     }
 
-    public function profilePicsInsertDB($userID,$imgname){
-        $db = new Database();
-
-        $sql = "INSERT INTO profilkepek(userID,profilePicsPath) VALUES ($userID,'$imgname')";
-        return $db -> mysqli -> query($sql);
-
-    }
 
     public function profilePicsUpdate($userID,$imgname){
         $db = new Database();
 
-        $sql_update = "UPDATE profilkepek SET profilePicsPath = '$imgname' WHERE userid = $userID";
+        $sql_update = "UPDATE users SET picture = '$imgname' WHERE userid = $userID";
+        var_dump($sql_update);
 
         return $db -> mysqli -> query($sql_update);
 

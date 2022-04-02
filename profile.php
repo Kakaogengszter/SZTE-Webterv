@@ -1,3 +1,34 @@
+<?php
+session_start();
+require_once('php/connection.php');
+$id = $_SESSION['userID'];
+
+
+$sql = "SELECT * FROM users WHERE userID=$id";
+
+$db = new Database();
+
+$res = $db -> mysqli -> query($sql);
+
+
+if(!$res){
+    die("Hiba a lekérdezés során!");
+}
+$row = $res -> fetch_assoc();
+$username = $row["username"];
+$email = $row["email"];
+
+$sql_profilkep = "SELECT picture FROM users WHERE userID = $id";
+
+$res_profilkepek = $db -> mysqli -> query($sql_profilkep);
+
+
+$row_profilkepek = mysqli_fetch_assoc($res_profilkepek);
+
+$profilkep = $row_profilkepek['picture'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="hu">
     <head>
@@ -12,15 +43,15 @@
 
     <body>
         <nav class="navbar">
-           <a class="brand" href="./">Receptoldal</a>
+           <a class="brand" href="./index.html">Receptoldal</a>
 
             <ul class="nav-menu">
-                <li class="nav-item"><a class="nav-link" href="./">Főoldal</a></li>
+                <li class="nav-item"><a class="nav-link" href="./index.html">Főoldal</a></li>
                 <li class="nav-item"><a class="nav-link" href="./recipes.html">Receptek</a></li>
-                <li class="nav-item"><a class="nav-link" href="./login.html">Bejelentkezés</a></li>
-                <li class="nav-item"><a class="nav-link" href="./register.html">Regisztráció</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.php">Bejelentkezés</a></li>
+                <li class="nav-item"><a class="nav-link" href="register.php">Regisztráció</a></li>
 
-                <li class="nav-item"><a class="nav-link active" href="./profile.html">Profil</a></li>
+                <li class="nav-item"><a class="nav-link active" href="profile.php">Profil</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Kijelentkezés</a></li>
             </ul>
 
@@ -33,20 +64,31 @@
 
         <main>
             <div class="profile-container">
-                <h1>Firstuser profilja</h1>
+                <h1><?php echo $username ?> profilja</h1>
                 <div class="profile-informations">
-                    <form class="profile-form" action="profileUpdateValidator.php" method="POST" autocomplete="off" enctype="multipart/form-data">
+
+
+                    <form class="profile-form" action="php/profilePicture.php" method="post" enctype="multipart/form-data">
+
+
                         <div class="profile-picture-container">
-                            <img class="img-rounded" height="200" src="./img/firstuser.jpg" alt="profile picture">
+                            <img class="img-rounded" height="200" src="profilepics/<?php echo $profilkep ?>" alt="profile picture">
+
                             <label for="profile-picture">Feltöltés</label>
-                            <input type="file" name="profile-picture" id="profile-picture">
+                            <input type="file" name="profile-picture" onchange="form.submit()" id="profile-picture">
+
                         </div>
 
+                    </form>
+
+                    <form class="profile-form" action="php/profileUpdateValidator.php" method="POST" autocomplete="off" enctype="multipart/form-data">
+
+
                         <label for="username">Felhasználónév:</label>
-                        <input type="text" name="username" id="username" maxlength="80" value="firstuser">
+                        <input type="text" name="username" id="username" maxlength="80" value="<?php echo $username ?>">
 
                         <label for="email">E-mail cím:</label>
-                        <input type="email" name="email" id="email" value="email@email.com">
+                        <input type="email" name="email" id="email" value="<?php echo $email ?>">
 
                         <label for="password">Jelszó:</label>
                         <input type="password" name="password" id="password" placeholder="Jelszó">
@@ -54,7 +96,7 @@
                         <label for="birthday">Születési dátum:</label>
                         <input type="date" id="birthday" name="birthday" min="1900-01-01">
 
-                        <input type="submit" name="btn-update" value="Mentés">
+                        <input type="submit" name="update" value="Mentés">
                     </form>
                 </div>
 
@@ -109,12 +151,12 @@
 
         <footer>
             <ul>
-                <li><a href="./">Főoldal</a></li>
+                <li><a href="./index.html">Főoldal</a></li>
                 <li><a href="./recipes.html">Receptek</a></li>
-                <li><a href="./login.html">Bejelentkezés</a></li>
-                <li><a href="./register.html">Regisztráció</a></li>
+                <li><a href="login.php">Bejelentkezés</a></li>
+                <li><a href="register.php">Regisztráció</a></li>
 
-                <li><a href="./profile.html">Profil</a></li>
+                <li><a href="profile.php">Profil</a></li>
                 <li><a href="#">Kijelentkezés</a></li>
             </ul>
             <p class="copyright">
