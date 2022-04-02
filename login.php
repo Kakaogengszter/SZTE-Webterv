@@ -32,7 +32,7 @@ if (isset($_SESSION['userID'])){
                 <li class="nav-item"><a class="nav-link" href="register.php">Regisztráció</a></li>
 
                 <li class="nav-item"><a class="nav-link" href="profile.php">Profil</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Kijelentkezés</a></li>
+                <li class="nav-item"><a class="nav-link" href="php/logout.php">Kijelentkezés</a></li>
             </ul>
 
             <div class="burger">
@@ -69,7 +69,7 @@ if (isset($_SESSION['userID'])){
                 <li><a href="register.php">Regisztráció</a></li>
 
                 <li><a href="profile.php">Profil</a></li>
-                <li><a href="#">Kijelentkezés</a></li>
+                <li><a href="php/logout.php">Kijelentkezés</a></li>
             </ul>
             <p class="copyright">
                 Copyright &copy; 2022 Receptoldal
