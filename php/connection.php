@@ -23,6 +23,19 @@ class Database{
 
     }
 
+    public function run_select_query($sql){
+
+        $array = array();
+        $res = mysqli_query($this->mysqli, $sql) or die ('Failure in sql select!');
+        while($row = mysqli_fetch_assoc($res)){
+
+            $array[] = $row;
+
+        }
+        return $array;
+
+    }
+
     public function insertUsersToDB($username, $email, $password, $birthdate){
         $db = new Database();
 
@@ -48,6 +61,25 @@ class Database{
 
         return $db -> mysqli -> query($sql_update);
 
+    }
+
+    public function deleteProfilePicWhenModifyed(){
+        $db = new Database();
+
+        $id = $_SESSION['userID'];
+
+        $sqlselect = "SELECT * FROM users WHERE userID = $id";
+        $resSelect = $db -> mysqli -> query($sqlselect);
+
+        $row = $resSelect -> fetch_assoc();
+
+        $currentProfilePicture = $row["picture"];
+
+        $fileName = "../profilePics/$currentProfilePicture";
+
+        if($currentProfilePicture != "default.jpg"){
+            unlink($fileName);
+        }
     }
 
 }
