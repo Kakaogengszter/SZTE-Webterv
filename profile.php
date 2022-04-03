@@ -1,33 +1,20 @@
 <?php
-session_start();
-require_once('php/connection.php');
-$id = $_SESSION['userID'];
+
+require_once("php/profileSelect.php");
 
 
-$sql = "SELECT * FROM users WHERE userID=$id";
+$dataBase = new Database();
+$id = $_SESSION["userID"];
 
-$db = new Database();
-
-$res = $db -> mysqli -> query($sql);
-
-
-if(!$res){
-    die("Hiba a lekérdezés során!");
+$dataListTable = $dataBase->run_select_query("SELECT * FROM users WHERE userID = $id");
+$userArray = array();
+foreach ($dataListTable as $DLT) {
+    $userData = new User($DLT["userID"],$DLT["username"],$DLT["email"],$DLT["password"],$DLT["birthdate"],$DLT["picture"]);
+    $userArray[] = $userData;
 }
-$row = $res -> fetch_assoc();
-$username = $row["username"];
-$email = $row["email"];
-
-$sql_profilkep = "SELECT picture FROM users WHERE userID = $id";
-
-$res_profilkepek = $db -> mysqli -> query($sql_profilkep);
-
-
-$row_profilkepek = mysqli_fetch_assoc($res_profilkepek);
-
-$profilkep = $row_profilkepek['picture'];
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="hu">
@@ -43,10 +30,10 @@ $profilkep = $row_profilkepek['picture'];
 
     <body>
         <nav class="navbar">
-           <a class="brand" href="./index.html">Receptoldal</a>
+           <a class="brand" href="./index.php">Receptoldal</a>
 
             <ul class="nav-menu">
-                <li class="nav-item"><a class="nav-link" href="./index.html">Főoldal</a></li>
+                <li class="nav-item"><a class="nav-link" href="./index.php">Főoldal</a></li>
                 <li class="nav-item"><a class="nav-link" href="./recipes.html">Receptek</a></li>
                 <li class="nav-item"><a class="nav-link" href="login.php">Bejelentkezés</a></li>
                 <li class="nav-item"><a class="nav-link" href="register.php">Regisztráció</a></li>
@@ -64,7 +51,7 @@ $profilkep = $row_profilkepek['picture'];
 
         <main>
             <div class="profile-container">
-                <h1><?php echo $username ?> profilja</h1>
+                <h1><?php echo $userData -> getUsername() ?> profilja</h1>
                 <div class="profile-informations">
 
 
@@ -72,7 +59,7 @@ $profilkep = $row_profilkepek['picture'];
 
 
                         <div class="profile-picture-container">
-                            <img class="img-rounded" height="200" src="profilepics/<?php echo $profilkep ?>" alt="profile picture">
+                            <img class="img-rounded" height="200" src="profilepics/<?php echo $userData -> getPicture() ?>" alt="profile picture">
 
                             <label for="profile-picture">Feltöltés</label>
                             <input type="file" name="profile-picture" onchange="form.submit()" id="profile-picture">
@@ -81,17 +68,20 @@ $profilkep = $row_profilkepek['picture'];
 
                     </form>
 
-                    <form class="profile-form" action="php/profileUpdateValidator.php" method="POST" autocomplete="off" enctype="multipart/form-data">
+                    <form class="profile-form" action="php/profileEdit.php" method="POST" autocomplete="off" enctype="multipart/form-data">
 
 
                         <label for="username">Felhasználónév:</label>
-                        <input type="text" name="username" id="username" maxlength="80" value="<?php echo $username ?>">
+                        <input type="text" name="username" id="username" maxlength="80" value="<?php echo $userData -> getUsername() ?>" required>
 
                         <label for="email">E-mail cím:</label>
-                        <input type="email" name="email" id="email" value="<?php echo $email ?>">
+                        <input type="email" name="email" id="email" value="<?php echo $userData -> getEmail() ?>" required>
 
-                        <label for="password">Jelszó:</label>
-                        <input type="password" name="password" id="password" placeholder="Jelszó">
+                        <label for="password">Aktuális jelszó:</label>
+                        <input type="password" name="aPassword" id="password" placeholder="Aktuális jelszó" required>
+
+                        <label for="password">Új jelszó: (opcionális)</label>
+                        <input type="password" name="newPassword" id="password" placeholder="Új jelszó" >
 
                         <label for="birthday">Születési dátum:</label>
                         <input type="date" id="birthday" name="birthday" min="1900-01-01">
@@ -151,7 +141,7 @@ $profilkep = $row_profilkepek['picture'];
 
         <footer>
             <ul>
-                <li><a href="./index.html">Főoldal</a></li>
+                <li><a href="./index.php">Főoldal</a></li>
                 <li><a href="./recipes.html">Receptek</a></li>
                 <li><a href="login.php">Bejelentkezés</a></li>
                 <li><a href="register.php">Regisztráció</a></li>

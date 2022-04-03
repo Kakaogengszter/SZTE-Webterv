@@ -20,7 +20,7 @@ if (isset($_POST['login'])){
             if (password_verify($pwd, $row[3]))
             {
                 $_SESSION['userID'] = $row[0];
-                header("Location: ../index.html");
+                header("Location: ../index.php");
             }
             else {
                 //érvénytelen belépés
