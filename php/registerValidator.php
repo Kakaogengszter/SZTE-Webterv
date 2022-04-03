@@ -18,7 +18,7 @@ $bdate = trim($_POST["birthday"]);
 
 if (($pwd == $pwdc) && ($user != $pwd) && (strlen($user) > 6 ) && (strlen($pwd) > 6)){
     $hash = password_hash($pwd, PASSWORD_DEFAULT);
-    $db ->insert($user,$email,$hash,$bdate);
+    $db ->insertUsersToDB($user,$email,$hash,$bdate);
     if ($db -> mysqli -> connect_errno == 0){
         $_SESSION['register'] = "Sikeres regisztráció!";
 
@@ -26,5 +26,6 @@ if (($pwd == $pwdc) && ($user != $pwd) && (strlen($user) > 6 ) && (strlen($pwd) 
         $_SESSION['register'] = "A regisztráció sikertelen!";
     }
 
-    header("Location: ../login.php");
+
 }
+header("Location: ../login.php");
