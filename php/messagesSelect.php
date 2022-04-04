@@ -8,8 +8,6 @@ class Message{
     private $kitol;
     private $kinek;
     private $content;
-    private $kitolUsername;
-    private $kinekUsername;
 
 
     public function __construct($kitol, $kinek, $content)
@@ -55,67 +53,63 @@ class Message{
         $this->content = $content;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getKitolUsername()
-    {
-        return $this->kitolUsername;
-    }
-
-    /**
-     * @param mixed $kitolUsername
-     */
-    public function setKitolUsername($kitolUsername)
-    {
-        $this->kitolUsername = $kitolUsername;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getKinekUsername()
-    {
-        return $this->kinekUsername;
-    }
-
-    /**
-     * @param mixed $kinekUsername
-     */
-    public function setKinekUsername($kinekUsername)
-    {
-        $this->kinekUsername = $kinekUsername;
-    }
 
 
+    public function kitol(){
 
-
-    public function kitolUsername(){
         $db = new Database();
 
-        $userID = $this->getKitol();
+        $kitolID = $this->getKinek();
 
 
-        $dataListTable = $db->run_select_query("SELECT username FROM users INNER JOIN inbox ON inbox.kitolID = users.userID WHERE users.userID =$userID");
+        $dataListTable = $db->run_select_query("SELECT username FROM users INNER JOIN inbox ON inbox.kitolID = users.userID WHERE inbox.kinekID = $kitolID");
 
 
-        $messageArray = array();
+        $userArray = array();
         foreach ($dataListTable as $DLT) {
             $userData = $DLT["username"];
-            $messageArray[] = $userData;
+            $userArray[] = $userData;
+
         }
 
-        $this->setKitol($messageArray[0]);
-
-        return $messageArray;
+        return $userArray;
 
     }
 
+    public function messageContentArray() {
+        $db = new Database();
+
+        $kinekID = $this->getKinek();
+
+        $messageDataList = $db -> run_select_query("SELECT message from inbox where kinekID = $kinekID");
+
+        $messageConent = array();
+        foreach ($messageDataList as $DLT) {
+            $messageData = $DLT["message"];
+            $messageConent[] = $messageData;
+
+        }
+
+        return $messageConent;
+    }
 
 
-    public function kinekUsername(){
+    public function egyesites(){
+
+        $messageConent = $this->messageContentArray();
+        $userArray = $this->kitol();
 
 
+
+        $length = count($messageConent);
+
+        $messageWithUsername = array();
+        for ($i = 0; $i < $length;$i++){
+            $messageWithUsername[] = [$userArray[$i] => $messageConent[$i]];
+        }
+
+
+        return $messageWithUsername;
 
     }
 

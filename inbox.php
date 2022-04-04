@@ -2,7 +2,6 @@
 
 require_once("php/messagesSelect.php");
 
-
 $dataBase = new Database();
 
 
@@ -13,9 +12,20 @@ $dataListTable = $dataBase->run_select_query("SELECT * FROM inbox WHERE kinekID 
 $messageArray = array();
 foreach ($dataListTable as $DLT) {
     $messageData = new Message($DLT["kitolID"], $DLT["kinekID"], $DLT["message"]);
-    array_push($messageArray,$messageData);
+    $messageArray[] = $messageData;
 
 }
+
+if(!empty($messageData)){
+    $kuldoUsername = $messageData -> kitol();
+    $messageContent = $messageData -> messageContentArray();
+
+    $hossz = count($messageContent);
+    $message = $messageData -> egyesites();
+}
+
+
+
 
 ?>
 
@@ -62,28 +72,43 @@ foreach ($dataListTable as $DLT) {
     <h2>Üzenetek</h2>
     <table class="top-uploaders-table">
         <tr>
-            <th id="uploader">Kitől</th>
-            <th id="uploaded">Üzenet</th>
+            <th id="kitol">Kitől</th>
+            <th id="kinek">Üzenet</th>
         </tr>
-        <tr>
             <?php
-
-            $messages = $messageData ->kitolUsername();
-            foreach($messages as $mArray)
+            if(!empty($messageData)){
+            for($i = 0;$i < $hossz;$i++)
             {
             ?>
 
         <tr>
-            <td><?php echo $mArray?></td>
-            <td><?php echo $messageData ->getContent()?></td>
+            <td><?php echo $kuldoUsername[$i] ?></td>
+            <td><?php echo $message[$i][$kuldoUsername[$i]] ?></td>
+
         </tr>
 
         <?php
         }
+            }else{
+                ?>
+        <td>Még senki sem küldött üzenetet :(</td>
+        <td>Majd itt lesz az üzenet szövege</td>
+        <?php
+            }
         ?>
-
-        </tr>
     </table>
+
+    <form action="php/messageSend.php" method="post" autocomplete="off">
+        <label class="required-label" for="cimzett">Címzett </label>
+        <input type="text" id="cimzett" name="cimzett" required>
+
+        <br>
+
+        <label for="content">Szöveg </label>
+        <input type="text" id="content" name="content">
+
+        <button type="submit" id="send_message">Küldés</button>
+    </form>
 
 </main>
 

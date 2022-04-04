@@ -28,6 +28,7 @@ class Database{
         $array = array();
         $res = mysqli_query($this->mysqli, $sql) or die ('Failure in sql select!');
 
+
         while($row = mysqli_fetch_assoc($res)){
 
             $array[] = $row;
