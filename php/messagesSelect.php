@@ -7,14 +7,12 @@ class Message{
 
     private $kitol;
     private $kinek;
-    private $content;
 
 
-    public function __construct($kitol, $kinek, $content)
+    public function __construct($kitol, $kinek)
     {
         $this->kitol = $kitol;
         $this->kinek = $kinek;
-        $this->content = $content;
     }
 
 
@@ -41,17 +39,6 @@ class Message{
         $this->kinek = $kinek;
     }
 
-
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-
-    public function setContent($content)
-    {
-        $this->content = $content;
-    }
 
 
 

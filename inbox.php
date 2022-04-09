@@ -102,12 +102,16 @@ if(!empty($messageData)){
         <label class="required-label" for="cimzett">Címzett </label>
         <input type="text" id="cimzett" name="cimzett" required>
 
+        <button type="button">Check</button>
+        <p id="exist_user"></p>
+
+
         <br>
 
         <label for="content">Szöveg </label>
         <input type="text" id="content" name="content">
 
-        <button type="submit" id="send_message">Küldés</button>
+        <button type="submit" name="send_message" id="send_message">Küldés</button>
     </form>
 
 </main>
