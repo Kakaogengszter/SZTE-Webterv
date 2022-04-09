@@ -23,16 +23,16 @@ if (isset($_SESSION['userID'])){
 
     <body>
         <nav class="navbar">
-           <a class="brand" href="./index.html">Receptoldal</a>
+           <a class="brand" href="./index.php">Receptoldal</a>
 
             <ul class="nav-menu">
-                <li class="nav-item"><a class="nav-link" href="./index.html">Főoldal</a></li>
+                <li class="nav-item"><a class="nav-link" href="./index.php">Főoldal</a></li>
                 <li class="nav-item"><a class="nav-link" href="./recipes.html">Receptek</a></li>
                 <li class="nav-item"><a class="nav-link active" href="login.php">Bejelentkezés</a></li>
                 <li class="nav-item"><a class="nav-link" href="register.php">Regisztráció</a></li>
 
                 <li class="nav-item"><a class="nav-link" href="profile.php">Profil</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Kijelentkezés</a></li>
+                <li class="nav-item"><a class="nav-link" href="php/logout.php">Kijelentkezés</a></li>
             </ul>
 
             <div class="burger">
@@ -63,13 +63,13 @@ if (isset($_SESSION['userID'])){
 
         <footer>
             <ul>
-                <li><a href="./index.html">Főoldal</a></li>
+                <li><a href="./index.php">Főoldal</a></li>
                 <li><a href="./recipes.html">Receptek</a></li>
                 <li><a href="login.php">Bejelentkezés</a></li>
                 <li><a href="register.php">Regisztráció</a></li>
 
                 <li><a href="profile.php">Profil</a></li>
-                <li><a href="#">Kijelentkezés</a></li>
+                <li><a href="php/logout.php">Kijelentkezés</a></li>
             </ul>
             <p class="copyright">
                 Copyright &copy; 2022 Receptoldal
