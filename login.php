@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('php/connection.php');
+require_once('php/includes.php');
 
 if (isset($_SESSION['userID'])){
 
@@ -22,25 +23,7 @@ if (isset($_SESSION['userID'])){
     </head>
 
     <body>
-        <nav class="navbar">
-           <a class="brand" href="./index.html">Receptoldal</a>
-
-            <ul class="nav-menu">
-                <li class="nav-item"><a class="nav-link" href="./index.html">Főoldal</a></li>
-                <li class="nav-item"><a class="nav-link" href="./recipes.html">Receptek</a></li>
-                <li class="nav-item"><a class="nav-link active" href="login.php">Bejelentkezés</a></li>
-                <li class="nav-item"><a class="nav-link" href="register.php">Regisztráció</a></li>
-
-                <li class="nav-item"><a class="nav-link" href="profile.php">Profil</a></li>
-                <li class="nav-item"><a class="nav-link" href="php/logout.php">Kijelentkezés</a></li>
-            </ul>
-
-            <div class="burger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </nav>
+        <?php navigationGenerate("login"); ?>
 
         <main>
             <div class="form-container">
@@ -61,20 +44,7 @@ if (isset($_SESSION['userID'])){
             </div>
         </main>
 
-        <footer>
-            <ul>
-                <li><a href="./index.html">Főoldal</a></li>
-                <li><a href="./recipes.html">Receptek</a></li>
-                <li><a href="login.php">Bejelentkezés</a></li>
-                <li><a href="register.php">Regisztráció</a></li>
-
-                <li><a href="profile.php">Profil</a></li>
-                <li><a href="php/logout.php">Kijelentkezés</a></li>
-            </ul>
-            <p class="copyright">
-                Copyright &copy; 2022 Receptoldal
-            </p>
-        </footer>
+        <?php footerGenerate();?>
 
     </body>
 </html>

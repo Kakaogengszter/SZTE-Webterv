@@ -16,7 +16,7 @@ class Database{
         $this->host = "localhost";
         $this->user = "root";
         $this->pwd = "";
-        $this->db = "recipes";
+        $this->db = "szte-webterv";
         $this->port = "3306";
 
         $this->mysqli = new mysqli($this->host,$this->user,$this->pwd,$this->db,$this->port);
