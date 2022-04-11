@@ -5,7 +5,7 @@ require_once('php/includes.php');
 $id = $_SESSION['userID'];
 
 
-$sql = "SELECT * FROM users WHERE userID=$id";
+$sql = "SELECT * FROM users WHERE id=$id";
 
 $db = new Database();
 
@@ -19,7 +19,7 @@ $row = $res -> fetch_assoc();
 $username = $row["username"];
 $email = $row["email"];
 
-$sql_profilkep = "SELECT picture FROM users WHERE userID = $id";
+$sql_profilkep = "SELECT picture FROM users WHERE id = $id";
 
 $res_profilkepek = $db -> mysqli -> query($sql_profilkep);
 

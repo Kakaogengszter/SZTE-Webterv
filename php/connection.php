@@ -43,7 +43,7 @@ class Database{
     public function profilePicsUpdate($userID,$imgname){
         $db = new Database();
 
-        $sql_update = "UPDATE users SET picture = '$imgname' WHERE userid = $userID";
+        $sql_update = "UPDATE users SET picture = '$imgname' WHERE id = $userID";
         var_dump($sql_update);
 
         return $db -> mysqli -> query($sql_update);

@@ -12,7 +12,7 @@ $db = new Database();
 
 $id = $_SESSION['userID'];
 
-$sqlselect = "SELECT * FROM users WHERE userID = $id";
+$sqlselect = "SELECT * FROM users WHERE id = $id";
 $resSelect = $db -> mysqli -> query($sqlselect);
 
 $row = $resSelect -> fetch_assoc();
