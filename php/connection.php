@@ -23,7 +23,7 @@ class Database{
 
     }
 
-    public function run_select_query($sql){
+    public function run_select_query_to_array($sql){
 
         $array = array();
         $res = mysqli_query($this->mysqli, $sql) or die ('Failure in sql select!');
@@ -80,6 +80,28 @@ class Database{
         if($currentProfilePicture != "default.jpg"){
             unlink($fileName);
         }
+    }
+
+    public function get_user_id(string $username): int
+    {
+
+        $sql_get_addressee_id = "SELECT userID FROM users where username = '$username'";
+
+        $res = $this->mysqli ->query($sql_get_addressee_id);
+        $row = $res -> fetch_assoc();
+
+        if(!is_null($row)){
+            return (int)$row["userID"];
+        }
+
+        return 0;
+
+    }
+
+    public function insertMessageToDB(int $userID, int $addressee_ID, string $content)
+    {
+        $sql_add = "INSERT INTO inbox (kitolID,kinekID,message) values ($userID,$addressee_ID,'$content')";
+        $this->mysqli -> query($sql_add);
     }
 
 }

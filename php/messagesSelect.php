@@ -49,7 +49,7 @@ class Message{
         $kitolID = $this->getKinek();
 
 
-        $dataListTable = $db->run_select_query("SELECT username FROM users INNER JOIN inbox ON inbox.kitolID = users.userID WHERE inbox.kinekID = $kitolID");
+        $dataListTable = $db->run_select_query_to_array("SELECT username FROM users INNER JOIN inbox ON inbox.kitolID = users.userID WHERE inbox.kinekID = $kitolID");
 
 
         $userArray = array();
@@ -68,7 +68,7 @@ class Message{
 
         $kinekID = $this->getKinek();
 
-        $messageDataList = $db -> run_select_query("SELECT message from inbox where kinekID = $kinekID");
+        $messageDataList = $db -> run_select_query_to_array("SELECT message from inbox where kinekID = $kinekID");
 
         $messageConent = array();
         foreach ($messageDataList as $DLT) {

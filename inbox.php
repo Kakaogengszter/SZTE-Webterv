@@ -8,7 +8,7 @@ $dataBase = new Database();
 $id = $_SESSION["userID"];
 
 
-$dataListTable = $dataBase->run_select_query("SELECT * FROM inbox WHERE kinekID = $id");
+$dataListTable = $dataBase->run_select_query_to_array("SELECT * FROM inbox WHERE kinekID = $id");
 $messageArray = array();
 foreach ($dataListTable as $DLT) {
     $messageData = new Message($DLT["kitolID"], $DLT["kinekID"], $DLT["message"]);
@@ -24,6 +24,11 @@ if(!empty($messageData)){
     $message = $messageData -> egyesites();
 }
 
+if(isset($_SESSION["error"])){
+    $error = $_SESSION["error"];
+}else{
+    $error[] = null;
+}
 
 
 
@@ -98,12 +103,28 @@ if(!empty($messageData)){
         ?>
     </table>
 
+
+    <?php
+    if (isset($_GET["siker"])) {
+        echo "<div class='success'>Megvan a felhasználó!</div>";
+    }
+
+    if (count($error) > 0 && isset($_SESSION["error"])) {
+        echo "<div class='errors'>";
+
+        echo $error[0];
+
+        echo "</div>";
+    }
+    unset($_SESSION["error"]);
+    ?>
+
+<div align="center">
     <form action="php/messageSend.php" method="post" autocomplete="off">
         <label class="required-label" for="cimzett">Címzett </label>
         <input type="text" id="cimzett" name="cimzett" required>
 
-        <button type="button">Check</button>
-        <p id="exist_user"></p>
+        <button type="submit" name="user_check" id="user_check">Check</button>
 
 
         <br>
@@ -113,6 +134,8 @@ if(!empty($messageData)){
 
         <button type="submit" name="send_message" id="send_message">Küldés</button>
     </form>
+</div>
+
 
 </main>
 
