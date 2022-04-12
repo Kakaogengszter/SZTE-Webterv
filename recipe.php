@@ -8,11 +8,16 @@
     }
 
     $recipename = $_GET['name'];
+
     
     $db = new Database();
+
     $sqlselect = "SELECT * FROM recipes WHERE slug = '$recipename'";
     $resSelect = $db->mysqli->query($sqlselect);
     $recipe = $resSelect->fetch_all()[0];
+
+    $_SESSION["recipe_id"] = $recipe[0];
+    $_SESSION["recipe_name"] = $recipename;
 
     if (empty($recipe)) {
         header("Location: ./recipes.php");
@@ -26,8 +31,20 @@
     $uploaderSelect = $db->mysqli->query($uploaderSqlSelect);
     $uploaderData = $uploaderSelect->fetch_all()[0];
 
+    if(isset($_SESSION["comment_error"])){
+        $error = $_SESSION["comment_error"];
+    }else{
+        $error[] = null;
+    }
+
+
     // [0]=id, [1]=user_id, [2]=name, [3]=image_name, [4]=video_url, [5]=portion, [6]=time, [7]=ingredients, [8]=instructions, [9]=upload_date, [10]=slug
     // [0]=id, [1]=username, [2]=email, [3]=password, [4]=birthdate, [5]=picture
+
+    $comments = $db ->get_comments($recipe[0]);
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -99,22 +116,54 @@
                         "<iframe src='" . $recipe[4] . "'></iframe>" . 
                         "<img src='./img/" . $recipe[3]  . "' alt='" . $recipe[2] . "'>" . 
                     "</div>";
-                ?>
-                
+            ?>
             </div>
 
-            <div class="comment-container">
-                <h2>Hozzászólások</h2>
-                <div class="comment">
-                    <h3 class="comment-user"><a href="../profile.php">firstuser</a></h3>
-                    <p class="comment-msg">Kedvenc receptem ezen az oldalon!</p>
-                </div>
 
-                <form class="recipe-new-comment" action="addCommentValidator.php" method="POST">
-                    <label for="recipe-comment">Új hozzászólás:</label>
-                    <textarea id="recipe-comment" name="recipe-comment"></textarea>
-                    <input class="recipe-add-comment cursor-pointer" type="submit" value="Hozzászólás">
-                </form>
+
+            <div class="comment-container">
+                <?php
+                if (count($error) > 0 && isset($_SESSION["comment_error"])) {
+                    echo "<div class='errors' id='left-errors'>";
+
+                    echo $error[0];
+
+                    echo "</div>";
+                }
+                unset($_SESSION["comment_error"]);
+                ?>
+                <h2>Hozzászólások</h2>
+
+                <?php
+
+                    echo " <div class='comment'>"
+                ?>
+
+                <?php
+                foreach ($comments as $comms){
+
+                    $username = $comms -> getUsername();
+                    $comment = $comms -> getComment();
+
+                    echo "<h3 class='comment-user'><a href='profile.php'>$username</a></h3>
+                            <p class='comment-msg'>$comment</p>"
+                ?>
+
+                <?php
+                    if(isset($_SESSION["admin"])){
+                        echo"<button type='submit' name='delete_comment'>Töröl</button>";
+                    }
+                }
+                ?>
+
+
+                </div>
+        
+                     <form class="recipe-new-comment" action="php/addCommentValidator.php" method="POST">
+                         <label for="recipe-comment">Új hozzászólás:</label>
+                         <textarea id="recipe-comment" name="recipe-comment"></textarea>
+                         <input class="recipe-add-comment cursor-pointer" type="submit" name="comment" value="Hozzászólás">
+                     </form>
             </div>
         </main>
 

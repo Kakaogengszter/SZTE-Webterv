@@ -3,11 +3,6 @@ session_start();
 include "php/includes.php";
 require_once('php/connection.php');
 
-if (isset($_SESSION['userID'])){
-
-    die();
-}
-
 if(isset($_SESSION["errors"])){
     $errors[] = $_SESSION["errors"];
 }else{

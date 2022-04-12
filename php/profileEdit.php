@@ -6,7 +6,8 @@ require_once("connection.php");
 $db = new Database();
 $errors = [];
 
-$id = $_SESSION['userID'];
+$id = $_SESSION["admin"] ?? $_SESSION["userID"];
+
 $username = trim($_POST["username"]);
 $email = trim($_POST["email"]);
 $pwd = trim($_POST["aPassword"]);

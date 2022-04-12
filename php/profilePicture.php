@@ -3,10 +3,6 @@
 session_start();
 require_once('connection.php');
 
-if (!isset($_SESSION['userID'])){
-    die("A funkció használatához be kell jelentkezni!");
-}
-
 
 $db = new Database();
 
@@ -14,7 +10,7 @@ $db -> delete_profile_pic_when_modified();
 
 $error = [];
 
-$uid = $_SESSION['userID'];
+$id = $_SESSION["admin"] ?? $_SESSION["userID"];
 
 $imgName = $_FILES['profile-picture']['name'];
 $imgType = $_FILES['profile-picture']['type'];

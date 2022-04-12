@@ -5,7 +5,8 @@ require_once("php/messagesSelect.php");
 $dataBase = new Database();
 
 
-$id = $_SESSION["userID"];
+$id = $_SESSION["admin"] ?? $_SESSION["userID"];
+
 
 
 $dataListTable = $dataBase-> mysqli -> query("SELECT * FROM inbox WHERE sender_id = $id");
@@ -91,11 +92,11 @@ navigationGenerate("profile");
 
     <?php
     if (isset($_GET["siker"])) {
-        echo "<div class='success'>Megvan a felhasználó!</div>";
+        echo "<div class='success' id='left-success'>Megvan a felhasználó!</div>";
     }
 
     if (count($error) > 0 && isset($_SESSION["error"])) {
-        echo "<div class='errors'>";
+        echo "<div class='errors' id='left-errors'>";
 
         echo $error[0];
 
@@ -109,9 +110,8 @@ navigationGenerate("profile");
         <label class="required-label" for="cimzett">Címzett </label>
         <input type="text" id="cimzett" name="cimzett" required>
 
-        <button type="submit" name="user_check" id="user_check">Felhasználónév ellenőrzése</button>
 
-
+        <br>
         <br>
 
         <label for="content">Szöveg</label>
@@ -120,8 +120,12 @@ navigationGenerate("profile");
         <textarea id="content" name="content">
 
         </textarea>
+        <br>
+        <div class="message-buttons">
+            <button type="submit" name="user_check" id="user_check">Felhasználónév ellenőrzése</button>
+            <button type="submit" name="send_message" id="send_message">Üzenet elküldése</button>
+        </div>
 
-        <button type="submit" name="send_message" id="send_message">Küldés</button>
     </form>
 </div>
 

@@ -4,13 +4,15 @@ require_once("php/profileSelect.php");
 
 
 $dataBase = new Database();
-$id = $_SESSION["userID"];
+
+$id = $_SESSION["admin"] ?? $_SESSION["userID"];
+
+
 
 $dataListTable = $dataBase-> mysqli -> query("SELECT * FROM users WHERE id = $id");
-$userArray = array();
+
 foreach ($dataListTable as $DLT) {
     $userData = new User($DLT["id"],$DLT["username"],$DLT["email"],$DLT["password"],$DLT["birthdate"],$DLT["picture"]);
-    $userArray[] = $userData;
 }
 
 if(isset($_SESSION["errors"])){
@@ -75,7 +77,11 @@ if(isset($_SESSION["profile_pic_error"])){
             ?>
 
             <div class="profile-container">
-                <h1><?php echo $userData -> getUsername() ?> profilja</h1>
+                <h1><?php
+
+                    echo $userData -> getUsername();
+
+                    ?> profilja</h1>
                 <div class="profile-informations">
 
 

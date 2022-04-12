@@ -1,5 +1,6 @@
 <?php
 
+require_once("comment.php");
 
 class Database{
     private $host;
@@ -52,7 +53,8 @@ class Database{
     public function delete_profile_pic_when_modified(){
         $db = new Database();
 
-        $id = $_SESSION['userID'];
+        $id = $_SESSION["admin"] ?? $_SESSION["userID"];
+
 
         $sqlselect = "SELECT * FROM users WHERE id = $id";
         $resSelect = $db -> mysqli -> query($sqlselect);
@@ -84,10 +86,30 @@ class Database{
 
     }
 
+
     public function insertMessageToDB(int $userID, int $addressee_ID, string $content)
     {
         $sql_add = "INSERT INTO inbox (kitolID,kinekID,message) values ($userID,$addressee_ID,'$content')";
         $this->mysqli -> query($sql_add);
     }
 
+    function get_comments($recipe_id): array
+    {
+        $db = new Database();
+
+        $comment_array = [];
+
+
+        $sql_select_comments = "SELECT users.username,comment FROM comments INNER JOIN users ON users.id = comments.user_id where recipe_id = $recipe_id";
+        $result_comment = $db -> mysqli -> query($sql_select_comments);
+        $row_comment = $result_comment -> fetch_all();
+
+        foreach ($row_comment as $comment){
+            $comment_array[] = new comment($comment[0],$comment[1]);
+        }
+
+
+        return $comment_array;
+
+    }
 }
