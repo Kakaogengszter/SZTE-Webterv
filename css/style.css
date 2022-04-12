@@ -247,6 +247,8 @@ main {
     color: #fff;
 }
 
+
+
 .default-form .form-btn-container input[type="submit"],
 .profile-form input[type="submit"],
 .recipe-add-comment {
@@ -622,6 +624,14 @@ footer ul li a:hover {
     font-weight: bold;
 }
 
+#left-errors{
+    margin: 0 !important;
+}
+
+#left-success{
+    margin: 0 !important;
+}
+
 .errors {
     background-color: tomato;
 }
@@ -629,6 +639,27 @@ footer ul li a:hover {
 .success {
     background-color: limegreen;
 }
+
+.message-send-form{
+    display: block;
+    margin: 5px 0;
+    padding: 10px;
+
+}
+
+
+.message-send-form #content{
+    width: 60%;
+    height: 200px;
+}
+
+#user_check {
+    width: 17%;
+    height: 60px;
+    background-color: #e52424;
+    color: #fff;
+}
+
 
 @media only screen and (max-width: 1250px) {
     body {
