@@ -19,6 +19,12 @@ if(isset($_SESSION["errors"])){
     $error[] = null;
 }
 
+if(isset($_SESSION["profile_pic_error"])){
+    $pic_error = $_SESSION["profile_pic_error"];
+}else{
+    $pic_error[] = null;
+}
+
 ?>
 
 
@@ -55,7 +61,17 @@ if(isset($_SESSION["errors"])){
                 }
                 echo "</div>";
             }
+
+            if (count($pic_error) > 0 && isset($_SESSION["profile_pic_error"])) {
+                echo "<div class='errors'>";
+                foreach ($pic_error as $pic_err) {
+                    echo "<p>" . $pic_err . "</p>";
+                }
+                echo "</div>";
+            }
+
             unset($_SESSION["errors"]);
+            unset($_SESSION["profile_pic_error"]);
             ?>
 
             <div class="profile-container">
@@ -79,7 +95,7 @@ if(isset($_SESSION["errors"])){
                     <form class="profile-form" action="php/profileEdit.php" method="POST" autocomplete="off" enctype="multipart/form-data">
 
 
-                        <label for="username">Felhasználónév:</label>
+                        <label for="username">Felhasználónév (min. 6 karakter):</label>
                         <input type="text" name="username" id="username" maxlength="80" value="<?php echo $userData -> getUsername() ?>" required>
 
                         <label for="email">E-mail cím:</label>
@@ -88,7 +104,7 @@ if(isset($_SESSION["errors"])){
                         <label for="password">Aktuális jelszó:</label>
                         <input type="password" name="aPassword" id="password" placeholder="Aktuális jelszó" required>
 
-                        <label for="password">Új jelszó: (opcionális)</label>
+                        <label for="password">Új jelszó: (opcionális, min. 6 karakter és szám)</label>
                         <input type="password" name="newPassword" id="password" placeholder="Új jelszó" >
 
                         <label for="birthday">Születési dátum:</label>

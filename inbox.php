@@ -104,18 +104,22 @@ navigationGenerate("profile");
     unset($_SESSION["error"]);
     ?>
 
-<div align="center">
+<div class="message-send-form">
     <form action="php/messageSend.php" method="post" autocomplete="off">
         <label class="required-label" for="cimzett">Címzett </label>
         <input type="text" id="cimzett" name="cimzett" required>
 
-        <button type="submit" name="user_check" id="user_check">Check</button>
+        <button type="submit" name="user_check" id="user_check">Felhasználónév ellenőrzése</button>
 
 
         <br>
 
-        <label for="content">Szöveg </label>
-        <input type="text" id="content" name="content">
+        <label for="content">Szöveg</label>
+        <br>
+
+        <textarea id="content" name="content">
+
+        </textarea>
 
         <button type="submit" name="send_message" id="send_message">Küldés</button>
     </form>

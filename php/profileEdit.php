@@ -16,7 +16,7 @@ $pwd = trim($_POST["aPassword"]);
 $newPwd = trim($_POST["newPassword"]);
 $birthdate = trim($_POST["birthday"]);
 
-if(($username == $pwd)){
+if(($username == $newPwd)){
     $errors[] = "A felhasználónév és a jelszó nem lehet ugyanaz!";
 }
 
@@ -24,8 +24,8 @@ if(strlen($username) < 6){
     $errors[] = "A felhasználónévnek legalább 6 karakternek kell lennie!";
 }
 
-if(strlen($pwd) < 6){
-    $errors[] = "A jelszónak legalább 7 karakternek kell lennie!";
+if(strlen($newPwd) < 6){
+    $errors[] = "A jelszónak legalább 6 karakternek kell lennie!";
 }
 
 

@@ -43,13 +43,13 @@ navigationGenerate("register");
         ?>
         <h1>Regisztráció</h1>
         <form class="default-form register-form" action="php/registerValidator.php" method="POST" autocomplete="off" enctype="multipart/form-data">
-            <label class="required-label" for="username">Felhasználónév:</label>
+            <label class="required-label" for="username">Felhasználónév (min. 6 karakter):</label>
             <input type="text" name="username" id="username" maxlength="80" placeholder="Felhasználónév" <?php if (isset($username)) { echo "value='$username'"; }?> required>
 
             <label class="required-label" for="email">E-mail cím:</label>
             <input type="email" name="email" id="email" placeholder="email@email.com" <?php if (isset($email)) { echo "value='$email'"; }?> required>
 
-            <label class="required-label" for="password">Jelszó:</label>
+            <label class="required-label" for="password">Jelszó (min. 6 karakter és szám):</label>
             <input type="password" name="password" id="password" placeholder="Jelszó" required>
 
             <label class="required-label" for="password-check">Jelszó megerősítése:</label>

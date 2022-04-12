@@ -24,8 +24,21 @@ $bdate = trim($_POST["birthdate"]);
     $sqlselect = "SELECT * FROM users WHERE username = '$username'";
     $resSelect = $db->mysqli->query($sqlselect);
     $row = $resSelect->fetch_all();
+
     if(!empty($row)) {
         $errors[] = "A felhasználónév már foglalt!";
+    }
+
+    if(($username == $password)){
+        $errors[] = "A felhasználónév és a jelszó nem lehet ugyanaz!";
+    }
+
+    if(strlen($username) < 6){
+        $errors[] = "A felhasználónévnek legalább 6 karakternek kell lennie!";
+    }
+
+    if(strlen($password) < 6){
+        $errors[] = "A jelszónak legalább 6 karakternek kell lennie!";
     }
 
     if (!preg_match("/[A-Za-z]/", $password) || !preg_match("/[0-9]/", $password)) {
@@ -49,7 +62,7 @@ $bdate = trim($_POST["birthdate"]);
 
     if (count($errors) === 0) {
         $hash = password_hash($password, PASSWORD_DEFAULT);
-        $db->insertUsersToDB($username,$email,$hash,$bdate);
+        $db->insert_users_to_db($username,$email,$hash,$bdate);
         header("Location: ./login.php");
     }
 

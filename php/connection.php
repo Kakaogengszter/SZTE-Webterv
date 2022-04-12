@@ -24,7 +24,7 @@ class Database{
     }
 
 
-    public function insertUsersToDB($username, $email, $password, $birthdate){
+    public function insert_users_to_db($username, $email, $password, $birthdate){
         $db = new Database();
 
         $sql = "INSERT INTO users (username,email,password,birthdate,picture) VALUES ('$username','$email','$password','$birthdate','default.jpg')";
@@ -40,16 +40,16 @@ class Database{
     }
 
 
-    public function profilePicsUpdate($userID,$imgname){
+    public function profile_pics_update($userID, $imgname){
         $db = new Database();
 
-        $sql_update = "UPDATE users SET picture = '$imgname' WHERE userid = $userID";
+        $sql_update = "UPDATE users SET picture = '$imgname' WHERE id = $userID";
 
         return $db -> mysqli -> query($sql_update);
 
     }
 
-    public function deleteProfilePicWhenModified(){
+    public function delete_profile_pic_when_modified(){
         $db = new Database();
 
         $id = $_SESSION['userID'];
@@ -63,7 +63,7 @@ class Database{
 
         $fileName = "../profilePics/$currentProfilePicture";
 
-        if($currentProfilePicture != "default.jpg"){
+        if($currentProfilePicture != "default.jpg" && file_exists($fileName)){
             unlink($fileName);
         }
     }

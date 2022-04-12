@@ -10,9 +10,9 @@ if (!isset($_SESSION['userID'])){
 
 $db = new Database();
 
-$db -> deleteProfilePicWhenModified();
+$db -> delete_profile_pic_when_modified();
 
-
+$error = [];
 
 $uid = $_SESSION['userID'];
 
@@ -28,19 +28,21 @@ if (in_array($imgType, $imgFormat) && $imgSize < 16000000) {
 
         if (!file_exists("../profilePics\\" . $imgName)) {
             move_uploaded_file($imgTmpName, "../profilePics/" . $imgName);
-            $resInsert = $db->profilePicsUpdate($uid, $imgName);
+            $resInsert = $db->profile_pics_update($uid, $imgName);
+            header("Location: ../profile.php?siker");
 
         } else{
-            var_dump("Valami nem jó");
+            $error[] = "Valami hiba történt a profilkép feltöltésekor!";
+            header("Location: ../profile.php");
         }
 
 }else {
-    $sql_update = "UPDATE users SET picture = 'default.jpg' WHERE userid = $uid";
+    $sql_update = "UPDATE users SET picture = 'default.jpg' WHERE id = $uid";
     $db -> mysqli -> query($sql_update);
-    var_dump("Hiba! Nem megfelelő fájlformátum, vagy a fájl túl nagy!");
-
+    $error[] = "Hiba! Nem megfelelő fájlformátum, vagy a fájl túl nagy!";
+    header("Location: ../profile.php");
 }
 
+$_SESSION["profile_pic_error"] = $error;
 
-header("Location: ../profile.php");
 ?>
