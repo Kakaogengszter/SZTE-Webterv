@@ -43,6 +43,12 @@
 
     $comments = $db ->get_comments($recipe[0]);
 
+    if(isset($_SESSION["ban_error"])){
+        $ban_error = $_SESSION["ban_error"];
+    }else{
+        $ban_error[] = null;
+    }
+
 
 
 ?>
@@ -130,6 +136,7 @@
 
                     echo "</div>";
                 }
+
                 unset($_SESSION["comment_error"]);
                 ?>
                 <h2>Hozzászólások</h2>
@@ -140,22 +147,16 @@
                 ?>
 
                 <?php
+
                 foreach ($comments as $comms){
 
                     $username = $comms -> getUsername();
                     $comment = $comms -> getComment();
 
                     echo "<h3 class='comment-user'><a href='profile.php'>$username</a></h3>
-                            <p class='comment-msg'>$comment</p>"
-                ?>
-
-                <?php
-                    if(isset($_SESSION["admin"])){
-                        echo"<button type='submit' name='delete_comment'>Töröl</button>";
-                    }
+                            <p class='comment-msg'>$comment</p>";
                 }
                 ?>
-
 
                 </div>
         
@@ -165,6 +166,41 @@
                          <input class="recipe-add-comment cursor-pointer" type="submit" name="comment" value="Hozzászólás">
                      </form>
             </div>
+
+            <?php
+
+                if(isset($_SESSION["admin"])){
+
+                    if (isset($_GET["siker"])) {
+                        echo "<div class='success' id='left-success'>Egy életre bannolva lett!</div>";
+                    }
+
+                    if (count($ban_error) > 0 && isset($_SESSION["ban_error"])) {
+                        echo "<div class='errors' id='left-errors'>";
+
+                        foreach ($ban_error as $berr) {
+                            echo "<p>" . $berr . "</p>";
+                        }
+
+                        echo "</div>";
+                    }
+                    unset($_SESSION["ban_error"]);
+
+                    echo "
+                    <form class='delete_user' action='php/banUser.php' method='post'>
+                        <label for='username'>Perma bann:</label>
+                        <input type='text' name='username' required>
+                        <input type='submit' name='delete_comment' value='Törlés'>
+                    </form>
+                    
+                    ";
+                }
+
+
+            ?>
+
+
+
         </main>
 
 
