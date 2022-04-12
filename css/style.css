@@ -614,6 +614,21 @@ footer ul li a:hover {
     text-align: center;
 }
 
+.errors, .success {
+    width:  25%;
+    margin: 10px auto;
+    padding: 10px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.errors {
+    background-color: tomato;
+}
+
+.success {
+    background-color: limegreen;
+}
 
 @media only screen and (max-width: 1250px) {
     body {

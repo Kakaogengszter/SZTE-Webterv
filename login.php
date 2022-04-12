@@ -1,12 +1,19 @@
 <?php
 session_start();
+include "php/includes.php";
 require_once('php/connection.php');
-require_once('php/includes.php');
 
 if (isset($_SESSION['userID'])){
 
     die();
 }
+
+if(isset($_SESSION["errors"])){
+    $errors[] = $_SESSION["errors"];
+}else{
+    $errors[] = null;
+}
+
 
 ?>
 
@@ -23,9 +30,28 @@ if (isset($_SESSION['userID'])){
     </head>
 
     <body>
-        <?php navigationGenerate("login"); ?>
+    <?php
 
+    navigationGenerate("profile");
+
+    ?>
         <main>
+            <?php
+            if (count($errors) > 0 && isset($_SESSION["errors"])) {
+                $length = count($errors);
+
+                echo "<div class='errors'>";
+
+                for ($i = 0; $i < $length;$i++) {
+                    echo "<p>" . $errors[$i][$i] . "</p>";
+                }
+
+                echo "</div>";
+
+                unset($_SESSION["errors"]);
+            }
+            ?>
+
             <div class="form-container">
                 <form class="default-form login-form" action="php/loginValidator.php" method="POST">
                     <fieldset>
@@ -44,7 +70,7 @@ if (isset($_SESSION['userID'])){
             </div>
         </main>
 
-        <?php footerGenerate();?>
+    <?php footerGenerate(); ?>
 
     </body>
 </html>

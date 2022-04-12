@@ -1,17 +1,19 @@
 <?php
 session_start();
-
 require_once('connection.php');
 
 $db = new Database();
+$error = [];
 
 if (isset($_POST['login'])){
     $userName = $_POST['username'];
     $pwd = $_POST['password'];
     $res = $db -> login($userName);
 
-
-    if ($res) {
+    if($userName === "" || $pwd === ""){
+        $error[] = "Minden mezőt tölts ki!";
+        header("Location: ../login.php");
+    }else if ($res) {
 
         if($res -> num_rows == 1){
             //belépett
@@ -20,19 +22,18 @@ if (isset($_POST['login'])){
             if (password_verify($pwd, $row[3]))
             {
                 $_SESSION['userID'] = $row[0];
-                header("Location: ../index.php");
+                header("Location: ../profile.php");
+            }else {
+                $error[] = "Helytelen jelszó!";
+                header("Location: ../login.php");
             }
-            else {
-                //érvénytelen belépés
-                $_SESSION['error'] = 'Helytelen felhasználónév vagy jelszó!';
-                echo "Helytelen felhasználónév vagy jelszó";
-                echo "<br><a href='../login.php'>
-                  <button type='button'>Vissza a bejelentkezéshez</button>
-                      </a>";
-
-            }
+        }else{
+            $error[] = "Helytelen felhasználónév!";
+            header("Location: ../login.php");
         }
     }
+    $_SESSION["errors"] = $error;
+
 }
 echo "</body>";
 ?>
