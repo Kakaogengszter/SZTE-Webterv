@@ -63,7 +63,9 @@ $bdate = trim($_POST["birthdate"]);
     if (count($errors) === 0) {
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $db->insert_users_to_db($username,$email,$hash,$bdate);
-        header("Location: ./login.php");
+        header("Location: ../login.php");
+    }else{
+        header("Location: ../register.php");
     }
 
 
@@ -71,4 +73,4 @@ $bdate = trim($_POST["birthdate"]);
 
 $_SESSION["reg_errors"] = $errors;
 
-header("Location: ../register.php");
+

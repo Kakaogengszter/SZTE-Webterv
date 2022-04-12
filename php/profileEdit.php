@@ -2,9 +2,6 @@
 session_start();
 require_once("connection.php");
 
-if (!isset($_POST["update"])){
-    die();
-}
 
 $db = new Database();
 $errors = [];
@@ -16,6 +13,7 @@ $pwd = trim($_POST["aPassword"]);
 $newPwd = trim($_POST["newPassword"]);
 $birthdate = trim($_POST["birthday"]);
 
+
 if(($username == $newPwd)){
     $errors[] = "A felhasználónév és a jelszó nem lehet ugyanaz!";
 }
@@ -24,10 +22,13 @@ if(strlen($username) < 6){
     $errors[] = "A felhasználónévnek legalább 6 karakternek kell lennie!";
 }
 
-if(strlen($newPwd) < 6){
-    $errors[] = "A jelszónak legalább 6 karakternek kell lennie!";
+if(strlen($newPwd) < 6 && !empty($newPwd)){
+    $errors[] = "Az új jelszónak legalább 6 karakternek kell lennie!";
 }
 
+if(empty($pwd)){
+    $errors[] = "Kérem írja be az aktuális jelszavát!";
+}
 
 if (count($errors) === 0){
     $hash = password_hash($newPwd, PASSWORD_DEFAULT);
@@ -73,7 +74,12 @@ if (count($errors) === 0){
         }
 
     }
-
+    if(isset($_POST["delete"])){
+        $sql_delete_profile = "DELETE FROM users WHERE id = $id";
+        $db -> mysqli -> query($sql_delete_profile);
+        session_destroy();
+        header("Location: ../index.php");
+    }
 
 }else{
     header("LOCATION: ../profile.php");
