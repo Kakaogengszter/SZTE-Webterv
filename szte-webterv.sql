@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2022. Ápr 15. 14:48
+-- Létrehozás ideje: 2022. Ápr 15. 16:07
 -- Kiszolgáló verziója: 10.4.22-MariaDB
 -- PHP verzió: 7.4.28
 
@@ -39,7 +39,25 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `user_id`, `recipe_id`, `comment`) VALUES
-(2, 3, 2, 'A legjobb carbonara amit valaha ettem!!');
+(26, 1, 4, 'Nagyon finom!'),
+(27, 2, 4, 'Igazán laktató :)'),
+(28, 1, 5, 'Az egyik legfinomabb desszert!'),
+(29, 2, 5, 'Nagyon jól néz ki!'),
+(30, 1, 3, 'Kicsit sok idő mire kész, de megéri!'),
+(31, 2, 3, 'Én tettem rá ketchup-ot :)'),
+(32, 2, 1, 'Kiadós ebéd'),
+(33, 3, 4, 'Inkább elmegyek a mekibe enni'),
+(34, 3, 5, 'Nekem sajnos odaégett :('),
+(35, 10, 5, 'Nem baj, legközelebb jobb lesz'),
+(36, 10, 1, 'Nem rossz, de én maradok a sima lángosnál :)'),
+(37, 3, 1, 'Ez a legfinomabb töltöttlángos *-*'),
+(38, 3, 1, 'Szerintem többször is fogok ilyet csinálni!'),
+(39, 10, 3, 'Hát ez nem a legjobb'),
+(40, 10, 2, 'Nekem kicsit száraz a tészta'),
+(41, 3, 2, 'Könnyű elkészíteni és nagyon finom!'),
+(42, 1, 2, 'Sajnos nekem odaégett, mégsem olyan könnyű mint hittem'),
+(43, 1, 4, 'Megcsináltam megint és nyers maradt a hús. 1/5'),
+(44, 1, 1, 'Hát megmondom az őszintét, néha jól esik egy ilyen');
 
 -- --------------------------------------------------------
 
@@ -102,7 +120,7 @@ INSERT INTO `recipes` (`id`, `user_id`, `name`, `image_name`, `video_url`, `port
 (2, 2, 'Az eredeti carbonara', 'az-eredeti-carbonara.jpg', 'https://www.youtube.com/embed/7jPh79AdnRk', 2, 30, '150 g füstölt kolozsvári szalonna\\;250 g spagetti\\;só, bors\\;80 g parmezán\\;2 ek olívaolaj\\;4 db tojás\\;frissen reszelt szerecsendió\\;150 - 200 ml tészta-főzővíz', 'A szalonnát vékony csíkokra vágjuk, és kb. 2 evőkanál olajon lassan megpirítjuk, majd elzárjuk. Közben a tésztát sós vízben al dentére főzzük, majd leszűrjük úgy, hogy egy keveset megtartunk a tészta főzővizéből.\\;A tojásokat felverjük, sózzuk, borsozzuk, belereszeljük a parmezánt és a szerecsendiót is.\\;A kifőtt tésztát beleforgatjuk a pirított szalonnába. Összerázzuk, majd ráöntjük a tojásos keveréket, a tészta főzővizét, és ha kicsit kihűlt a serpenyő, picit visszarakjuk a tűzre. Folyamatosan rázogatjuk addig, amíg az egész krémes nem lesz.', '2022-03-19', 'az-eredeti-carbonara'),
 (3, 1, 'Grillezett kenyérlángos', 'grillezett-kenyerlangos.jpg', 'https://www.youtube.com/embed/UzjJ-L_HMlk', 4, 240, '350 ml szobahőmérsékletű víz\\;1 tk só\\;550 g pizzaliszt\\;15 g élesztő\\;1 tk cukor\\;1 ek olívaolaj\\;1 szál füstölt szárazkolbász\\;200 g tejföl\\;1 fej lilahagyma\\;100 g sajt (trappista, cheddar, amit szeretnénk)\\;150 ml olívaolaj\\;friss kakukkfű\\;friss rozmaring\\;2 gerezd fokhagyma', 'A tésztához a vízbe morzsoljuk az élesztőt, hozzászórjuk a sót és a cukrot, majd átkeverjük. A lisztet egy nagy tálba szórjuk, ráöntjük az élesztős vizet, az olívaolajat, és simára dagasztjuk a tésztát. Ha szép fényes és ruganyos lesz, megszórjuk a tetejét liszttel, letakarjuk és árnyékos, hűvösebb helyen 1,5-2 órát pihentetjük.\\;Lisztezett deszkára borítjuk a megkelt tésztát és négy részre vágjuk. Szép kis bucikká formázzuk őket. A feltéthez a kolbászt vékony karikára, a hagymát vastagabb cikkekre vágjuk. A fokhagymás olajhoz az olívaolajba reszeljük a fokhagymát, belemorzsoljuk a kakukkfüvet és hozzáadjuk az apróra vágott rozmaringot. A tejfölt átkeverjük, a sajtot pedig lereszeljük nagylyukú reszelőn. A tésztabucikat hosszúkás alakúra nyújtjuk, megkenjük a tetejét a fokhagymás fűszeres olajjal és a megkent oldalával lefelé a grillrácsra fektetjük. Pár perc után amikor megsült a tészta alja, lekenjük a tetejét is olajjal és gyorsan megfordítjuk. Sülés közben mehetnek is rá a feltétek. Először tejföl, majd reszelt sajt, kolbászkarikák, lilahagymagerezdek és még kevés fokhagymás olaj. Amikor megsült a tészta másik fele is és ráolvadt a sajt, már ehetjük is!', '2022-01-22', 'grillezett-kenyerlangos'),
 (4, 2, 'Homemade dupla sajtos hamburger', 'homemade-duplasajtos-hamburger.jpg', 'https://www.youtube.com/embed/gfgtt_fh9RA', 3, 60, '2 fej vöröshagyma\\;500 g darált marhahús\\;1 mk fokhagymapor\\;só, bors\\;1 mk zárított vöröshagyma\\;1 csomag lapka cheddar sajt\\;ketchup\\;3 db szezámmagos hamburgerzsömle\\;1 db csemegeuborka\\;mustár', 'A vöröshagymát félbevágjuk, felszeleteljük majd mikrohullámú sütőben, alacsony fokozaton kb. 8-10 perc alatt dehidratálom. A darált húst sózzuk, borsozzuk, hozzákeverjük a fokhagymaport és a szárított vöröshagymát, majd kézzel jól összegyúrjuk. A fűszerezett húst hat részre osztjuk, így kb. 7-8 dkg-os húspogácsákat kapunk, és egyenként, sütőpapír között, egy lábas segítségével ujjnyi vastagságúra lapítjuk. A bucikat kettévágjuk.\\;Egy serpenyőt kevés olajjal felhevítünk és megsütjük rajta a hamburgerpogácsákat. Ezekre kerül egy-egy szelet sajt. Az összeállításnál a kettévágott buci aljára kerül egy sajtos húspogácsa, erre még egy ebből a gyönyörűségből, majd pár szelet hagyma, és csemegeuborka karika. A bucik kalapjait beborítjuk ketchuppal és mustárral és megkoronázzuk vele a hamburgerünket.', '2022-01-22', 'homemade-dupla-sajtos-hamburger'),
-(5, 3, 'Tiramisu', 'tiramisu.jpg', 'https://www.youtube.com/embed/7jPh79AdnRk', 1, 80, '4 tk instant kávé\\;350 ml forró víz\\;100 g kristálycukor\\;4 db tojás\\;1 csipet só\\;500 g mascarpone\\;24 db babapiskóta\\;cukrozatlan kakaópor', 'Első lépésként feloldjuk az instant kávét forró vízben, majd átöntjük egy tálba, hogy könnyebben kihűljön és adunk hozzá a receptben szereplő cukormennyiségből kb. 2 evőkanálnyit. A tojásokat kettéválasztjuk. A tojássárgájához adjuk a maradék cukor felét és fehéredésig habosítjuk. A fehérjét egy csipet sóval tiszta habverővel elkezdjük felverni, majd hozzáadjuk a maradék cukrot és kemény habbá verjük.\\;A cukros tojássárgáját alaposan elkeverjük a mascarponéval, majd mehet hozzá tojásfehérjehab fele, amivel fellazítjuk a sárgájás részt, ezután lazán beleforgatjuk a hab másik felét is, ügyelve, hogy ne törjük össze a habot.\\;Már csak az összeállítás maradt hátra. Egy kb. 35 cm átlójú tálba rakunk egy kisebb adag krémet és elegyengetjük. A babapiskótákat 2-3 másodpercre a kávéba mártjuk és rásorakoztatjuk őket a krémre. Majd újra jön egy adag mascarponés krémréteg, rá két sor babapiskóta, majd az egészet krémmel zárjuk. Utolsó lépésként megszórjuk egy nagy adag kakaóporral és hűtőbe rakjuk, legalább 3 órára, de a legjobb egy egész éjszakát pihentetni hogy jól összeérjenek az ízek.', '2022-03-19', 'tiramisu');
+(5, 3, 'Tiramisu', 'tiramisu.jpg', 'https://www.youtube.com/embed/X_GIPOtyJSo', 1, 80, '4 tk instant kávé\\;350 ml forró víz\\;100 g kristálycukor\\;4 db tojás\\;1 csipet só\\;500 g mascarpone\\;24 db babapiskóta\\;cukrozatlan kakaópor', 'Első lépésként feloldjuk az instant kávét forró vízben, majd átöntjük egy tálba, hogy könnyebben kihűljön és adunk hozzá a receptben szereplő cukormennyiségből kb. 2 evőkanálnyit. A tojásokat kettéválasztjuk. A tojássárgájához adjuk a maradék cukor felét és fehéredésig habosítjuk. A fehérjét egy csipet sóval tiszta habverővel elkezdjük felverni, majd hozzáadjuk a maradék cukrot és kemény habbá verjük.\\;A cukros tojássárgáját alaposan elkeverjük a mascarponéval, majd mehet hozzá tojásfehérjehab fele, amivel fellazítjuk a sárgájás részt, ezután lazán beleforgatjuk a hab másik felét is, ügyelve, hogy ne törjük össze a habot.\\;Már csak az összeállítás maradt hátra. Egy kb. 35 cm átlójú tálba rakunk egy kisebb adag krémet és elegyengetjük. A babapiskótákat 2-3 másodpercre a kávéba mártjuk és rásorakoztatjuk őket a krémre. Majd újra jön egy adag mascarponés krémréteg, rá két sor babapiskóta, majd az egészet krémmel zárjuk. Utolsó lépésként megszórjuk egy nagy adag kakaóporral és hűtőbe rakjuk, legalább 3 órára, de a legjobb egy egész éjszakát pihentetni hogy jól összeérjenek az ízek.', '2022-03-19', 'tiramisu');
 
 -- --------------------------------------------------------
 
@@ -128,10 +146,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `birthdate`, `picture`, `email_is_private`, `birthdate_is_private`, `admin`) VALUES
 (1, 'tesztelek', 'teszt.elek@gmail.com', '$2y$10$BgVutF50iniBjbHQ3cBWDevr4E9YN.S3BpcJ5d4o40K7iyAgNbZIO', '2022-03-31', '492-4929444_eating-popcorn-png-transparent-png.png', 0, 0, 0),
-(2, 'tesztelek2', 'tesztelek2@gmail.com', '$2y$10$EaOC20AxuIM0vUiinCg6bOCrDYwwxFDvac9B9ZInVBrc3.nqt9eam', '2022-04-03', 'default.jpg', 0, 0, 0),
-(3, 'tesztelek3', 'tesztelek3@gmail.com', '$2y$10$vKlTQdJtFmyRJaqSuiSKgObumuEy3/RCajFbU0YyVYc8qPVZVtToe', '2022-04-03', 'default.jpg', 0, 0, 0),
-(9, 'admin1', 'admin@admin.com', '$2y$10$R9yrlotN/KiLepJsvO6YSO4AvzNk1Ovxu56lbsjasjmcTiZ2fdASe', '1900-01-01', 'admin.jpg', 0, 0, 1),
-(10, 'tesztelek4', 'tesztele4@gmail.com', '$2y$10$d00.aq3/QRVdk37Z16nGU.agkhMRT4o3LsTJAvwesSJrIU1.f3Sqe', '2022-04-22', 'default.jpg', 0, 0, 0);
+(2, 'tesztelek2', 'tesztelek2@gmail.com', '$2y$10$EaOC20AxuIM0vUiinCg6bOCrDYwwxFDvac9B9ZInVBrc3.nqt9eam', '2022-04-03', 'nemnyilatkozom.PNG', 0, 0, 0),
+(3, 'tesztelek3', 'tesztelek3@gmail.com', '$2y$10$vKlTQdJtFmyRJaqSuiSKgObumuEy3/RCajFbU0YyVYc8qPVZVtToe', '2022-04-03', 'brian.PNG', 0, 0, 0),
+(9, 'admin1', 'admin@admin.com', '$2y$10$R9yrlotN/KiLepJsvO6YSO4AvzNk1Ovxu56lbsjasjmcTiZ2fdASe', '1900-01-01', 'bartos.PNG', 0, 0, 1),
+(10, 'tesztelek4', 'tesztele4@gmail.com', '$2y$10$d00.aq3/QRVdk37Z16nGU.agkhMRT4o3LsTJAvwesSJrIU1.f3Sqe', '2022-04-22', 'thomas.PNG', 0, 0, 0);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -176,7 +194,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT a táblához `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT a táblához `inbox`
