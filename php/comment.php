@@ -1,7 +1,4 @@
 <?php
-require_once("connection.php");
-
-
 class comment{
 
     private $username;

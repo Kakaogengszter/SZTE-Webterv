@@ -1,104 +1,57 @@
 <?php
-
-session_start();
 require_once('connection.php');
-
-class Message{
-
-    private $kitol;
-    private $kinek;
+session_start();
+class messagesSelect{
 
 
-    public function __construct($kitol, $kinek)
+
+
+    public function messageArray($user): array
     {
-        $this->kitol = $kitol;
-        $this->kinek = $kinek;
-    }
-
-
-    public function getKitol()
-    {
-        return $this->kitol;
-    }
-
-
-    public function setKitol($kitol)
-    {
-        $this->kitol = $kitol;
-    }
-
-
-    public function getKinek()
-    {
-        return $this->kinek;
-    }
-
-
-    public function setKinek($kinek)
-    {
-        $this->kinek = $kinek;
-    }
-
-
-
-
-    public function kitol(){
 
         $db = new Database();
+        $id = $_SESSION["admin"] ?? $_SESSION["userID"];
 
-        $kitolID = $this->getKinek();
+        $messageArray = [];
+
+        $sql_select_messages = "SELECT users.username,inbox.message FROM users INNER JOIN inbox ON users.id = inbox.sender_id WHERE (receiver_id = $id AND sender_id = $user) OR (receiver_id = $user AND sender_id = $id)";
+        $res = $db -> mysqli -> query($sql_select_messages);
+        $row = $res -> fetch_all();
 
 
-        $dataListTable = $db->mysqli -> query("SELECT username FROM users INNER JOIN inbox ON inbox.sender_id = users.id WHERE inbox.receiver_id = $kitolID");
-
-
-        $userArray = array();
-        foreach ($dataListTable as $DLT) {
-            $userData = $DLT["username"];
-            $userArray[] = $userData;
-
+        foreach ($row as $message){
+            $messageArray[] = new message($message[0],$message[1]);
         }
 
-        return $userArray;
+        return $messageArray;
 
     }
 
-    public function messageContentArray() {
+    public function friends(): array{
+
         $db = new Database();
+        $id = $_SESSION["admin"] ?? $_SESSION["userID"];
+        $friend_users_array = [];
 
-        $kinekID = $this->getKinek();
+        $sql_friends = "SELECT DISTINCT users.username FROM users INNER JOIN inbox ON users.id = inbox.sender_id WHERE receiver_id = $id";
+        $res = $db -> mysqli -> query($sql_friends);
+        $row = $res -> fetch_all();
 
-        $messageDataList = $db -> mysqli -> query("SELECT message from inbox where receiver_id = $kinekID");
-
-        $messageConent = array();
-        foreach ($messageDataList as $DLT) {
-            $messageData = $DLT["message"];
-            $messageConent[] = $messageData;
-
-        }
-
-        return $messageConent;
-    }
-
-
-    public function egyesites(){
-
-        $messageConent = $this->messageContentArray();
-        $userArray = $this->kitol();
-
-
-
-        $length = count($messageConent);
-
-        $messageWithUsername = array();
-        for ($i = 0; $i < $length;$i++){
-            $messageWithUsername[] = [$userArray[$i] => $messageConent[$i]];
+        foreach ($row as $friends){
+            $friend_users_array[] = $friends;
         }
 
 
-        return $messageWithUsername;
+        return $friend_users_array;
+
 
     }
+
 
 
 }
+
+
+
+
+

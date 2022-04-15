@@ -7,18 +7,33 @@ require_once("connection.php");
 
 $db = new Database();
 $userID = $_SESSION["userID"];
-$addressee = trim($_POST["cimzett"]);
+
 $content = trim($_POST["content"]);
-$addressee_ID = $db->get_user_id($addressee);
 $errors = [];
+
+if(isset($_SESSION["chat_username_id"]) && $_SESSION["chat_username"]){
+    $chat_username_id = $_SESSION["chat_username_id"];
+    $chat_username = $_SESSION["chat_username"];
+}
+
 
 
 if(isset($_POST["send_message"])){
 
-    $db ->insertMessageToDB($userID,$addressee_ID,$content);
-    header("Location: ../inbox.php");
+    if(empty($content)){
+        $errors[] = "Ne hagyd üresen az üzenetet!";
+        header("LOCATION: ../chat.php");
+    }else{
+        $db ->insertMessageToDB($userID,$chat_username_id,$content);
+        header("Location: ../chat.php?user=$chat_username");
+    }
 
-}else if(isset($_POST["user_check"])){
+
+}
+
+if(isset($_POST["user_check"])){
+    $addressee = trim($_POST["cimzett"]);
+    $addressee_ID = $db->get_user_id($addressee);
 
     $sql_check_user = "SELECT id FROM users WHERE id = $addressee_ID";
 
@@ -27,14 +42,27 @@ if(isset($_POST["send_message"])){
 
     if(is_null($row)){
         $errors[] = "Nincs ilyen felhasználó!";
-        header("LOCATION: ../inbox.php");
+        header("LOCATION: ../new-message.php");
     }else{
-        header("LOCATION: ../inbox.php?siker");
+        header("LOCATION: ../new-message.php?siker");
     }
 
-    $_SESSION["error"] = $errors;
+    $_SESSION["cimzett"] = $addressee;
+
 }
 
+if(isset($_POST["send_new_message"])){
+    $addressee = trim($_POST["cimzett"]);
+    $addressee_ID = $db->get_user_id($addressee);
+    $id = $_SESSION["admin"] ?? $_SESSION["userID"];
+
+    $db -> insertMessageToDB($id,$addressee_ID,$content);
+
+    header("LOCATION: ../inbox.php");
+}
+
+$_SESSION["error"] = $errors;
+$_SESSION["content"] = $content;
 
 
 

@@ -89,7 +89,7 @@ class Database{
 
     public function insertMessageToDB(int $userID, int $addressee_ID, string $content)
     {
-        $sql_add = "INSERT INTO inbox (kitolID,kinekID,message) values ($userID,$addressee_ID,'$content')";
+        $sql_add = "INSERT INTO inbox (sender_id,receiver_id,message) values ($userID,$addressee_ID,'$content')";
         $this->mysqli -> query($sql_add);
     }
 

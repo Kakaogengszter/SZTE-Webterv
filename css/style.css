@@ -653,12 +653,42 @@ footer ul li a:hover {
     height: 200px;
 }
 
-#user_check {
-    width: 17%;
-    height: 60px;
+#send_message,#new-message {
+    width: 13%;
+    height: 50px;
+    background-color: #2471e5;
+    color: #ffffff;
+    text-align: center;
+}
+
+
+
+#user_check{
+    width: 13%;
+    height: 50px;
     background-color: #e52424;
     color: #fff;
+    text-align: center;
 }
+
+.friends-container,.friends td, .friends th{
+    text-align: center !important;
+    width: 50% !important;
+    margin-left: 25%;
+}
+
+#message-right{
+    text-align: right;
+}
+
+#message-left{
+    text-align: left;
+}
+
+.message-table{
+    width: 50% !important;
+}
+
 
 
 @media only screen and (max-width: 1250px) {
@@ -760,6 +790,7 @@ footer ul li a:hover {
         gap: 20px;
     }
 }
+
 
 
 /* Mobil */

@@ -150,8 +150,8 @@
 
                 foreach ($comments as $comms){
 
-                    $username = $comms -> getUsername();
-                    $comment = $comms -> getComment();
+                        $username = $comms -> getUsername();
+                        $comment = $comms -> getComment();
 
                     echo "<h3 class='comment-user'><a href='profile.php'>$username</a></h3>
                             <p class='comment-msg'>$comment</p>";
