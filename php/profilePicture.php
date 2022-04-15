@@ -24,7 +24,7 @@ if (in_array($imgType, $imgFormat) && $imgSize < 16000000) {
 
         if (!file_exists("../profilePics\\" . $imgName)) {
             move_uploaded_file($imgTmpName, "../profilePics/" . $imgName);
-            $resInsert = $db->profile_pics_update($uid, $imgName);
+            $resInsert = $db->profile_pics_update($id, $imgName);
             header("Location: ../profile.php?siker");
 
         } else{
@@ -33,7 +33,7 @@ if (in_array($imgType, $imgFormat) && $imgSize < 16000000) {
         }
 
 }else {
-    $sql_update = "UPDATE users SET picture = 'default.jpg' WHERE id = $uid";
+    $sql_update = "UPDATE users SET picture = 'default.jpg' WHERE id = $id";
     $db -> mysqli -> query($sql_update);
     $error[] = "Hiba! Nem megfelelő fájlformátum, vagy a fájl túl nagy!";
     header("Location: ../profile.php");

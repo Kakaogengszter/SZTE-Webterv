@@ -152,52 +152,39 @@
 
                         $username = $comms -> getUsername();
                         $comment = $comms -> getComment();
+                        $comment_id =$comms -> getCommentID();
+                        $user_id = $comms -> getUsernameID();
 
                     echo "<h3 class='comment-user'><a href='profile.php'>$username</a></h3>
-                            <p class='comment-msg'>$comment</p>";
-                }
-                ?>
+                            <p class='comment-msg'>$comment</p>
+                            <form action='php/deleteComment.php' method='post'>
+                            <input type='text' name='comment_id' value='$comment_id' hidden>"
+                            ?>
+
+                        <?php
+                            if(isset($_SESSION["userID"]) && $_SESSION["userID"] == $user_id){
+
+                                echo"
+                                <button type='submit' name='delete_comment' class='delete_comment'>Törlés</button>";
+                            }else if(isset($_SESSION["admin"])){
+                                echo"
+                                <button type='submit' name='delete_comment' class='delete_comment'>Törlés</button>";
+                            }
+
+                            echo"</form>";
+                            }
+                            ?>
 
                 </div>
-        
+
                      <form class="recipe-new-comment" action="php/addCommentValidator.php" method="POST">
                          <label for="recipe-comment">Új hozzászólás:</label>
                          <textarea id="recipe-comment" name="recipe-comment"></textarea>
                          <input class="recipe-add-comment cursor-pointer" type="submit" name="comment" value="Hozzászólás">
                      </form>
-            </div>
-
-            <?php
-
-                if(isset($_SESSION["admin"])){
-
-                    if (isset($_GET["siker"])) {
-                        echo "<div class='success' id='left-success'>Egy életre bannolva lett!</div>";
-                    }
-
-                    if (count($ban_error) > 0 && isset($_SESSION["ban_error"])) {
-                        echo "<div class='errors' id='left-errors'>";
-
-                        foreach ($ban_error as $berr) {
-                            echo "<p>" . $berr . "</p>";
-                        }
-
-                        echo "</div>";
-                    }
-                    unset($_SESSION["ban_error"]);
-
-                    echo "
-                    <form class='delete_user' action='php/banUser.php' method='post'>
-                        <label for='username'>Perma bann:</label>
-                        <input type='text' name='username' required>
-                        <input type='submit' name='delete_comment' value='Törlés'>
-                    </form>
-                    
-                    ";
-                }
 
 
-            ?>
+
 
 
 

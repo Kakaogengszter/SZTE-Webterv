@@ -100,12 +100,12 @@ class Database{
         $comment_array = [];
 
 
-        $sql_select_comments = "SELECT users.username,comment FROM comments INNER JOIN users ON users.id = comments.user_id where recipe_id = $recipe_id";
+        $sql_select_comments = "SELECT users.username,comment,comments.id,comments.user_id FROM comments INNER JOIN users ON users.id = comments.user_id where recipe_id = $recipe_id ORDER BY comments.id";
         $result_comment = $db -> mysqli -> query($sql_select_comments);
         $row_comment = $result_comment -> fetch_all();
 
         foreach ($row_comment as $comment){
-            $comment_array[] = new comment($comment[0],$comment[1]);
+            $comment_array[] = new comment($comment[0],$comment[1],$comment[2],$comment[3]);
         }
 
 
