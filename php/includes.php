@@ -7,15 +7,21 @@ function navigationGenerate(string $currentPage) {
     "<ul class='nav-menu'>" .
         "<li class='nav-item'><a class='nav-link " . ($currentPage === "index" ? " active" : "") . "' href='./index.php'>Főoldal</a></li>" .
         "<li class='nav-item'><a class='nav-link " . ($currentPage === "recipes" ? " active" : "") . "' href='./recipes.php'>Receptek</a></li>";
-        if (!isset($_SESSION["userID"])) {
-            echo 
+        if (isset($_SESSION["userID"]) || isset($_SESSION["admin"])) {
+
+            echo
+                "<li class='nav-item'><a class='nav-link " . ($currentPage === "profile" ? " active" : "") . "' href='profile.php'>Profil</a></li>" .
+                "<li class='nav-item'><a class='nav-link " . ($currentPage === "inbox" ? " active" : "") . "' href='inbox.php'>Üzenetek</a></li>" .
+                "<li class='nav-item'><a class='nav-link' href='php/logout.php'>Kijelentkezés</a></li>";
+            if(isset($_SESSION["admin"])){
+                echo
+                    "<li class='nav-item' style='color: red'>Admin profil</li>";
+            }
+
+        } else {
+            echo
                 "<li class='nav-item'><a class='nav-link " . ($currentPage === "login" ? " active" : "") . "' href='login.php'>Bejelentkezés</a></li>" .
                 "<li class='nav-item'><a class='nav-link " . ($currentPage === "register" ? " active" : "") . "' href='register.php'>Regisztráció</a></li>";
-        } else {
-            echo 
-            "<li class='nav-item'><a class='nav-link " . ($currentPage === "profile" ? " active" : "") . "' href='profile.php'>Profil</a></li>" .
-            "<li class='nav-item'><a class='nav-link " . ($currentPage === "inbox" ? " active" : "") . "' href='inbox.php'>Üzenetek</a></li>" . 
-            "<li class='nav-item'><a class='nav-link' href='php/logout.php'>Kijelentkezés</a></li>";
         }
         echo "</ul>" .
             "<div class='burger'>" .
@@ -32,14 +38,15 @@ function footerGenerate() {
             "<ul>" .
                 "<li><a href='index.php'>Főoldal</a></li>" .
                 "<li><a href='recipes.php'>Receptek</a></li>";
-                if (!isset($_SESSION["userID"])) {
-                    echo
-                        "<li><a href='login.php'>Bejelentkezés</a></li>" .
-                        "<li><a href='register.php'>Regisztráció</a></li>";
-                } else {
+                if (isset($_SESSION["userID"]) || isset($_SESSION["admin"])) {
                     echo
                         "<li><a href='profile.php'>Profil</a></li>" .
                         "<li><a href='php/logout.php'>Kijelentkezés</a></li>";
+                } else {
+                    echo
+                        "<li><a href='login.php'>Bejelentkezés</a></li>" .
+                        "<li><a href='register.php'>Regisztráció</a></li>";
+
                 }
             echo
             "</ul>" .

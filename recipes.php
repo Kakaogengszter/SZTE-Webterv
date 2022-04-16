@@ -32,7 +32,7 @@
                 <?php 
                     foreach ($recipes as $recipe) {
                         $userid= $recipe[1];
-                        $uploaderSqlSelect = "SELECT * FROM users WHERE id = '$userid'";
+                        $uploaderSqlSelect = "SELECT * FROM users WHERE id = $userid";
                         $uploaderSelect = $db->mysqli->query($uploaderSqlSelect);
                         $uploaderData = $uploaderSelect->fetch_all()[0];
                         
@@ -52,7 +52,7 @@
                                     "<p>". $uploaderData[1] ."</p>" .
                                 "</a>" .
                             "</div>" .
-                        "</div>";                        
+                        "</div>";
                     }
                 ?>
             </div>

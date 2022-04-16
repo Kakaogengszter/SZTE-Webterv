@@ -3,38 +3,19 @@
 session_start();
 require_once('connection.php');
 
-if (!isset($_SESSION['userID'])){
-    die("A funkció használatához be kell jelentkezni!");
-}
-
 
 $db = new Database();
 
-$id = $_SESSION['userID'];
+$db -> delete_profile_pic_when_modified();
 
-$sqlselect = "SELECT * FROM users WHERE id = $id";
-$resSelect = $db -> mysqli -> query($sqlselect);
+$error = [];
 
-$row = $resSelect -> fetch_assoc();
-
-$currentProfilePicture = $row["picture"];
-$username = $row["username"];
-
-$fileName = "../profilePics/$currentProfilePicture";
-
-if($currentProfilePicture != "default.jpg"){
-    unlink($fileName);
-}
-
-
-
-$uid = $_SESSION['userID'];
+$id = $_SESSION["admin"] ?? $_SESSION["userID"];
 
 $imgName = $_FILES['profile-picture']['name'];
 $imgType = $_FILES['profile-picture']['type'];
 $imgTmpName = $_FILES['profile-picture']['tmp_name'];
 $imgSize = $_FILES['profile-picture']['size'];
-$uploadError = $_FILES['profile-picture']['error'];
 $imgFormat = array("image/jpeg", "image/png", "image/jpg");
 
 
@@ -43,19 +24,21 @@ if (in_array($imgType, $imgFormat) && $imgSize < 16000000) {
 
         if (!file_exists("../profilePics\\" . $imgName)) {
             move_uploaded_file($imgTmpName, "../profilePics/" . $imgName);
-            $resInsert = $db->profilePicsUpdate($uid, $imgName);
+            $resInsert = $db->profile_pics_update($id, $imgName);
+            header("Location: ../profile.php?siker");
 
         } else{
-            var_dump("Valami hatalmas hiba történt!");
+            $error[] = "Valami hiba történt a profilkép feltöltésekor!";
+            header("Location: ../profile.php");
         }
 
 }else {
-    var_dump("Hiba! Nem megfelelő fájlformátum, vagy a fájl túl nagy!");
-
+    $sql_update = "UPDATE users SET picture = 'default.jpg' WHERE id = $id";
+    $db -> mysqli -> query($sql_update);
+    $error[] = "Hiba! Nem megfelelő fájlformátum, vagy a fájl túl nagy!";
+    header("Location: ../profile.php");
 }
 
+$_SESSION["profile_pic_error"] = $error;
 
-
-
-header("Location: ../profile.php");
 ?>
