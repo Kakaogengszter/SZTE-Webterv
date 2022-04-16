@@ -24,7 +24,7 @@
         <main>
             <div class="form-container">
                 <h1>Új recept hozzáadása</h1>
-                <form class="default-form create-recipe-form" action="createRecipeValidator.php" method="POST" enctype="multipart/form-data">
+                <form class="default-form create-recipe-form" action="php/createRecipeValidator.php" method="POST" enctype="multipart/form-data">
                     <label class="required-label" for="recipe-name">Recept neve:</label>
                     <input type="text" name="recipe-name" id="recipe-name" maxlength="80" placeholder="Recept neve" required>
 
@@ -47,10 +47,10 @@ placeholder="1 kg liszt
                     <input type="text" name="recipe-video-link" id="recipe-video-link" maxlength="80" placeholder="https://youtu.be/dQw4w9WgXcQ">
 
                     <label class="required-label" for="recipe-picture">Kép:</label>
-                    <input type="file" name="recipe-picture" id="recipe-picture" required>
+                    <input type="file" name="recipe-picture" id="recipe-picture" >
 
                     <div class="form-btn-container center">
-                        <input type="submit" name="btn-create-recipe" value="Recept hozzáadása">
+                        <input type="submit" name="create-recipe" value="Recept hozzáadása">
                     </div>
                     <p class="required-footnote"><small> kötelező</small></p>
                 </form>

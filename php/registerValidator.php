@@ -3,7 +3,7 @@ session_start();
 require_once("connection.php");
 
 if (!isset($_POST["register"])){
-    header("Location: ../register.php");
+    die();
 }
 
 $db = new Database();
@@ -68,4 +68,9 @@ $bdate = trim($_POST["birthdate"]);
         header("Location: ../register.php");
     }
 
+
+
+
 $_SESSION["reg_errors"] = $errors;
+
+

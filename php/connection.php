@@ -32,17 +32,6 @@ class Database{
 
         $db -> mysqli -> query($sql);
     }
-    
-    public function insertCommentToDB($userID,$recipeID,$comment){
-        $db = new Database();
-        $sql = "INSERT INTO comments (user_id,recipe_id,comment) VALUES ('$userID','$recipeID','$comment')";
-        $db->mysqli->query($sql);
-    }
-    public function deleteComment($commentid){
-        $db = new Database();
-        $sql ="DELETE FROM comments WHERE id = '$commentid'";
-        $db->mysqli->query($sql);
-    }
 
     public function login($username){
         $db = new Database();
@@ -122,5 +111,11 @@ class Database{
 
         return $comment_array;
 
+    }
+
+    public function insert_recipe_db($userid,$name,$pic,$url,$portion,$time,$ingredients,$instructions,$date,$slug){
+        $sql_insert_recipe = "INSERT INTO `recipes` (`user_id`, `name`, `image_name`, `video_url`, `portion`, `time`, `ingredients`, `instructions`, `upload_date`, `slug`) VALUES ('$userid','$name','$pic','$url','$portion','$time','$ingredients','$instructions','$date','$slug')";
+        $this->mysqli -> query($sql_insert_recipe);
+        var_dump($sql_insert_recipe);
     }
 }
