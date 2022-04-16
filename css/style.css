@@ -729,6 +729,14 @@ footer ul li a:hover {
     text-align: left;
 }
 
+.delete_comment{
+    width: 6%;
+    height: 30px;
+    background-color: #e52424;
+    color: #fff;
+    text-align: center;
+}
+
 .message-table{
     width: 50% !important;
 }
