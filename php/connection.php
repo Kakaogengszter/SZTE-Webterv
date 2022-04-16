@@ -27,9 +27,19 @@ class Database{
         $db = new Database();
 
         $sql = "INSERT INTO users (username,email,password,birthdate,picture) VALUES ('$username','$email','$password','$birthdate','default.jpg')";
-        var_dump($sql);
 
         $db -> mysqli -> query($sql);
+    }
+    
+    public function insertCommentToDB($userID,$recipeID,$comment){
+        $db = new Database();
+        $sql = "INSERT INTO comments (user_id,recipe_id,comment) VALUES ('$userID','$recipeID','$comment')";
+        $db->mysqli->query($sql);
+    }
+    public function deleteComment($commentid){
+        $db = new Database();
+        $sql ="DELETE FROM comments WHERE id = '$commentid'";
+        $db->mysqli->query($sql);
     }
 
     public function login($username){
@@ -44,7 +54,6 @@ class Database{
         $db = new Database();
 
         $sql_update = "UPDATE users SET picture = '$imgname' WHERE id = $userID";
-        var_dump($sql_update);
 
         return $db -> mysqli -> query($sql_update);
 

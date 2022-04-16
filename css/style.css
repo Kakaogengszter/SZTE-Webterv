@@ -357,6 +357,7 @@ main {
 }
 
 .comment-container .comment {
+    width: 70%;
     border-left: 2px solid #ccc;
     padding-left: 5px;
     margin-bottom: 18px;
@@ -373,10 +374,23 @@ main {
     height: 80px;
 }
 
+.recipe-comment-text {
+    padding: 10px;
+}
+
 .recipe-add-comment {
     width: 200px;
     height: 40px;
 }
+
+.errors-comment {
+    text-align: center;
+    width: 70%;
+    background-color: #E52424;
+    color: #fff;
+    padding: 20px;
+}
+
 
 /* Egy recept oldal */
 .receptneve {
@@ -700,7 +714,7 @@ footer ul li a:hover {
         margin: 0 auto;
     }
 
-    .recipe-new-comment #recipe-comment {
+    .recipe-new-comment #recipe-comment, .errors-comment {
         width: 100%;
     }
 

@@ -1,13 +1,58 @@
 <?php
-session_start();
-require_once('php/connection.php');
-require_once('php/includes.php');
+    session_start();
+    require_once('php/connection.php');
+    require_once('php/includes.php');
 
-if (isset($_SESSION['userID'])){
+    if (isset($_SESSION['userID'])){
+        header("Location: ./profile.php");
+    }
 
-    die();
-}
+    $errors = [];
+    if (isset($_POST["register"])){
+        $db = new Database();
+        $username = trim($_POST["username"]);
+        $email = trim($_POST["email"]);
+        $password = trim($_POST["password"]);
+        $passwordConfirm = trim($_POST["password-check"]);
+        $bdate = trim($_POST["birthdate"]);
 
+        if ($username === "" || $email === "" || $password === "" ||
+            $passwordConfirm === "" || $bdate === "") {
+            $errors[] = "Minden kötelezően kitöltendő mezőt ki kell tölteni!";
+        }
+
+        $sqlselect = "SELECT * FROM users WHERE username = '$username'";
+        $resSelect = $db->mysqli->query($sqlselect);
+        $row = $resSelect->fetch_all();
+        if(!empty($row)) {
+            $errors[] = "A felhasználónév már foglalt!";
+        }
+
+        if (!preg_match("/[A-Za-z]/", $password) || !preg_match("/[0-9]/", $password)) {
+            $errors[] = "A jelszónak tartalmaznia kell betűt és számjegyet is!";
+        }
+
+        if (!preg_match("/[0-9a-z.-]+@([0-9a-z-]+\.)+[a-z]{2,4}/", $email)) {
+            $errors[] = "A megadott e-mail cím formátuma nem megfelelő!";
+        }
+
+        if ($password !== $passwordConfirm) {
+            $errors[] = "A két jelszó nem egyezik!";
+        }
+
+        $sqlselect = "SELECT * FROM users WHERE email = '$email'";
+        $resSelect = $db->mysqli->query($sqlselect);
+        $row = $resSelect->fetch_all();
+        if(!empty($row)) {
+            $errors[] = "Az email cím már foglalt!";
+        }
+
+        if (count($errors) === 0) {
+            $hash = password_hash($pwd, PASSWORD_DEFAULT);
+            $db->insertUsersToDB($user,$email,$hash,$bdate);
+            header("Location: ./login.php");
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -24,18 +69,25 @@ if (isset($_SESSION['userID'])){
 
     <body>
         <?php navigationGenerate("register"); ?>
-        
-
 
         <main>
             <div class="form-container">
+                <?php
+                    if (count($errors) > 0) {
+                        echo "<div class='errors'>";
+                        foreach ($errors as $error) {
+                            echo "<p>" . $error . "</p>";
+                        }
+                        echo "</div>";
+                    }
+                ?>
                 <h1>Regisztráció</h1>
-                <form class="default-form register-form" action="php/registerValidator.php" method="POST" autocomplete="off" enctype="multipart/form-data">
+                <form class="default-form register-form" action="register.php" method="POST" autocomplete="off" enctype="multipart/form-data">
                     <label class="required-label" for="username">Felhasználónév:</label>
-                    <input type="text" name="username" id="username" maxlength="80" placeholder="Felhasználónév" required>
+                    <input type="text" name="username" id="username" maxlength="80" placeholder="Felhasználónév" <?php if (isset($username)) { echo "value='$username'"; }?> required>
 
                     <label class="required-label" for="email">E-mail cím:</label>
-                    <input type="email" name="email" id="email" placeholder="email@email.com" required>
+                    <input type="email" name="email" id="email" placeholder="email@email.com" <?php if (isset($email)) { echo "value='$email'"; }?> required>
 
                     <label class="required-label" for="password">Jelszó:</label>
                     <input type="password" name="password" id="password" placeholder="Jelszó" required>
@@ -43,9 +95,8 @@ if (isset($_SESSION['userID'])){
                     <label class="required-label" for="password-check">Jelszó megerősítése:</label>
                     <input type="password" name="password-check" id="password-check" placeholder="Jelszó megerősítése" required>
 
-                    <label for="birthday">Születési dátum:</label>
-                    <input type="date" id="birthday" name="birthday" min="1900-01-01">
-
+                    <label for="birthdate">Születési dátum:</label>
+                    <input type="date" id="birthdate" name="birthdate" min="1900-01-01" <?php if (isset($birthdate)) { echo "value='$birthdate'"; }?>>
 
                     <label for="profile-picture">Profilkép:</label>
                     <input type="file" name="profile-picture" id="profile-picture">
@@ -58,8 +109,7 @@ if (isset($_SESSION['userID'])){
                 </form>
             </div>
         </main>
-        
-        <?php footerGenerate();?>
 
+        <?php footerGenerate();?>
     </body>
 </html>

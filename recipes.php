@@ -7,6 +7,7 @@
     $resSelect = $db->mysqli->query($sqlselect);
     $recipes = $resSelect->fetch_all();
     
+    // [0]=id, [1]=username, [2]=email, [3]=password, [4]=birthdate, [5]=picture
     // [0]=id, [1]=user_id, [2]=name, [3]=image_name, [4]=video_url, [5]=portion, [6]=time, [7]=ingredients, [8]=instructions, [9]=upload_date
 ?>
 
@@ -29,13 +30,11 @@
             <h1 id="page-title" class="text-center">Receptek</h1>
             <div class="recipes-container">
                 <?php 
-                // [0]=id, [1]=user_id, [2]=name, [3]=image_name, [4]=video_url, [5]=portion, [6]=time, [7]=ingredients, [8]=instructions, [9]=upload_date, [10]=slug
                     foreach ($recipes as $recipe) {
                         $userid= $recipe[1];
                         $uploaderSqlSelect = "SELECT * FROM users WHERE id = '$userid'";
                         $uploaderSelect = $db->mysqli->query($uploaderSqlSelect);
                         $uploaderData = $uploaderSelect->fetch_all()[0];
-                        // [0]=id, [1]=username, [2]=email, [3]=password, [4]=birthdate, [5]=picture
                         
                         echo 
                         "<div class='card-container'>" .
@@ -60,6 +59,5 @@
         </main>
 
         <?php footerGenerate();?>
-
     </body>
 </html>
