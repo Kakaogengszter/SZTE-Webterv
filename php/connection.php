@@ -33,6 +33,17 @@ class Database{
         $db -> mysqli -> query($sql);
     }
 
+    public function insertCommentToDB($userID,$recipeID,$comment){
+        $db = new Database();
+        $sql = "INSERT INTO comments (user_id,recipe_id,comment) VALUES ('$userID','$recipeID','$comment')";
+        $db->mysqli->query($sql);
+    }
+    public function deleteComment($commentid){
+        $db = new Database();
+        $sql ="DELETE FROM comments WHERE id = '$commentid'";
+        $db->mysqli->query($sql);
+    }
+
     public function login($username){
         $db = new Database();
 

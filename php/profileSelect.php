@@ -11,9 +11,12 @@ class User{
     private $password;
     private $birthdate;
     private $picture;
+    private $emailPrivate;
+    private $birthdatePrivate;
+    private $admin;
 
 
-    public function __construct($ID, $username, $email, $password, $birthdate, $picture)
+    public function __construct($ID, $username, $email, $password, $birthdate, $picture, $emailPrivate, $birthdatePrivate, $admin)
     {
         $this->ID = $ID;
         $this->username = $username;
@@ -21,6 +24,9 @@ class User{
         $this->password = $password;
         $this->birthdate = $birthdate;
         $this->picture = $picture;
+        $this->emailPrivate = $emailPrivate;
+        $this->emailPrivate = $emailPrivate;
+        $this->admin = $admin;
     }
 
 
@@ -66,8 +72,10 @@ class User{
     }
 
 
-    public function setPassword($password)
+    public function setPassword($password, $id)
     {
+        $db = new Database();
+        $db->mysqli->query("UPDATE users SET password = '$password' WHERE id = '$id'");
         $this->password = $password;
     }
 
@@ -83,18 +91,30 @@ class User{
         $this->birthdate = $birthdate;
     }
 
-
-    public function getPicture()
-    {
+    public function getPicture() {
         return $this->picture;
     }
 
-
-    public function setPicture($picture)
-    {
+    public function setPicture($picture) {
         $this->picture = $picture;
     }
 
+
+    public function isBirthDatePrivate()
+    {
+        return $this->birthdatePrivate;
+    }
+
+    public function isEmailPrivate()
+    {
+        return $this->emailPrivate;
+    }
+
+
+    public function isAdmin()
+    {
+        return $this->admin;
+    }
 }
 
 ?>
