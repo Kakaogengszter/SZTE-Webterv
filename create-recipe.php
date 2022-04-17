@@ -9,6 +9,12 @@
         }
     }
 
+    if(isset($_SESSION["create_recipe_errors"])){
+        $recipe_errors = $_SESSION["create_recipe_errors"];
+    }else{
+        $recipe_errors[] = null;
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +36,18 @@
 
         <main>
             <div class="form-container">
+                <?php
+
+                if (count($recipe_errors) > 0 && isset($_SESSION["create_recipe_errors"])) {
+                    echo "<div class='errors'>";
+                    foreach ($recipe_errors as $error) {
+                        echo "<p>" . $error . "</p>";
+                    }
+                    echo "</div>";
+                    unset($_SESSION["create_recipe_errors"]);
+                }
+                ?>
+
                 <h1>Új recept hozzáadása</h1>
                 <form class="default-form create-recipe-form" action="php/createRecipeValidator.php" method="POST" enctype="multipart/form-data">
                     <label class="required-label" for="recipe-name">Recept neve:</label>
@@ -42,7 +60,7 @@
                     <input type="number" name="time" id="time" value="120" min="0" required>
 
                     <label class="required-label" for="recipe-ingredients">Recept hozzávalók: (A hozzávalókat enterrel válaszd el!)</label>
-                    <textarea id="recipe-ingredients" name="recipe-ingredients" rows="6"
+                    <textarea  required id="recipe-ingredients" name="recipe-ingredients" rows="6"
 placeholder="1 kg liszt
 500 g burgonya">
 </textarea>

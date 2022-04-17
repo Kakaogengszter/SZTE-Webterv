@@ -47,10 +47,10 @@ navigationGenerate("register");
         <h1>Regisztráció</h1>
         <form class="default-form register-form" action="php/registerValidator.php" method="POST" autocomplete="off" enctype="multipart/form-data">
             <label class="required-label" for="username">Felhasználónév (min. 6 karakter):</label>
-            <input type="text" name="username" id="username" maxlength="80" placeholder="Felhasználónév" <?php if (isset($username)) { echo "value='$username'"; }?> required>
+            <input type="text" name="username" id="username" maxlength="80" placeholder="Felhasználónév" value='<?php if(isset($_SESSION["reg_username"])) echo $_SESSION["reg_username"]; ?>' required>
 
             <label class="required-label" for="email">E-mail cím:</label>
-            <input type="email" name="email" id="email" placeholder="email@email.com" <?php if (isset($email)) { echo "value='$email'"; }?> required>
+            <input type="email" name="email" id="email" placeholder="email@email.com" value='<?php if(isset($_SESSION["reg_email"])) echo $_SESSION["reg_email"]; ?>' required>
 
             <label class="required-label" for="password">Jelszó (min. 6 karakter és szám):</label>
             <input type="password" name="password" id="password" placeholder="Jelszó" required>
@@ -59,7 +59,7 @@ navigationGenerate("register");
             <input type="password" name="password-check" id="password-check" placeholder="Jelszó megerősítése" required>
 
             <label for="birthdate">Születési dátum:</label>
-            <input type="date" id="birthdate" name="birthdate" min="1900-01-01" <?php if (isset($birthdate)) { echo "value='$birthdate'"; }?>>
+            <input type="date" id="birthdate" name="birthdate" min="1900-01-01" value='<?php if(isset($_SESSION["reg_bdate"])) echo $_SESSION["reg_bdate"]; ?>'>
 
             <div class="form-btn-container">
                 <input type="submit" name="register" value="Regisztráció">

@@ -150,7 +150,7 @@
             <?php
 
             if (isset($_GET["siker_delete"])) {
-                echo "<div class='success' id='left-success'>Megvan a felhasználó!</div>";
+                echo "<div class='success' id='left-success'>Sikeres törlés!</div>";
             }
 
             if (count($ban_error) > 0 && isset($_SESSION["ban_error"])) {

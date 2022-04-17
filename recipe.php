@@ -128,14 +128,21 @@ $instructions = explode(";",  $recipe[8]);
                             echo "<p>" . $instruction .  "</p>";
                         }
                         echo
-                    "</div>" . 
+                    "</div>".
 
-                    "<div class='media text-center'>" . 
-                        "<iframe src='" . $recipe[4] . "'></iframe>" . 
-                        "<img src='./img/" . $recipe[3]  . "' alt='" . $recipe[2] . "'>" . 
+                    "<div class='media text-center'>";
+                        ?>
+                <?php
+                        if(!empty($recipe[4])){
+                            echo "<iframe src='" . $recipe[4] . "'></iframe>";
+                        }
+
+                ?>
+                <?php
+                       echo "<img src='./img/" . $recipe[3]  . "' alt='" . $recipe[2] . "'>" .
                     "</div>";
                 ?>
-                
+
             </div>
 
             <div class="comment-container">

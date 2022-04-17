@@ -3,11 +3,22 @@ session_start();
 require_once('connection.php');
 
 
+if(isset($_SESSION["recipe_name"])){
+    $recipe_name = $_SESSION["recipe_name"];
+}else{
+    header("location: ../recipe.php");
+}
+
+$error = [];
 
 if(!isset($_POST["comment"])){
     header("location: ../recipe.php");
 }
 
+if(!isset($_SESSION["userID"])){
+    $error[] = "Csak úgy tudsz hozzászólni ha belépsz!";
+    header("location: ../recipe.php?name=$recipe_name");
+}
 
 if(isset($_SESSION["recipe_name"])){
     $recipe_name = $_SESSION["recipe_name"];
@@ -17,21 +28,11 @@ if(isset($_SESSION["recipe_name"])){
 
 $db = new Database();
 
-$error = [];
+
 $comment = trim($_POST["recipe-comment"]);
 
 
-if(!isset($_SESSION["userID"])){
-    $error[] = "Csak belépett felhasználó szólhat hozzá!";
-}
-
 $id = $_SESSION["admin"] ?? $_SESSION['userID'];
-
-if(isset($_SESSION["recipe_name"])){
-    $recipe_name = $_SESSION["recipe_name"];
-}else{
-    header("location: ../recipe.php");
-}
 
 
 if(isset($_SESSION["recipe_id"])){

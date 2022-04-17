@@ -135,10 +135,11 @@ class Database{
         $sql_delete_messages = "DELETE FROM inbox where sender_id = $id OR receiver_id = $id";
 
 
+
         $this ->mysqli -> query($sql_delete_user_comments);
-        $this -> mysqli -> query($sql_delete_user);
         $this -> mysqli -> query($sql_delete_recipes);
         $this -> mysqli -> query($sql_delete_messages);
+        $this -> mysqli -> query($sql_delete_user);
     }
 
 
