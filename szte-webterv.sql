@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2022. Ápr 17. 19:02
+-- Létrehozás ideje: 2022. Ápr 17. 23:00
 -- Kiszolgáló verziója: 10.4.22-MariaDB
 -- PHP verzió: 7.4.28
 
@@ -201,7 +201,7 @@ ALTER TABLE `inbox`
 -- AUTO_INCREMENT a táblához `recipes`
 --
 ALTER TABLE `recipes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT a táblához `users`

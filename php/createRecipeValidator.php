@@ -37,7 +37,7 @@ $imgTmpName = $_FILES['recipe-picture']['tmp_name'];
 $imgSize = $_FILES['recipe-picture']['size'];
 $imgFormat = array("image/jpeg", "image/png", "image/jpg");
 
-if(empty($recipe_name) || empty($portion) || empty($time) || empty($ingredients) || empty($instructions) || empty($imgName) || empty($url)){
+if(empty($recipe_name) || empty($portion) || empty($time) || empty($ingredients) || empty($instructions) || empty($imgName)){
     $error[] = "Tölts ki minden mezőt! Ne felejts el képet is felrakni.";
 }
 
@@ -46,15 +46,19 @@ if (in_array($imgType, $imgFormat) && $imgSize < 16000000 && count($error) == 0)
     if (!file_exists("../img\\" . $imgName)) {
         move_uploaded_file($imgTmpName, "../img/" . $imgName);
         $resInsert = $db-> insert_recipe_db($id,$recipe_name,$imgName,$url,$portion,$time,$ingredients_final,$instructions_final,$date,$slug);
-
-        header("location: ../recipes.php");
     } else{
         $error[] = "Valami hiba történt a kép feltöltésekor!";
-
     }
 
 }else {
     $error[] = "Hiba! Nem megfelelő fájlformátum, vagy a fájl túl nagy!";
-
 }
+header("location: ../recipes.php");
+
+if(count($error) > 0){
+    $_SESSION["create_recipe_errors"] = $error;
+    header("location: ../create-recipe.php");
+}
+
+
 
