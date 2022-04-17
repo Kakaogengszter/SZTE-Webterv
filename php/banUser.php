@@ -28,17 +28,7 @@ if(count($errors) == 0){
 
 if(count($errors) == 0){
 
-    $sql_delete_user_comments = "DELETE FROM comments WHERE user_id = $username_id";
-    $sql_delete_user = "DELETE FROM users where id=$username_id";
-    $sql_delete_recipes = "DELETE FROM recipes where user_id = $username_id";
-    $sql_delete_messages = "DELETE FROM inbox where sender_id = $username_id OR receiver_id = $username_id";
-
-
-    $db -> mysqli -> query($sql_delete_user_comments);
-    $db -> mysqli -> query($sql_delete_user);
-    $db -> mysqli -> query($sql_delete_recipes);
-    $db -> mysqli -> query($sql_delete_messages);
-
+    $db -> delete_user($username_id);
 
     header("location: ../profile.php?siker_delete");
 }else{

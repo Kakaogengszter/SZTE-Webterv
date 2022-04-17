@@ -14,7 +14,8 @@ $db = new Database();
 
 $sqlselect = "SELECT * FROM recipes WHERE slug = '$recipename'";
 $resSelect = $db->mysqli->query($sqlselect);
-$recipe = $resSelect->fetch_all()[0];
+$recipe = $resSelect->fetch_row();
+
 
 
 
@@ -31,7 +32,7 @@ $instructions = explode(";",  $recipe[8]);
     $userid= $recipe[1];
     $uploaderSqlSelect = "SELECT * FROM users WHERE id = '$userid'";
     $uploaderSelect = $db->mysqli->query($uploaderSqlSelect);
-    $uploaderData = $uploaderSelect->fetch_all()[0];
+    $uploaderData = $uploaderSelect->fetch_row();
 
     if(isset($_SESSION["comment_error"])){
         $error = $_SESSION["comment_error"];
@@ -69,10 +70,27 @@ $instructions = explode(";",  $recipe[8]);
                     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><path d='M384 48V512l-192-112L0 512V48C0 21.5 21.5 0 48 0h288C362.5 0 384 21.5 384 48z'/></svg>
                 </div>
                 <?php
+
+
                     echo
-                    "<h1 class='receptneve'>" . $recipe[2]. "</h1>" .
-                    "<div class='feltolto text-center'>" .
-                        "<div class='rating'>" .
+                    "<h1 class='receptneve'>" . $recipe[2]. "</h1>".
+
+                    "<div class='feltolto text-center'>"
+                    ?>
+                <?php
+
+                $session_userid = $_SESSION["userID"] ?? null;
+
+                if($userid == $session_userid || isset($_SESSION["admin"])){
+
+                    echo "<form action='php/deleteRecipe.php' method='post' autocomplete='off'>".
+                        "<input type='text' name='recipe_id' value='$recipe[0]' hidden>".
+                        "<button type='submit' name='delete_recipe' value='recipe_delete' class='delete_button'>Töröl</button>".
+                        "</form>";
+                }
+
+
+                       echo "<div class='rating'>" .
                             "<span>(10)</span>" .
                             "<input type='radio' name='star'/><span class='star'></span>" .
                             "<input type='radio' name='star'/><span class='star'></span>" .

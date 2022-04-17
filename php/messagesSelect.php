@@ -1,6 +1,13 @@
 <?php
 require_once('connection.php');
 session_start();
+
+if(!isset($_SESSION["admin"])) {
+    if (!isset($_SESSION["userID"])) {
+        header("location: login.php");
+    }
+}
+
 class messagesSelect{
 
 

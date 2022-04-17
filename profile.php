@@ -25,7 +25,7 @@
 
     if(!isset($_SESSION["admin"])){
         if (!isset($_SESSION["userID"]) && !isset($_GET["name"])) {
-            header("Location: ./index.php");
+            header("Location: ./login.php");
         }
     }
 
@@ -40,7 +40,7 @@
         if (!isset($_GET['name'])) {
             $sqlselect = "SELECT * FROM users WHERE id = '$id'";
             $resSelect = $db->mysqli->query($sqlselect);
-            $userSelect = $resSelect->fetch_all()[0];
+            $userSelect = $resSelect->fetch_row();
             $user = new User($userSelect[0],$userSelect[1],$userSelect[2],$userSelect[3],$userSelect[4],$userSelect[5], $userSelect[6],$userSelect[7],$userSelect[8]);
             $ownProfile = true;
         } else {
@@ -50,7 +50,7 @@
             $username = $_GET['name'];
             $sqlselect = "SELECT * FROM users WHERE username = '$username'";
             $resSelect = $db->mysqli->query($sqlselect);
-            $userSelect = $resSelect->fetch_all()[0];
+            $userSelect = $resSelect->fetch_row();
 
             if(!empty($userSelect)){
                 $user = new User($userSelect[0],$userSelect[1],$userSelect[2],$userSelect[3],$userSelect[4],$userSelect[5], $userSelect[6],$userSelect[7],$userSelect[8]);
@@ -65,14 +65,14 @@
     } else {
         $username = $_GET['name'];
         if ($username == null) {
-            header("Location: ./index.php");
+            header("Location: ./login.php");
         } else {
             $username = $_GET['name'];
             $sqlselect = "SELECT * FROM users WHERE username = '$username'";
             $resSelect = $db->mysqli->query($sqlselect);
-            $userSelect = $resSelect->fetch_all()[0];
+            $userSelect = $resSelect->fetch_row();
             if ($userSelect == null) {
-                header("Location: ./index.php");
+                header("Location: ./login.php");
             }
             $user = new User($userSelect[0],$userSelect[1],$userSelect[2],$userSelect[3],$userSelect[4],$userSelect[5], $userSelect[6],$userSelect[7],$userSelect[8]);
         }
@@ -125,8 +125,6 @@
         $ban_error[] = null;
     }
 
-    $birthdate_private = $_SESSION["birthdate_private"] ?? null;
-    $email_private = $_SESSION["email_private"] ?? null;
 
 
 ?>
@@ -223,8 +221,8 @@
 
 
                         "<form class='profile-form' action='php/profileEdit.php' method='post'>".
-                        "<label><input type='checkbox' name='private_email' id='private_email' value='private_email'"?> <?php if($email_private == true) echo 'checked' ?> <?php echo">Privát email</label> <br>" .
-                        "<label><input type='checkbox' name='private_birthdate' id='private_birthdate' value='private_birthdate'"?> <?php if($birthdate_private == true) echo 'checked' ?> <?php echo">Privát születésnap</label>" .
+                        "<label><input type='checkbox' name='private_email' id='private_email' value='private_email'>Privát email (Üres, ha publikust szeretnél)</label> <br>" .
+                        "<label><input type='checkbox' name='private_birthdate' id='private_birthdate' value='private_birthdate'>Privát születésnap (Üres, ha publikust szeretnél)</label>" .
                         "<input type='submit' name='private_update' value='Privát adatok mentés'>".
                         "</form>".
                     "<hr>" .
@@ -277,31 +275,6 @@
                           </form>";
                 }
             ?>
-<!-- 
-                <h2>Kedvenc receptek:</h2>
-                <div class="recipe-list-container">
-                    <div class="card-container">
-                        <a href="./recipes/bolognai-raguval-toltott-langos.html">
-                            <img src="./img/bolognai-raguval-toltott-langos.jpg" alt="bolognai-raguval-toltott-langos">
-                            <h3 class="recipe-name text-center">Bolognai raguval töltött lángos</h3>
-                        </a>
-                    </div>
-
-                    <div class="card-container">
-                        <a href="./recipes/az-eredeti-carbonara.html">
-                            <img src="./img/az-eredeti-carbonara.jpg" alt="carbonara">
-                            <h3 class="recipe-name text-center">Az eredeti carbonara</h3>
-                        </a>
-                    </div>
-
-                    <div class="card-container">
-                        <a href="./recipes/tiramisu.html">
-                            <img src="./img/tiramisu.jpg" alt="tiramisu.jpg">
-                            <h3 class="recipe-name text-center">Tiramisu</h3>
-                        </a>
-                    </div>
-                </div>
--->
                 <hr>
             
                 <?php 

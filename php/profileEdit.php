@@ -6,33 +6,37 @@ require_once("connection.php");
 $db = new Database();
 $errors = [];
 
+
+
 $id = $_SESSION["admin"] ?? $_SESSION["userID"];
+
+if($id == null){
+    header("location: ../login.php");
+}
 
 if(isset($_POST["private_update"])){
     $email_private = false;
     $birthdate_private = false;
 
 
-
     if(isset($_POST["private_email"]) && $_POST["private_email"] == "private_email"){
         $sql_private_email = "UPDATE users SET email_is_private = 1 WHERE id = $id";
-        $db -> mysqli -> query($sql_private_email);
 
     }else{
         $sql_private_email = "UPDATE users SET email_is_private = 0 WHERE id = $id";
-        $db -> mysqli -> query($sql_private_email);
 
     }
+    $db -> mysqli -> query($sql_private_email);
 
     if(isset($_POST["private_birthdate"]) && $_POST["private_birthdate"] == "private_birthdate"){
         $sql_private_birthdate = "UPDATE users SET birthdate_is_private = 1 WHERE id = $id";
-        $db -> mysqli -> query($sql_private_birthdate);
 
     }else{
         $sql_private_birthdate = "UPDATE users SET birthdate_is_private = 0 WHERE id = $id";
-        $db -> mysqli -> query($sql_private_birthdate);
 
     }
+    $db -> mysqli -> query($sql_private_birthdate);
+
 
     $sql_check_email_private = "SELECT email_is_private FROM users WHERE id = $id";
     $res_email_private = $db -> mysqli -> query($sql_check_email_private);
@@ -49,7 +53,9 @@ if(isset($_POST["private_update"])){
     if($row_birthdate_private["birthdate_is_private"] == 1){
         $birthdate_private = true;
     }
+
     header("location: ../profile.php?siker");
+
 
 }else if(isset($_POST["update"])){
 
@@ -114,8 +120,7 @@ if (count($errors) === 0){
 
     }
     if(isset($_POST["delete"])){
-        $sql_delete_profile = "DELETE FROM users WHERE id = $id";
-        $db -> mysqli -> query($sql_delete_profile);
+        $db -> delete_user($id);
         session_destroy();
         header("Location: ../index.php");
     }
@@ -127,7 +132,5 @@ if (count($errors) === 0){
 }
 }
 
-$_SESSION["email_private"] = $email_private;
-$_SESSION["birthdate_private"] = $birthdate_private;
 
 ?>

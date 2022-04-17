@@ -128,4 +128,19 @@ class Database{
         $sql_insert_recipe = "INSERT INTO `recipes` (`user_id`, `name`, `image_name`, `video_url`, `portion`, `time`, `ingredients`, `instructions`, `upload_date`, `slug`) VALUES ('$userid','$name','$pic','$url','$portion','$time','$ingredients','$instructions','$date','$slug')";
         $this->mysqli -> query($sql_insert_recipe);
     }
+
+    public function delete_user($id){
+        $sql_delete_user_comments = "DELETE FROM comments WHERE user_id = $id";
+        $sql_delete_user = "DELETE FROM users where id=$id";
+        $sql_delete_recipes = "DELETE FROM recipes where user_id = $id";
+        $sql_delete_messages = "DELETE FROM inbox where sender_id = $id OR receiver_id = $id";
+
+
+        $this ->mysqli -> query($sql_delete_user_comments);
+        $this -> mysqli -> query($sql_delete_user);
+        $this -> mysqli -> query($sql_delete_recipes);
+        $this -> mysqli -> query($sql_delete_messages);
+    }
+
+
 }

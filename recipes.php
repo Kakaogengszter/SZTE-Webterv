@@ -35,7 +35,7 @@
                         $userid= $recipe[1];
                         $uploaderSqlSelect = "SELECT * FROM users WHERE id = $userid";
                         $uploaderSelect = $db->mysqli->query($uploaderSqlSelect);
-                        $uploaderData = $uploaderSelect->fetch_all()[0];
+                        $uploaderData = $uploaderSelect->fetch_row();
                         
                         echo 
                         "<div class='card-container'>" .

@@ -67,21 +67,21 @@ navigationGenerate("index");
         <div class="top-recipe-container recipe-list-container">
 
             <div class="card-container">
-                <a href="./recipes/homemade-duplasajtos-hamburger.html">
+                <a href="./recipe.php?name=homemade-dupla-sajtos-hamburger">
                     <img src="./img/homemade-duplasajtos-hamburger.jpg" alt="homemade duplasajtos hamburger">
                     <h3 class="recipe-name text-center">Homemade duplasajtos hamburger</h3>
                 </a>
             </div>
 
             <div class="card-container">
-                <a href="./recipes/tiramisu.html">
+                <a href="./recipe.php?name=tiramisu">
                     <img src="./img/tiramisu.jpg" alt="tiramisu.jpg">
                     <h3 class="recipe-name text-center">Tiramisu</h3>
                 </a>
             </div>
 
             <div class="card-container">
-                <a href="./recipes/grillezett-kenyerlangos.html">
+                <a href="./recipe.php?name=grillezett-kenyerlangos">
                     <img src="./img/grillezett-kenyerlangos.jpg" alt="grillezett kenyerlangos">
                     <h3 class="recipe-name text-center">Grillezett kenyérlángos</h3>
                 </a>
@@ -97,11 +97,11 @@ navigationGenerate("index");
                 <th id="uploaded">Darab</th>
             </tr>
             <tr>
-                <td headers="uploader"><a href="./users/user12.html">user12</a></td>
-                <td headers="uploaded">4</td>
+                <td headers="uploader"><a href="./profile.php?name=tesztelek">tesztelek</a></td>
+                <td headers="uploaded">3</td>
             </tr>
             <tr>
-                <td headers="uploader"><a href="profile.php">firstuser</a></td>
+                <td headers="uploader"><a href="./profile.php?name=tesztelek2">tesztelek2</a></td>
                 <td headers="uploaded">2</td>
             </tr>
         </table>
@@ -111,14 +111,14 @@ navigationGenerate("index");
         <h2>Korábban megtekintett receptek</h2>
         <div id="recipe-history" class="recipe-list-container">
             <div class="card-container">
-                <a href="./recipes/tiramisu.html">
+                <a href="./recipe.php?name=tiramisu">
                     <img src="./img/tiramisu.jpg" alt="tiramisu.jpg">
                     <h3 class="recipe-name text-center">Tiramisu</h3>
                 </a>
             </div>
 
             <div class="card-container">
-                <a href="./recipes/grillezett-kenyerlangos.html">
+                <a href="./recipe.php?name=grillezett-kenyerlangos">
                     <img src="./img/grillezett-kenyerlangos.jpg" alt="grillezett kenyerlangos">
                     <h3 class="recipe-name text-center">Grillezett kenyérlángos</h3>
                 </a>

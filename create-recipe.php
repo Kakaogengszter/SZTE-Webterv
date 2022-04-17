@@ -2,6 +2,13 @@
     session_start();
     require_once('php/connection.php');
     require_once('php/includes.php');
+
+    if(!isset($_SESSION["admin"])) {
+        if (!isset($_SESSION["userID"])) {
+            header("location: login.php");
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +41,7 @@
                     <label class="required-label" for="time">Idő (perc):</label>
                     <input type="number" name="time" id="time" value="120" min="0" required>
 
-                    <label class="required-label" for="recipe-ingredients">Recept hozzávalók:</label>
+                    <label class="required-label" for="recipe-ingredients">Recept hozzávalók: (A hozzávalókat enterrel válaszd el!)</label>
                     <textarea id="recipe-ingredients" name="recipe-ingredients" rows="6"
 placeholder="1 kg liszt
 500 g burgonya">
@@ -44,7 +51,7 @@ placeholder="1 kg liszt
                     <textarea id="recipe-instructions" name="recipe-instructions" rows="6"></textarea>
 
                     <label for="recipe-video-link">Recept videó link:</label>
-                    <input type="text" name="recipe-video-link" id="recipe-video-link" maxlength="80" placeholder="https://youtu.be/dQw4w9WgXcQ">
+                    <input type="text" name="recipe-video-link" id="recipe-video-link" maxlength="80" placeholder="https://youtube.com/embed/*watch utáni karaktersorozat*">
 
                     <label class="required-label" for="recipe-picture">Kép:</label>
                     <input type="file" name="recipe-picture" id="recipe-picture" >
