@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2022. Ápr 16. 20:13
+-- Létrehozás ideje: 2022. Ápr 17. 19:02
 -- Kiszolgáló verziója: 10.4.22-MariaDB
 -- PHP verzió: 7.4.28
 
@@ -79,24 +79,11 @@ CREATE TABLE `inbox` (
 --
 
 INSERT INTO `inbox` (`id`, `sender_id`, `receiver_id`, `message`) VALUES
-(1, 1, 2, 'Szia!\r\nEz egy teszt üzenet tesztelek2-nek.'),
-(2, 2, 1, 'Szia!\r\nEz egy teszt üzenet tesztelek-nek.'),
-(3, 3, 2, 'Macska'),
-(4, 3, 1, 'Aranyos vagy'),
-(5, 3, 2, 'Hehe'),
-(6, 2, 3, 'Hali te!'),
-(7, 2, 1, 'Első válasz üzenet!'),
-(29, 2, 1, 'Hali!'),
-(30, 1, 2, 'Szevasz'),
-(34, 10, 1, 'Szia tesztelek! Tesztelek4 vagyok.'),
-(35, 1, 10, 'Szia Tesztelek4! Én az eredeti tesztelek vagyok.'),
-(36, 10, 1, 'Örülök hogy írtál.'),
-(37, 1, 10, 'Én is :)'),
-(38, 1, 3, 'Wtf'),
-(39, 1, 3, 'Köszi'),
-(40, 1, 10, 'Köszi'),
-(41, 1, 10, 'Valami'),
-(42, 1, 3, 'Azért');
+(46, 2, 1, 'Szia tesztelek!'),
+(47, 1, 2, 'Szia tesztelek2!'),
+(48, 2, 1, 'Ez egy példa beszélgetés :D'),
+(49, 2, 1, 'Itt valami hasznos infó van tesztelek2 részére'),
+(50, 1, 2, 'Igazán hasznos volt, köszi :)');
 
 -- --------------------------------------------------------
 
@@ -153,10 +140,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `birthdate`, `picture`, `email_is_private`, `birthdate_is_private`, `admin`) VALUES
-(1, 'tesztelek', 'teszt.elek@gmail.com', '$2y$10$BgVutF50iniBjbHQ3cBWDevr4E9YN.S3BpcJ5d4o40K7iyAgNbZIO', '2022-03-31', '492-4929444_eating-popcorn-png-transparent-png.png', 0, 0, 0),
+(1, 'tesztelek', 'teszt.elek@gmail.com', '$2y$10$jj.Al.DN60BdJ5n7qEuO/.Qkwm6BAqydySlfDS0SHZprlfiKiHpRG', '2022-03-31', '492-4929444_eating-popcorn-png-transparent-png.png', 1, 0, 0),
 (2, 'tesztelek2', 'tesztelek2@gmail.com', '$2y$10$EaOC20AxuIM0vUiinCg6bOCrDYwwxFDvac9B9ZInVBrc3.nqt9eam', '2022-04-03', 'nemnyilatkozom.PNG', 0, 0, 0),
 (3, 'tesztelek3', 'tesztelek3@gmail.com', '$2y$10$vKlTQdJtFmyRJaqSuiSKgObumuEy3/RCajFbU0YyVYc8qPVZVtToe', '2022-04-03', 'brian.PNG', 0, 0, 0),
-(9, 'admin1', 'admin@admin.com', '$2y$10$R9yrlotN/KiLepJsvO6YSO4AvzNk1Ovxu56lbsjasjmcTiZ2fdASe', '1900-01-01', 'bartos.PNG', 0, 0, 1),
+(9, 'admin1', 'admin@admin.com', '$2y$10$R9yrlotN/KiLepJsvO6YSO4AvzNk1Ovxu56lbsjasjmcTiZ2fdASe', '1900-01-01', 'admin1.PNG', 0, 0, 1),
 (10, 'tesztelek4', 'tesztele4@gmail.com', '$2y$10$d00.aq3/QRVdk37Z16nGU.agkhMRT4o3LsTJAvwesSJrIU1.f3Sqe', '2022-04-22', 'thomas.PNG', 0, 0, 0);
 
 --
@@ -202,25 +189,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT a táblához `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT a táblához `inbox`
 --
 ALTER TABLE `inbox`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT a táblához `recipes`
 --
 ALTER TABLE `recipes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Megkötések a kiírt táblákhoz
