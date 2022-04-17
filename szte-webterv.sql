@@ -27,6 +27,9 @@ SET time_zone = "+00:00";
 -- Tábla szerkezet ehhez a táblához `comments`
 --
 
+CREATE DATABASE IF NOT EXISTS `szte-webterv` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `szte-webterv`;
+
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
