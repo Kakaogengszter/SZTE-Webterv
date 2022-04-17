@@ -3,3 +3,19 @@ Az adatbázis nevének "szte-webterv"-nek kell lennie, idézőjelek nélkül.
 
 A mellékelt "szte-webterv.sql" fájlt ezek után csak be kell importálni és az oldal használatra kész.
 
+Felhasználók:
+	tesztelek
+	tesztelek2
+	tesztelek3
+	tesztelek4
+
+A fentiekhez a jelszó Elek12345
+
+
+
+
+Admin:
+	admin1
+
+Jelszó: Admin12345
+
