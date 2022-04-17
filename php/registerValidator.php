@@ -70,6 +70,9 @@ $bdate = trim($_POST["birthdate"]);
 
 
 
+$_SESSION["reg_username"] = $username;
+$_SESSION["reg_email"] = $email;
+$_SESSION["reg_bdate"] = $bdate;
 
 $_SESSION["reg_errors"] = $errors;
 
