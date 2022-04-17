@@ -45,7 +45,6 @@ if(empty($comment)){
 
 if(count($error) == 0){
     $sql_insert_comment = "insert into comments (user_id,recipe_id,comment) values ($id,$recipe_id,'$comment')";
-    var_dump($sql_insert_comment);
     $db -> mysqli -> query($sql_insert_comment);
     header("location: ../recipe.php?name=$recipe_name");
 }

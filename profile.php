@@ -5,7 +5,6 @@
 
     $dataBase = new Database();
 
-    $id;
 
     if(isset($_SESSION["errors"])){
         $error = $_SESSION["errors"];
@@ -21,15 +20,49 @@
 
 
     $ownProfile = false;
-    $username;
-    $user;
+
     $db = new Database();
 
-    if (!isset($_SESSION["userID"]) && !isset($_GET["name"])) {
-        header("Location: ./index.php");
+    if(!isset($_SESSION["admin"])){
+        if (!isset($_SESSION["userID"]) && !isset($_GET["name"])) {
+            header("Location: ./index.php");
+        }
     }
 
-    if (!isset($_SESSION["userID"])) {
+    if(isset($_GET["name"])){
+        $username = $_GET["name"];
+    }
+
+
+    if (isset($_SESSION["userID"]) || isset($_SESSION["admin"])) {
+
+        $id = $_SESSION["userID"] ?? $_SESSION["admin"];
+        if (!isset($_GET['name'])) {
+            $sqlselect = "SELECT * FROM users WHERE id = '$id'";
+            $resSelect = $db->mysqli->query($sqlselect);
+            $userSelect = $resSelect->fetch_all()[0];
+            $user = new User($userSelect[0],$userSelect[1],$userSelect[2],$userSelect[3],$userSelect[4],$userSelect[5], $userSelect[6],$userSelect[7],$userSelect[8]);
+            $ownProfile = true;
+        } else {
+            if ($username == null) {
+                header("Location: ./index.php");
+            }
+            $username = $_GET['name'];
+            $sqlselect = "SELECT * FROM users WHERE username = '$username'";
+            $resSelect = $db->mysqli->query($sqlselect);
+            $userSelect = $resSelect->fetch_all()[0];
+
+            if(!empty($userSelect)){
+                $user = new User($userSelect[0],$userSelect[1],$userSelect[2],$userSelect[3],$userSelect[4],$userSelect[5], $userSelect[6],$userSelect[7],$userSelect[8]);
+            }else{
+                header("Location: ./index.php");
+            }
+
+            if ($user->getID() == $id) {
+                $ownProfile = true;
+            }
+        }
+    } else {
         $username = $_GET['name'];
         if ($username == null) {
             header("Location: ./index.php");
@@ -42,67 +75,56 @@
                 header("Location: ./index.php");
             }
             $user = new User($userSelect[0],$userSelect[1],$userSelect[2],$userSelect[3],$userSelect[4],$userSelect[5], $userSelect[6],$userSelect[7],$userSelect[8]);
-        } 
-    } else {
-        $id = $_SESSION["userID"];
-        if (!isset($_GET['name'])) {
-            $sqlselect = "SELECT * FROM users WHERE id = '$id'";
-            $resSelect = $db->mysqli->query($sqlselect);
-            $userSelect = $resSelect->fetch_all()[0];
-            $user = new User($userSelect[0],$userSelect[1],$userSelect[2],$userSelect[3],$userSelect[4],$userSelect[5], $userSelect[6],$userSelect[7],$userSelect[8]);
-            $ownProfile = true;
-        } else {
-            $username = $_GET['name'];
-            $sqlselect = "SELECT * FROM users WHERE username = '$username'";
-            $resSelect = $db->mysqli->query($sqlselect);
-            $userSelect = $resSelect->fetch_all()[0];
-            $user = new User($userSelect[0],$userSelect[1],$userSelect[2],$userSelect[3],$userSelect[4],$userSelect[5], $userSelect[6],$userSelect[7],$userSelect[8]);
-            if ($user->getID() == $id) {
-                $ownProfile = true;
+        }
+    }
+
+        $errorsPasswordUpdate = [];
+        if (isset($_POST["update-password"])) {
+            $oldPassword = $_POST["old-password"];
+            $newPassword = $_POST["new-password"];
+            $newPasswordConfirmed = $_POST["new-password-confirmed"];
+
+            if (trim($oldPassword) === "" || trim($newPassword) === "" || trim($newPasswordConfirmed) === "" ) {
+                $errorsPasswordUpdate[] = "Minden kötelezően kitöltendő mezőt ki kell tölteni!";
+            }
+
+            // Ellenőrizzük, hogy a jelszó és az ellenőrző jelszó megegyezik-e!
+            if ($newPassword !== $newPasswordConfirmed) {
+                $errorsPasswordUpdate[] = "A két új jelszó nem egyezik!";
+            }
+
+            // Ellenőrizzük, hogy a jelszó hossza legalább 5 karakter legyen!
+            if (strlen($newPassword) < 5) {
+                $errorsPasswordUpdate[] = "A jelszónak legalább 5 karakter hosszúnak kell lennie!";
+            }
+
+            // Érjük el, hogy a jelszónak tartalmaznia kelljen betűt és számjegyet is!
+            if (!preg_match("/[A-Za-z]/", $newPassword) || !preg_match("/[0-9]/", $newPassword)) {
+                $errorsPasswordUpdate[] = "A jelszónak tartalmaznia kell betűt és számjegyet is!";
+            }
+
+            if (!password_verify($oldPassword, $user->getPassword())) {
+                $errorsPasswordUpdate[] = "A régi jelszó nem egyezik!";
+            }
+
+            if (password_verify($newPassword, $user->getPassword())) {
+                $errorsPasswordUpdate[] = "Az új jelszó nem lehet megegyező a régi jelszóval!";
+            }
+
+            if (count($errorsPasswordUpdate) === 0) {
+                $newPasswordHashed = password_hash($newPassword, PASSWORD_DEFAULT);
+                $user->setPassword($newPasswordHashed, $_SESSION["userID"]);
+
+                header("Location: profile.php?success=true");
             }
         }
+
+    if(isset($_SESSION["ban_error"])){
+        $ban_error = $_SESSION["ban_error"];
+    }else{
+        $ban_error[] = null;
     }
 
-    $errorsPasswordUpdate = [];
-    if (isset($_POST["update-password"])) {
-        $oldPassword = $_POST["old-password"];
-        $newPassword = $_POST["new-password"];
-        $newPasswordConfirmed = $_POST["new-password-confirmed"];
-    
-        if (trim($oldPassword) === "" || trim($newPassword) === "" || trim($newPasswordConfirmed) === "" ) {
-            $errorsPasswordUpdate[] = "Minden kötelezően kitöltendő mezőt ki kell tölteni!";
-        }
-
-        // Ellenőrizzük, hogy a jelszó és az ellenőrző jelszó megegyezik-e!
-        if ($newPassword !== $newPasswordConfirmed) {
-            $errorsPasswordUpdate[] = "A két új jelszó nem egyezik!";
-        }
-
-        // Ellenőrizzük, hogy a jelszó hossza legalább 5 karakter legyen!
-        if (strlen($newPassword) < 5) {
-            $errorsPasswordUpdate[] = "A jelszónak legalább 5 karakter hosszúnak kell lennie!";
-        }
-        
-        // Érjük el, hogy a jelszónak tartalmaznia kelljen betűt és számjegyet is!
-        if (!preg_match("/[A-Za-z]/", $newPassword) || !preg_match("/[0-9]/", $newPassword)) {
-            $errorsPasswordUpdate[] = "A jelszónak tartalmaznia kell betűt és számjegyet is!";
-        }
-
-        if (!password_verify($oldPassword, $user->getPassword())) {
-            $errorsPasswordUpdate[] = "A régi jelszó nem egyezik!";
-        }
-
-        if (password_verify($newPassword, $user->getPassword())) {
-            $errorsPasswordUpdate[] = "Az új jelszó nem lehet megegyező a régi jelszóval!";
-        }
-
-        if (count($errorsPasswordUpdate) === 0) {
-            $newPasswordHashed = password_hash($newPassword, PASSWORD_DEFAULT);
-            $user->setPassword($newPasswordHashed, $_SESSION["userID"]);
-            
-            header("Location: profile.php?success=true");
-        }
-    }
 ?>
 
 
@@ -122,6 +144,26 @@
         <?php navigationGenerate("profile"); ?>
 
         <main>
+
+            <?php
+
+            if (isset($_GET["siker"])) {
+                echo "<div class='success' id='left-success'>Megvan a felhasználó!</div>";
+            }
+
+            if (count($ban_error) > 0 && isset($_SESSION["ban_error"])) {
+                echo "<div class='errors'>";
+
+                foreach ($ban_error as $be){
+                    echo $be;
+                }
+
+                echo "</div>";
+                unset($_SESSION["error"]);
+            }
+
+
+            ?>
             
             <div class="profile-container">
             <h1><?php echo $user -> getUsername(); ?> profilja</h1>
@@ -133,7 +175,7 @@
                         echo "<div class='success'>A módisítás sikeres!</div>";
                     }
         
-                    if (count($error) > 0 && isset($_SESSION["errors"])) {
+                    if (count($ban_error) > 0 && isset($_SESSION["ban_error"])) {
                         echo "<div class='errors'>";
                         foreach ($error as $err) {
                             echo "<p>" . $err . "</p>";
@@ -168,8 +210,6 @@
                         "<input type='email' name='email' id='email' value='" . $user->getEmail() . "' required>" .
                         "<label for='password'>Aktuális jelszó:</label>" .
                         "<input type='password' name='aPassword' id='password' placeholder='Aktuális jelszó' required>" .
-                        "<label for='password'>Új jelszó: (opcionális, min. 6 karakter és szám)</label>" .
-                        "<input type='password' name='newPassword' id='password' placeholder='Új jelszó' >" .
                         "<label for='birthday'>Születési dátum:</label>" .
                         "<input type='date' id='birthday' name='birthday' min='1900-01-01'>" .
                         "<input type='submit' name='update' value='Mentés'>" .
@@ -199,7 +239,7 @@
                             "</form>" .
                         "</div>" .
                     "</div>";
-                } else {;
+                } else {
                     echo 
                     "<div class='profile-information-container'>" .
                     "<div class='profile-information'>" .
@@ -214,6 +254,15 @@
                         "</div>" .
                             "<img width='360px' height='360px' class='profile-picture img-rounded' src='./profilePics/" . $user->getPicture() . "' alt='". $user->getUsername() . "' profil képe'>" .
                         "</div>";
+                }
+                if(isset($_SESSION["admin"])){
+                    if(empty($username)){
+                        $username = null;
+                    }
+                    echo "<form action='php/banUser.php' method='post' autocomplete='off'>
+                            <input type='text' value='$username' name='username' hidden>
+                            <button type='submit' name='delete_user_by_admin' class='delete_button' id='delete_user_by_admin'>Profil törlése</button>
+                          </form>";
                 }
             ?>
 <!-- 

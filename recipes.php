@@ -29,6 +29,7 @@
         <main>
             <h1 id="page-title" class="text-center">Receptek</h1>
             <div class="recipes-container">
+
                 <?php 
                     foreach ($recipes as $recipe) {
                         $userid= $recipe[1];

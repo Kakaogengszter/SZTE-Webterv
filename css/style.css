@@ -729,7 +729,7 @@ footer ul li a:hover {
     text-align: left;
 }
 
-.delete_comment{
+.delete_button{
     width: 6%;
     height: 30px;
     background-color: #e52424;

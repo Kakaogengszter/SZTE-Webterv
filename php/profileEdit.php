@@ -23,9 +23,6 @@ if(strlen($username) < 6){
     $errors[] = "A felhasználónévnek legalább 6 karakternek kell lennie!";
 }
 
-if(strlen($newPwd) < 6 && !empty($newPwd)){
-    $errors[] = "Az új jelszónak legalább 6 karakternek kell lennie!";
-}
 
 if(empty($pwd)){
     $errors[] = "Kérem írja be az aktuális jelszavát!";
@@ -48,13 +45,6 @@ if (count($errors) === 0){
 
             $db -> mysqli -> query($sql);
 
-
-        }else if(!empty($newPwd)){
-            $sql = " UPDATE users
-               SET username= '$username', password='$hash', email = '$email'
-               WHERE id=$id ";
-
-            $db -> mysqli -> query($sql);
 
         }else if(!empty($birthdate)){
             $sql = " UPDATE users

@@ -1,64 +1,52 @@
 <?php
-    session_start();
-    require_once('php/connection.php');
-    require_once('php/includes.php');
+session_start();
+require_once('php/connection.php');
+require_once('php/includes.php');
 
-    if (!isset($_GET['name'])) {
-        header("Location: ./recipes.php");
-    }
+if (!isset($_GET['name'])) {
+    header("Location: ./recipes.php");
+}
 
-    $recipename = $_GET['name'];
-    
-    $db = new Database();
-    $sqlselect = "SELECT * FROM recipes WHERE slug = '$recipename'";
-    $resSelect = $db->mysqli->query($sqlselect);
-    $recipe = $resSelect->fetch_all()[0];
+$recipename = $_GET['name'];
 
-    if (empty($recipe)) {
-        header("Location: ./recipes.php");
-    }
 
-    $ingredients = explode("\;",  $recipe[7]);
-    $instructions = explode("\;",  $recipe[8]);
+$db = new Database();
+
+$sqlselect = "SELECT * FROM recipes WHERE slug = '$recipename'";
+$resSelect = $db->mysqli->query($sqlselect);
+$recipe = $resSelect->fetch_all()[0];
+
+
+
+$_SESSION["recipe_id"] = $recipe[0];
+$_SESSION["recipe_name"] = $recipename;
+
+if (empty($recipe)) {
+    header("Location: ./recipes.php");
+}
+
+$ingredients = explode(";",  $recipe[7]);
+$instructions = explode(";",  $recipe[8]);
     
     $userid= $recipe[1];
     $uploaderSqlSelect = "SELECT * FROM users WHERE id = '$userid'";
     $uploaderSelect = $db->mysqli->query($uploaderSqlSelect);
     $uploaderData = $uploaderSelect->fetch_all()[0];
 
-    // comment
-    $recipeID= $recipe[0];
-    $recipeCommentSqlSelect = "SELECT * FROM comments WHERE recipe_id = '$recipeID'";
-    $recipeCommentSelect = $db->mysqli->query($recipeCommentSqlSelect);
-    $recipeComments = $recipeCommentSelect->fetch_all();
-
-    $errors = [];
-    if (isset($_POST["comment"])) {
-        if (!isset($_SESSION["userID"])) {
-            $errors[] = "Csak bejelentkezett felhasználó szólhat hozzá!";
-        } else {
-            $comment = trim($_POST["recipe-comment"]);
-            if ($comment === "") {
-                $errors[] = "Hozzászólás nem lehet üres!";
-            }
-
-            if (count($errors) == 0) {
-                $db->insertCommentToDB($_SESSION["userID"],$recipeID,$comment);
-                header("Location: ./recipe.php?name=" . $_GET["name"]);
-            }
-        }
-    }
-
-    //remove
-    if (isset($_POST["commentRemove"])) {
-        $commentId = $_POST["comment-id"];
-        $db->deleteComment($commentId);
-        header("Location: ./recipe.php?name=" . $_GET["name"]);
+    if(isset($_SESSION["comment_error"])){
+        $error = $_SESSION["comment_error"];
+    }else{
+        $error[] = null;
     }
 
 
     // [0]=id, [1]=user_id, [2]=name, [3]=image_name, [4]=video_url, [5]=portion, [6]=time, [7]=ingredients, [8]=instructions, [9]=upload_date, [10]=slug
     // [0]=id, [1]=username, [2]=email, [3]=password, [4]=birthdate, [5]=picture
+
+    $comments = $db ->get_comments($recipe[0]);
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -133,47 +121,47 @@
 
             <div class="comment-container">
                 <h2>Hozzászólások</h2>
-                <?php
-                    if (count($recipeComments) == 0) {
-                        echo
-                        "<div class='comment'>" .
-                            "<p>Még nem érkezett hozzászólás</p>" .
-                        "</div>";
-                    } else {
-                        foreach ($recipeComments as $comment) {
-                            $commentUserId= $comment[1];
-                            $userCommentSqlSelect = "SELECT username FROM users WHERE id = '$commentUserId'";
-                            $userCommentSelect = $db->mysqli->query($userCommentSqlSelect);
-                            $userNameComment = $userCommentSelect->fetch_all()[0];
 
-                            echo
-                            "<div class='comment'>" .
-                                "<h3 class='comment-user'><a href='./profile.php?name=" . $userNameComment[0] . "'>" . $userNameComment[0] . "</a></h3>" .
-                                "<p>" . $comment[3] . "</p>";
-                                if (isset($_SESSION["userID"]) && $_SESSION["userID"] == $comment[1]) {
-                                    echo 
-                                    "<form class='recipe-delete-comment'  autocomplete='off' action='recipe.php?name=" . $_GET['name'] . "' method='POST'>" .
-                                        "<input type='hidden' name='comment-id' value='" . $comment[0] ."'>" .
-                                        "<input class='cursor-pointer' type='submit' name='commentRemove' value='Törlés'>" .
-                                    "</form>";
-                                }
-                            echo 
-                            "</div>";
-                        }
-                    }
+                <?php
+
+                echo " <div class='comment'>"
                 ?>
 
-                <form class="recipe-new-comment"  autocomplete="off" action="recipe.php?name=<?php echo $_GET["name"]?>" method="POST">
-                    <?php
-                        if (count($errors) > 0) {
-                            echo "<div class='errors-comment'>";
-                            foreach ($errors as $error) {
-                                echo "<p>" . $error . "</p>";
-                            }
-                            echo "</div>";
-                        }
+                <?php
+
+                if(count($comments) == 0){
+                    echo "<p>Még nem érkezett hozzászólás</p>";
+                }
+
+                foreach ($comments as $comms){
+
+                    $username = $comms -> getUsername();
+                    $comment = $comms -> getComment();
+                    $comment_id =$comms -> getCommentID();
+                    $user_id = $comms -> getUsernameID();
+
+                    echo "<h3 class='comment-user'><a href='profile.php?name=$username'>$username</a></h3>
+                            <p class='comment-msg'>$comment</p>
+                            <form action='php/deleteComment.php' method='post'>
+                            <input type='text' name='comment_id' value='$comment_id' hidden>"
                     ?>
-                    <label for="recipe-comment"><h3>Új hozzászólás:</h3></label>
+
+                    <?php
+                    if(isset($_SESSION["userID"]) && $_SESSION["userID"] == $user_id){
+
+                        echo"
+                                <button type='submit' name='delete_comment' class='delete_button'>Törlés</button>";
+                    }else if(isset($_SESSION["admin"])){
+                        echo"
+                                <button type='submit' name='delete_comment' class='delete_button'>Törlés</button>";
+                    }
+
+                    echo"</form>";
+                }
+                ?>
+
+                <form class="recipe-new-comment" action="php/addCommentValidator.php" method="POST">
+                    <label for="recipe-comment">Új hozzászólás:</label>
                     <textarea class="recipe-comment-text" id="recipe-comment" name="recipe-comment"></textarea>
                     <input class="recipe-add-comment cursor-pointer" type="submit" name="comment" value="Hozzászólás">
                 </form>

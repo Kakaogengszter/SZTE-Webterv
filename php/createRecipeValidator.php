@@ -45,9 +45,9 @@ if (in_array($imgType, $imgFormat) && $imgSize < 16000000 && count($error) == 0)
 
     if (!file_exists("../img\\" . $imgName)) {
         move_uploaded_file($imgTmpName, "../img/" . $imgName);
-        $resInsert = $db-> insert_recipe_db($id,$recipe_name,$imgName,$url,$portion,$time,$ingredients_final,$instructions,$date,$slug);
+        $resInsert = $db-> insert_recipe_db($id,$recipe_name,$imgName,$url,$portion,$time,$ingredients_final,$instructions_final,$date,$slug);
 
-
+        header("location: ../recipes.php");
     } else{
         $error[] = "Valami hiba történt a kép feltöltésekor!";
 

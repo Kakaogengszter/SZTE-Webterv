@@ -127,6 +127,5 @@ class Database{
     public function insert_recipe_db($userid,$name,$pic,$url,$portion,$time,$ingredients,$instructions,$date,$slug){
         $sql_insert_recipe = "INSERT INTO `recipes` (`user_id`, `name`, `image_name`, `video_url`, `portion`, `time`, `ingredients`, `instructions`, `upload_date`, `slug`) VALUES ('$userid','$name','$pic','$url','$portion','$time','$ingredients','$instructions','$date','$slug')";
         $this->mysqli -> query($sql_insert_recipe);
-        var_dump($sql_insert_recipe);
     }
 }

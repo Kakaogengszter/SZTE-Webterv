@@ -11,6 +11,7 @@ function navigationGenerate(string $currentPage) {
 
             echo
                 "<li class='nav-item'><a class='nav-link " . ($currentPage === "profile" ? " active" : "") . "' href='profile.php'>Profil</a></li>" .
+                "<li class='nav-item'><a class='nav-link " . ($currentPage === "create-recipe" ? " active" : "") . "' href='create-recipe.php'>Recept feltöltése</a></li>" .
                 "<li class='nav-item'><a class='nav-link " . ($currentPage === "inbox" ? " active" : "") . "' href='inbox.php'>Üzenetek</a></li>" .
                 "<li class='nav-item'><a class='nav-link' href='php/logout.php'>Kijelentkezés</a></li>";
             if(isset($_SESSION["admin"])){
