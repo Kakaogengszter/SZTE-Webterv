@@ -3,7 +3,7 @@ session_start();
 require_once("connection.php");
 
 if (!isset($_POST["register"])){
-    die();
+    header("Location: ../login.php");
 }
 
 $db = new Database();

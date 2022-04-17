@@ -8,9 +8,6 @@ if(!isset($_POST["comment"])){
     header("location: ../recipe.php");
 }
 
-if(!isset($_SESSION["userID"])){
-    header("location: ../login.php");
-}
 
 if(isset($_SESSION["recipe_name"])){
     $recipe_name = $_SESSION["recipe_name"];
@@ -24,6 +21,9 @@ $error = [];
 $comment = trim($_POST["recipe-comment"]);
 
 
+if(!isset($_SESSION["userID"])){
+    $error[] = "Csak belépett felhasználó szólhat hozzá!";
+}
 
 $id = $_SESSION["admin"] ?? $_SESSION['userID'];
 

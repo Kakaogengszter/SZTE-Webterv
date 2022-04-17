@@ -1,5 +1,4 @@
 <?php
-
 require_once("comment.php");
 
 class Database{

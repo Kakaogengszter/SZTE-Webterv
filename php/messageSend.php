@@ -2,7 +2,9 @@
 session_start();
 require_once("connection.php");
 
-
+if(!isset($_SESSION["userID"])){
+    header("location: ../login.php");
+}
 
 
 $db = new Database();

@@ -144,7 +144,7 @@ $instructions = explode(";",  $recipe[8]);
                 <?php
 
                 if (count($error) > 0 && isset($_SESSION["comment_error"])) {
-                    echo "<div class='errors' id='left-errors'>";
+                    echo "<div class='errors-comment' id='left-errors'>";
 
                     echo $error[0];
 
@@ -178,22 +178,22 @@ $instructions = explode(";",  $recipe[8]);
                     if(isset($_SESSION["userID"]) && $_SESSION["userID"] == $user_id){
 
                         echo"
-                                <button type='submit' name='delete_comment' class='delete_button'>Törlés</button>";
+                            <button type='submit' name='delete_comment' class='delete_button'>Törlés</button>";
                     }else if(isset($_SESSION["admin"])){
                         echo"
-                                <button type='submit' name='delete_comment' class='delete_button'>Törlés</button>";
+                            <button type='submit' name='delete_comment' class='delete_button'>Törlés</button>";
                     }
 
                     echo"</form>";
                 }
                 ?>
-
-                <form class="recipe-new-comment" action="php/addCommentValidator.php" method="POST">
-                    <label for="recipe-comment">Új hozzászólás:</label>
-                    <textarea class="recipe-comment-text" id="recipe-comment" name="recipe-comment"></textarea>
-                    <input class="recipe-add-comment cursor-pointer" type="submit" name="comment" value="Hozzászólás">
-                </form>
             </div>
+
+            <form class="recipe-new-comment" action="php/addCommentValidator.php" method="POST">
+                <label for="recipe-comment">Új hozzászólás:</label>
+                <textarea class="recipe-comment-text" id="recipe-comment" name="recipe-comment"></textarea>
+                <input class="recipe-add-comment cursor-pointer" type="submit" name="comment" value="Hozzászólás">
+            </form>
         </main>
 
         <?php footerGenerate(); ?>

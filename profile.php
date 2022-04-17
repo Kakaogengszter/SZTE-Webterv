@@ -219,12 +219,19 @@
                         "<input type='submit' name='delete' value='Fiók törlése'>" .
                     "</form>" .
 
+                    "<hr>" .
 
-                        "<form class='profile-form' action='php/profileEdit.php' method='post'>".
-                        "<label><input type='checkbox' name='private_email' id='private_email' value='private_email'>Privát email (Üres, ha publikust szeretnél)</label> <br>" .
-                        "<label><input type='checkbox' name='private_birthdate' id='private_birthdate' value='private_birthdate'>Privát születésnap (Üres, ha publikust szeretnél)</label>" .
-                        "<input type='submit' name='private_update' value='Privát adatok mentés'>".
-                        "</form>".
+                    "<form class='profile-form' action='php/profileEdit.php' method='post'>".
+                        "<label> " .
+                        "<input type='checkbox' name='private_email' id='private_email' value='private_email'" . ($user->isEmailPrivate() ? 'checked' : '') . ">" . 
+                            "Privát email (Üres, ha publikust szeretnél)" .
+                        "</label> <br>" .
+                        "<label>" .
+                            "<input type='checkbox' name='private_birthdate' id='private_birthdate' value='private_birthdate' ". ($user->isBirthDatePrivate() ? 'checked' : '') . ">" .
+                        "Privát születésnap (Üres, ha publikust szeretnél)" .
+                            "</label>" .
+                        "<input type='submit' name='private_update' value='Privát adatok mentése'>" .
+                    "</form>".
                     "<hr>" .
                     "<form class='profile-form password-update-form' action='profile.php' method='POST' autocomplete='off'>";
 

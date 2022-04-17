@@ -3,6 +3,10 @@ session_start();
 include "php/includes.php";
 require_once("php/connection.php");
 
+if (!isset($_SESSION["userID"])){
+    header("location: ./login.php");
+}
+
 if(isset($_SESSION["error"])){
     $error = $_SESSION["error"];
 }else{
@@ -34,6 +38,9 @@ navigationGenerate("inbox");
 <main>
 
 
+    
+
+    <form class="message-send-form" action="php/messageSend.php" method="post" autocomplete="off">
     <?php
     if (isset($_GET["siker"])) {
         echo "<div class='success' id='left-success'>Megvan a felhasználó!</div>";
@@ -49,28 +56,18 @@ navigationGenerate("inbox");
     }
 
     ?>
+        <label class="required-label" for="cimzett">Címzett </label>
+        <input class="new-message-to" type="text" id="cimzett" name="cimzett" value='<?php if(isset($_SESSION["cimzett"])) echo $_SESSION["cimzett"]; ?>' required>
 
-    <div class="message-send-form">
-        <form action="php/messageSend.php" method="post" autocomplete="off">
-            <label class="required-label" for="cimzett">Címzett </label>
-            <input type="text" id="cimzett" name="cimzett" value='<?php if(isset($_SESSION["cimzett"])) echo $_SESSION["cimzett"]; ?>' required>
+        <label for="content">Szöveg</label>
 
+        <textarea class="new-message-message" id="content" name="content"><?php if(isset($_SESSION["content"])) echo $_SESSION["content"]; ?></textarea>
+        <div class="message-buttons">
+            <button class="new-message-user-check" type="submit" name="user_check" id="user_check">Címzett ellenőrzése</button>
+            <button class="new-message-send" type="submit" name="send_new_message" id="send_message">Üzenet elküldése</button>
+        </div>
 
-            <br>
-            <br>
-
-            <label for="content">Szöveg</label>
-            <br>
-
-            <textarea id="content" name="content"><?php if(isset($_SESSION["content"])) echo $_SESSION["content"]; ?></textarea>
-            <br>
-            <div class="message-buttons">
-                <button type="submit" name="user_check" id="user_check">Címzett ellenőrzése</button>
-                <button type="submit" name="send_new_message" id="send_message">Üzenet elküldése</button>
-            </div>
-
-        </form>
-    </div>
+    </form>
 
 
 </main>

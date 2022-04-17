@@ -31,23 +31,24 @@ if(isset($_SESSION["errors"])){
 
     ?>
         <main>
-            <?php
-            if (count($errors) > 0 && isset($_SESSION["errors"])) {
-                $length = count($errors);
-
-                echo "<div class='errors'>";
-
-                for ($i = 0; $i < $length;$i++) {
-                    echo "<p>" . $errors[$i][$i] . "</p>";
-                }
-
-                echo "</div>";
-
-                unset($_SESSION["errors"]);
-            }
-            ?>
-
             <div class="form-container">
+
+                <?php
+                if (count($errors) > 0 && isset($_SESSION["errors"])) {
+                    $length = count($errors);
+
+                    echo "<div class='errors'>";
+
+                    for ($i = 0; $i < $length;$i++) {
+                        echo "<p>" . $errors[$i][$i] . "</p>";
+                    }
+
+                    echo "</div>";
+
+                    unset($_SESSION["errors"]);
+                }
+                ?>
+
                 <form class="default-form login-form" action="php/loginValidator.php" method="POST">
                     <fieldset>
                         <legend><h1>Bejelentkezés</h1></legend>

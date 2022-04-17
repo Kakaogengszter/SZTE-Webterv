@@ -48,6 +48,9 @@ if (isset($_POST['login'])){
     }
     $_SESSION["errors"] = $error;
 
+} else {
+    if(!isset($_SESSION["userID"])){
+        header("location: ../login.php");
+    }
 }
-echo "</body>";
 ?>

@@ -21,11 +21,7 @@ if(isset($_SESSION["error"])){
 }
 
 
-
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="hu">
@@ -41,17 +37,14 @@ if(isset($_SESSION["error"])){
 
 <body>
 
-<?php
-
-navigationGenerate("inbox");
-
-?>
+<?php navigationGenerate("inbox"); ?>
 
 <main>
 
-    <a href="new-message.php"><button type="button" id="new-message">Új üzenet</button></a>
 
     <div class="friends-container">
+        <a href="new-message.php"><button type="button" id="new-message">Új üzenet</button></a>
+        
         <h2>"Barátok"</h2>
         <table class="top-uploaders-table friends">
             <tr>
