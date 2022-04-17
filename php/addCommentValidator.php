@@ -2,6 +2,8 @@
 session_start();
 require_once('connection.php');
 
+
+
 if(!isset($_POST["comment"])){
     header("location: ../recipe.php");
 }
@@ -20,7 +22,6 @@ $db = new Database();
 
 $error = [];
 $comment = trim($_POST["recipe-comment"]);
-
 
 
 
@@ -46,9 +47,10 @@ if(empty($comment)){
 if(count($error) == 0){
     $sql_insert_comment = "insert into comments (user_id,recipe_id,comment) values ($id,$recipe_id,'$comment')";
     $db -> mysqli -> query($sql_insert_comment);
-    header("location: ../recipe.php?name=$recipe_name");
 }
 
-$_SESSION["comment_error"] = $error;
 
+
+$_SESSION["comment_error"] = $error;
+header("location: ../recipe.php?name=$recipe_name");
 

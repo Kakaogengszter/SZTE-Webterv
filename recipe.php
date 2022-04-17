@@ -41,6 +41,7 @@ $instructions = explode(";",  $recipe[8]);
     }
 
 
+
     // [0]=id, [1]=user_id, [2]=name, [3]=image_name, [4]=video_url, [5]=portion, [6]=time, [7]=ingredients, [8]=instructions, [9]=upload_date, [10]=slug
     // [0]=id, [1]=username, [2]=email, [3]=password, [4]=birthdate, [5]=picture
 
@@ -141,6 +142,15 @@ $instructions = explode(";",  $recipe[8]);
                 <h2>Hozzászólások</h2>
 
                 <?php
+
+                if (count($error) > 0 && isset($_SESSION["comment_error"])) {
+                    echo "<div class='errors' id='left-errors'>";
+
+                    echo $error[0];
+
+                    echo "</div>";
+                    unset($_SESSION["comment_error"]);
+                }
 
                 echo " <div class='comment'>"
                 ?>
