@@ -741,6 +741,14 @@ footer ul li a:hover {
     width: 50% !important;
 }
 
+#private_email{
+    margin-left: 20%;
+}
+
+#private_birthdate{
+    margin-left: 18%;
+}
+
 
 
 @media only screen and (max-width: 1250px) {

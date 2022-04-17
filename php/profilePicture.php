@@ -27,17 +27,18 @@ if (in_array($imgType, $imgFormat) && $imgSize < 16000000) {
             $resInsert = $db->profile_pics_update($id, $imgName);
             header("Location: ../profile.php?siker");
 
-        } else{
+
+        }else{
             $error[] = "Valami hiba történt a profilkép feltöltésekor!";
             header("Location: ../profile.php");
         }
 
 }else {
-    $sql_update = "UPDATE users SET picture = 'default.jpg' WHERE id = $id";
-    $db -> mysqli -> query($sql_update);
     $error[] = "Hiba! Nem megfelelő fájlformátum, vagy a fájl túl nagy!";
     header("Location: ../profile.php");
 }
+
+
 
 $_SESSION["profile_pic_error"] = $error;
 

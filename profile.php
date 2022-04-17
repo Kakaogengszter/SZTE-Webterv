@@ -125,6 +125,10 @@
         $ban_error[] = null;
     }
 
+    $birthdate_private = $_SESSION["birthdate_private"] ?? null;
+    $email_private = $_SESSION["email_private"] ?? null;
+
+
 ?>
 
 
@@ -147,7 +151,7 @@
 
             <?php
 
-            if (isset($_GET["siker"])) {
+            if (isset($_GET["siker_delete"])) {
                 echo "<div class='success' id='left-success'>Megvan a felhasználó!</div>";
             }
 
@@ -212,9 +216,17 @@
                         "<input type='password' name='aPassword' id='password' placeholder='Aktuális jelszó' required>" .
                         "<label for='birthday'>Születési dátum:</label>" .
                         "<input type='date' id='birthday' name='birthday' min='1900-01-01'>" .
+
                         "<input type='submit' name='update' value='Mentés'>" .
                         "<input type='submit' name='delete' value='Fiók törlése'>" .
                     "</form>" .
+
+
+                        "<form class='profile-form' action='php/profileEdit.php' method='post'>".
+                        "<label><input type='checkbox' name='private_email' id='private_email' value='private_email'"?> <?php if($email_private == true) echo 'checked' ?> <?php echo">Privát email</label> <br>" .
+                        "<label><input type='checkbox' name='private_birthdate' id='private_birthdate' value='private_birthdate'"?> <?php if($birthdate_private == true) echo 'checked' ?> <?php echo">Privát születésnap</label>" .
+                        "<input type='submit' name='private_update' value='Privát adatok mentés'>".
+                        "</form>".
                     "<hr>" .
                     "<form class='profile-form password-update-form' action='profile.php' method='POST' autocomplete='off'>";
 

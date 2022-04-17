@@ -40,7 +40,7 @@ if(count($errors) == 0){
     $db -> mysqli -> query($sql_delete_messages);
 
 
-    header("location: ../profile.php?siker");
+    header("location: ../profile.php?siker_delete");
 }else{
     header("location: ../profile.php");
 }

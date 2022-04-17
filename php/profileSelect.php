@@ -25,7 +25,7 @@ class User{
         $this->birthdate = $birthdate;
         $this->picture = $picture;
         $this->emailPrivate = $emailPrivate;
-        $this->emailPrivate = $emailPrivate;
+        $this->birthdatePrivate = $birthdatePrivate;
         $this->admin = $admin;
     }
 
